@@ -1,1 +1,1 @@
-# Gerenciador de projetos judiciais
+# Gerenciador de processos judiciais
