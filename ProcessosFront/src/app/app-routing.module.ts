@@ -3,11 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { LoginFormComponent } from './login-form/login-form.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ProccessDetailComponent  } from './proccess-detail/proccess-detail.component';
 
 
 const routes: Routes = [
   { path: "login", component: LoginFormComponent },
   { path: "perfil", component: ProfileComponent },
+  { path: "processos/:id", component: ProccessDetailComponent },
 ];
 
 @NgModule({
