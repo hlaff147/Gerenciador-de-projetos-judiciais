@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Proccess } from '../proccess';
-import { PROCCESSES } from '../mock-proccesslist';
+import { ProccessService } from '../proccess.service';
 
 
 @Component({
@@ -13,9 +13,12 @@ import { PROCCESSES } from '../mock-proccesslist';
 })
 export class ProccessDetailComponent implements OnInit {
 
-  proccess: Proccess | undefined = undefined;
+  proccess: Proccess | undefined;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(
+    private route: ActivatedRoute,
+    private proccessService: ProccessService
+  ) { }
 
   ngOnInit(): void {
     this.getProccess();
@@ -23,7 +26,8 @@ export class ProccessDetailComponent implements OnInit {
 
   getProccess(): void {
     const id = Number(this.route.snapshot.paramMap.get("id"));
-    this.proccess = PROCCESSES.find(p => p.id === id);
+    this.proccessService.getProccess(id)
+      .subscribe(proccess => this.proccess = proccess);
   }
 
 }

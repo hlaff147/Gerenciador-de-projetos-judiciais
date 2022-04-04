@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { PROCCESSES } from '../mock-proccesslist';
+import { Proccess } from '../proccess';
+import { ProccessService } from '../proccess.service';
 
 
 @Component({
@@ -10,11 +11,13 @@ import { PROCCESSES } from '../mock-proccesslist';
 })
 export class ProfileComponent implements OnInit {
 
-  proccesses = PROCCESSES;
+  proccesses: Proccess[] = [];
 
-  constructor() { }
+  constructor(private proccessService: ProccessService) { }
 
   ngOnInit(): void {
+    this.proccessService.getProcesses()
+      .subscribe(proccesses => this.proccesses = proccesses);
   }
 
 }
