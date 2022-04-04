@@ -1,0 +1,15 @@
+<ul class="list-group list-group-flush" style="width: 70rem;">
+  <li *ngFor="let proccess of proccesses" class="list-group-item list-group-item-action">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">
+	{{ proccess.name }}
+      </h5>
+      <small class="text-muted">
+	Início: {{ proccess.startDate.getDate() }}/{{ proccess.startDate.getMonth() }}/{{ proccess.startDate.getFullYear() }}
+      </small>
+    </div>
+    <small class="text-muted">
+      Juiz: {{ proccess.judge }}
+    </small>
+  </li>
+</ul>
