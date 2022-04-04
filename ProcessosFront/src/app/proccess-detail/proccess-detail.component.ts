@@ -17,6 +17,7 @@ export class ProccessDetailComponent implements OnInit {
 
   proccess: Proccess | undefined;
   documents: Document[] = [];
+  selectedDoc: Document | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -41,4 +42,12 @@ export class ProccessDetailComponent implements OnInit {
       .subscribe(documents => this.documents = documents);
   }
 
+  selectDocument(id: number): void {
+    this.documentService.getDocument(id)
+      .subscribe(document => this.selectedDoc = document);
+    }
+
+  unselectDocument(): void {
+    this.selectedDoc = undefined;
+  }
 }

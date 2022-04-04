@@ -1,3 +1,12 @@
 i {
   font-size: 4.5rem;
 }
+
+.card, .btn-outline-secondary {
+  height: 10rem;
+}
+
+.modal {
+  display: block;
+  background-color: rgba(0, 0, 0, 0.65);
+}
