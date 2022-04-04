@@ -1,13 +1,6 @@
-export interface MockProccess {
-  id: number;
-  name: string;
-  startDate: Date;
-  judge: string;
-  status: string;
-  documents: string[];
-}
+import { Proccess } from './proccess';
 
-export const PROCCESSES: MockProccess[] = [
+export const PROCCESSES: Proccess[] = [
   {
     id: 6, name: "Processo Judicial 7", startDate: new Date(2015, 8, 9),
     judge: "Fulano Detal", status: "concluído",

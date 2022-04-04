@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 
-import { PROCCESSES, MockProccess } from '../mock-proccesslist';
+import { Proccess } from '../proccess';
+import { PROCCESSES } from '../mock-proccesslist';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { PROCCESSES, MockProccess } from '../mock-proccesslist';
 })
 export class ProccessDetailComponent implements OnInit {
 
-  proccess: MockProccess | undefined = undefined;
+  proccess: Proccess | undefined = undefined;
 
   constructor(private route: ActivatedRoute) { }
 
