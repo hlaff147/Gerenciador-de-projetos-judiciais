@@ -1,3 +1,5 @@
+<div class="card">
+  <div class="card-body">
 <ul class="list-group list-group-flush" style="width: 70rem;">
   <li *ngFor="let proccess of proccesses" class="list-group-item list-group-item-action">
     <div class="d-flex w-100 justify-content-between">
@@ -5,11 +7,15 @@
 	{{ proccess.name }}
       </h5>
       <small class="text-muted">
-	Início: {{ proccess.startDate.getDate() }}/{{ proccess.startDate.getMonth() }}/{{ proccess.startDate.getFullYear() }}
+	Status: {{ proccess.status }}
       </small>
     </div>
     <small class="text-muted">
-      Juiz: {{ proccess.judge }}
+	Início: {{ proccess.startDate.getDate() }}/{{ proccess.startDate.getMonth() }}/{{ proccess.startDate.getFullYear() }}
     </small>
+    <p class="mb-1">
+      Juiz: {{ proccess.judge }}
+    </p>
+    <a routerLink="/" class="btn btn-link btn-sm" role="button">Ver mais</a>
   </li>
 </ul>
