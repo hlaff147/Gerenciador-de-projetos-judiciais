@@ -12,10 +12,10 @@
 	  <small>Anexe um documento</small>
       </div>
     </li>
-    <li *ngFor="let doc of proccess.documents" class="col">
+    <li *ngFor="let doc of documents" class="col">
       <div class="card border-0 text-center">
 	<i class="bi bi-file-earmark-text"></i>
-	  <small>{{ doc }}</small>
+	  <small>{{ doc.name }}</small>
       </div>
     </li>
   </ul>

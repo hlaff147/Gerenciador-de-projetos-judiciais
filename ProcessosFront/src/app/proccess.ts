@@ -4,7 +4,6 @@ export class Proccess {
   startDate: Date;
   judge: string;
   status: string;
-  documents: string[];
 
   constructor(
     id: number,
@@ -16,7 +15,6 @@ export class Proccess {
     this. judge = judge;
     this.startDate = new Date();
     this.status = "em andamento";
-    this.documents = [];
   }
 }
 
