@@ -1,0 +1,44 @@
+<div class="card" style="width: 45rem;">
+  <div class="card-body">
+    <h5 class="card-title">Bem-vindo!</h5>
+    <form>
+      <div class="mb-3">
+	<label for="inName" class="form-label">Nome</label>
+	<input type="text" class="form-control" id="inName">
+      </div>
+
+      <div class="mb-3">
+	<label for="inCpf" class="form-label">CPF</label>
+	<input type="text" class="form-control" id="inCpf">
+      </div>
+
+      <div class="mb-3">
+	<label for="inEmail" class="form-label">E-mail</label>
+	<input type="text" class="form-control" id="inEmail">
+      </div>
+
+      <div class="mb-3">
+	<label for="inUserType" class="form-label">Função</label>
+	<select id="inUserType" class="form-select">
+	  <option>Advogado</option>
+	  <option>Juiz</option>
+	  <option>Réu</option>
+	</select>
+      </div>
+
+      <div class="mb-3">
+	<label for="inPassword" class="form-label">Senha</label>
+	<input type="text" class="form-control" id="inPassword" aria-describedby="passwordHelp">
+	<div id="passwordHelp" class="form-text">A senha deve conter, pelo menos, 5 dígitos e não deve fazer uso de espaços ou emojis. Também recomendamos misturar letras maiúsculas e minúsculas e números</div>
+      </div>
+
+      <div class="mb-3">
+	<label for="inConfirm" class="form-label">Confirme a senha</label>
+	<input type="text" class="form-control" id="inConfirm" aria-describedby="confirmHelp">
+	<div id="confirmHelp" class="form-text">Este campo deve ser exatamente igual à senha</div>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Fazer cadastro</button>
+    </form>
+  </div>
+</div>
