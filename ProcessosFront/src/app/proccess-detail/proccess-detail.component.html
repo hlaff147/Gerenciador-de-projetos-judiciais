@@ -3,4 +3,20 @@
   <p>Juiz: <span class="fst-italic text-muted">{{ proccess.judge }}</span></p>
   <p>Data de início: <span class="fst-italic text-muted">{{ proccess.startDate.getDate() }}/{{ proccess.startDate.getMonth() }}/{{ proccess.startDate.getFullYear() }}</span></p>
   <p>Status: <span class="fst-italic text-muted">{{ proccess.status }}</span></p>
+
+  <h5 class="fs-4 mb-4">Documentos do Processo</h5>
+  <ul class="list-unstyled row row-cols-5 row-cols-md-5 g-2" style="width: 60%;">
+    <li>
+      <div class="card border-0 text-center">
+	<i class="bi bi-plus"></i>
+	  <small>Anexe um documento</small>
+      </div>
+    </li>
+    <li *ngFor="let doc of proccess.documents" class="col">
+      <div class="card border-0 text-center">
+	<i class="bi bi-file-earmark-text"></i>
+	  <small>{{ doc }}</small>
+      </div>
+    </li>
+  </ul>
 </div>
