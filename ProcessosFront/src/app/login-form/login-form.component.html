@@ -4,14 +4,17 @@
     <form>
       <div class="mb-3">
 	<label for="inCpf" class="form-label">CPF</label>
-	<input type="text" class="form-control" id="inCpf">
+	<input type="text" class="form-control" id="inCpf"
+	  [(ngModel)]="cpf" name="cpf" required>
       </div>
       <div class="mb-3">
 	<label for="inPassword" class="form-label">Senha</label>
-	<input type="password" class="form-control" id="inPassword">
+	<input type="password" class="form-control" id="inPassword"
+	  [(ngModel)]="password" name="password "required>
       </div>
       <div class="mb-3 form-check">
-	<input type="checkbox" class="form-check-input" id="inCheck">
+	<input type="checkbox" class="form-check-input" id="inCheck"
+	  [(ngModel)]="rememberUser" name="rememberUser">
 	<label class="form-check-label fst-italic fs-6" for="inCheck">Lembre-se de mim.</label>
       </div>
       <button type="submit" class="btn btn-primary">Login</button>

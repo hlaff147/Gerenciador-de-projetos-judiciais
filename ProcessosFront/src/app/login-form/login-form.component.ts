@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginFormComponent implements OnInit {
 
+  cpf = "";
+  password = "";
+  rememberUser = false;
+
   constructor() { }
 
   ngOnInit(): void {
