@@ -1,4 +1,14 @@
 <div *ngIf="proccess">
+  <a class="nav-link" routerLink="/perfil">
+    <i class="bi bi-arrow-left-circle"></i>
+  </a>
+  <div class="process-detail-body">
+    <h5 class="fs-2">{{ proccess.name }}</h5>
+    <p>Juiz: <span class="fst-italic text-muted">{{ proccess.judge }}</span></p>
+    <p>Data de início: <span class="fst-italic text-muted">{{ proccess.startDate.getDate() }}/{{
+        proccess.startDate.getMonth() }}/{{ proccess.startDate.getFullYear() }}</span></p>
+    <p>Status: <span class="fst-italic text-muted">{{ proccess.status }}</span></p>
+  </div>
   <h5 class="fs-2">{{ proccess.name }}</h5>
   <p>
     Juiz: <span class="fst-italic text-muted">{{ proccess.judge }}</span>
