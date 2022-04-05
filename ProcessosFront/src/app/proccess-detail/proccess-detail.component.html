@@ -1,8 +1,36 @@
 <div *ngIf="proccess">
-  <h5 class="fs-2">{{ proccess.name }}</h5>
-  <p>Juiz: <span class="fst-italic text-muted">{{ proccess.judge }}</span></p>
-  <p>Data de início: <span class="fst-italic text-muted">{{ proccess.startDate.getDate() }}/{{ proccess.startDate.getMonth() }}/{{ proccess.startDate.getFullYear() }}</span></p>
-  <p>Status: <span class="fst-italic text-muted">{{ proccess.status }}</span></p>
+  <div class="process-detail-body">
+    <a class="nav-link" routerLink="/perfil">
+      <i class="bi bi-arrow-left-circle"></i>
+    </a>
+    <h5 class="fs-2">{{ proccess.name }}</h5>
+    <p>
+      Juiz: <span class="fst-italic text-muted">{{ proccess.judge }}</span>
+    </p>
+    <p>
+      Data de início:
+      <span class="fst-italic text-muted"
+	>{{ proccess.startDate.getDate() }}/{{ proccess.startDate.getMonth() }}/{{
+	  proccess.startDate.getFullYear()
+	}}</span
+      >
+    </p>
+    <div *ngIf="proccess.status === 'concluído'">
+      <p>
+	Status: <span class="fst-italic text-success">{{ proccess.status }}</span>
+      </p>
+    </div>
+    <div *ngIf="proccess.status === 'atrasado'">
+      <p>
+	Status: <span class="fst-italic text-danger">{{ proccess.status }}</span>
+      </p>
+    </div>
+    <div *ngIf="proccess.status === 'em andamento'">
+      <p>
+	Status: <span class="fst-italic text-primary">{{ proccess.status }}</span>
+      </p>
+
+    </div>
 
   <h5 class="fs-4 mb-4">Documentos do Processo</h5>
   <ul class="list-unstyled row row-cols-5 row-cols-md-5 g-2" style="width: 60%;">
@@ -23,6 +51,7 @@
     </li>
   </ul>
 
+  </div>
   <div *ngIf="selectedDoc">
     <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel">
       <div class="modal-dialog">
@@ -77,6 +106,5 @@
 	  </div>
 	</div>
       </div>
-    </div>
-  </div>
+
 </div>

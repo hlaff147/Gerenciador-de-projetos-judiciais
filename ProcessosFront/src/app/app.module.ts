@@ -4,7 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { LoginFormComponent } from './login-form/login-form.component';
+import { SignupFormComponent } from './signup-form/signup-form.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProccessDetailComponent } from './proccess-detail/proccess-detail.component';
 
@@ -12,6 +14,7 @@ import { ProccessDetailComponent } from './proccess-detail/proccess-detail.compo
   declarations: [
     AppComponent,
     LoginFormComponent,
+    SignupFormComponent,
     ProfileComponent,
     ProccessDetailComponent
   ],

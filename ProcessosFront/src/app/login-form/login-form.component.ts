@@ -13,7 +13,7 @@ export class LoginFormComponent implements OnInit {
   rememberUser = false;
   cpfInvalid = false;
   submitted = false;
-
+  nameInvalid = false
   constructor(private router: Router) { }
 
   ngOnInit(): void {
@@ -48,4 +48,8 @@ export class LoginFormComponent implements OnInit {
   updateCpf(event: any): void {
     this.cpfInvalid = isNaN(event);
   }
+  updateName(event: any): void {
+    this.cpfInvalid = event.search(/\d+/) === -1
+  }
+  
 }

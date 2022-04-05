@@ -1,0 +1,144 @@
+<div class="card" style="width: 45rem">
+  <div class="card-body">
+    <h5 class="card-title">Bem-vindo!</h5>
+    <form>
+      <div class="mb-3">
+        <label for="inName" class="form-label">Nome</label>
+        <input type="text" class="form-control" id="inName" />
+      </div>
+
+      <div class="mb-3">
+        <label for="inCpf" class="form-label">CPF</label>
+        <input
+          type="text"
+          class="form-control"
+          id="inCpf"
+          [(ngModel)]="cpf"
+          name="cpf"
+          #name="ngModel"
+          (ngModelChange)="updateCpf($event)"
+          required
+        />
+        <div [hidden]="!submitted || cpf !== ''" class="alert alert-danger">
+          Campo CPF é obrigatório.
+        </div>
+        <div [hidden]="!cpfInvalid" class="alert alert-danger">
+          CPF deve ser apenas números.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="inEmail" class="form-label">E-mail</label>
+        <input
+          type="email"
+          class="form-control"
+          id="inEmail"
+          [(ngModel)]="email"
+          name="email "
+          required
+        />
+        <div [hidden]="!submitted || emailIsValid()" class="alert alert-danger">
+          email é obrigatório
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="inPhone" class="form-label">Telefone</label>
+        <input
+          type="text"
+          class="form-control"
+          id="inPhone"
+          [(ngModel)]="phone"
+          name="phone"
+          #name="ngModel"
+          (ngModelChange)="updatePhone($event)"
+          required
+        />
+        <div [hidden]="!submitted || phone !== ''" class="alert alert-danger">
+          Campo telefone é obrigatório.
+        </div>
+        <div [hidden]="!phoneInvalid" class="alert alert-danger">
+          telefone deve ser apenas números.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="inUserType" class="form-label">Função</label>
+        <select
+          id="inUserType"
+          class="form-select"
+          [(ngModel)]="funcao"
+          name="funcao "
+          required
+        >
+          <option></option>
+          <option>Advogado</option>
+          <option>Juiz</option>
+          <option>Réu</option>
+        </select>
+        <div
+          [hidden]="!submitted || funcaoIsValid()"
+          class="alert alert-danger"
+          [(ngModel)]="funcao"
+          name="funcao "
+          required
+        >
+          funcao é obrigatória
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="inPassword" class="form-label">Senha</label>
+        <input
+          type="password"
+          class="form-control"
+          id="inPassword"
+          aria-describedby="passwordHelp"
+          [(ngModel)]="password"
+          name="password "
+          required
+        />
+        <div
+          [hidden]="!submitted || passwordIsValid()"
+          class="alert alert-danger"
+        >
+          Campo senha é obrigatório
+        </div>
+        <div id="passwordHelp" class="form-text">
+          A senha deve conter, pelo menos, 5 dígitos e não deve fazer uso de
+          espaços ou emojis. Também recomendamos misturar letras maiúsculas e
+          minúsculas e números
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="inConfirm" class="form-label">Confirme a senha</label>
+        <input
+          type="password"
+          class="form-control"
+          id="inConfirm"
+          aria-describedby="confirmHelp"
+          [(ngModel)]="repeatPassword"
+          name="repeatPassword"
+          required
+          (ngModelChange)="repeatPasswordIsCorrect($event)"
+        />
+        <div
+          [hidden]="!submitted || repeatPasswordIsValid()"
+          class="alert alert-danger"
+        >
+          Campo repetir senha obrigatorio
+        </div>
+        <div [hidden]="check_password" class="alert alert-danger">
+          Senhas não correspondem
+        </div>
+        <div id="confirmHelp" class="form-text">
+          Este campo deve ser exatamente igual à senha
+        </div>
+      </div>
+      <button (click)="sigIn()" type="submit" class="btn btn-primary">
+        Fazer cadastro
+      </button>
+    </form>
+  </div>
+</div>
