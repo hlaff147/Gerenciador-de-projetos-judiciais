@@ -43,9 +43,9 @@
         <div class="card text-center">
           <button
             (click)="toggleAddDocument()"
-            class="btn btn-outline-secondary document-list-item"
+            class="btn btn-outline-secondary document-list-icon"
           >
-            <i class="bi bi-plus d-block"></i>
+            <i class="bi bi-plus d-block doc-list-item"></i>
           </button>
         </div>
       </li>
@@ -55,7 +55,7 @@
             (click)="selectDocument(doc.id)"
             class="btn btn-outline-secondary document-list-item"
           >
-            <i class="bi bi-file-earmark-text"></i>
+            <i class="bi bi-file-earmark-text document-list-icon"></i>
             <small>{{ doc.name }}</small>
           </button>
         </div>
