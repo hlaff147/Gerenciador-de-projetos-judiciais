@@ -5,19 +5,18 @@ import { Document } from './document';
 import { DOCUMENTS } from './mock-documents';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DocumentService {
-
-  constructor() { }
+  constructor() {}
 
   getDocuments(proccessId: number): Observable<Document[]> {
-    const documents = DOCUMENTS.filter(d => d.proccessId === proccessId);
+    const documents = DOCUMENTS.filter((d) => d.proccessId === proccessId);
     return of(documents);
   }
 
   getDocument(id: number): Observable<Document | undefined> {
-    const document = DOCUMENTS.find(d => d.id === id);
+    const document = DOCUMENTS.find((d) => d.id === id);
     return of(document);
   }
 }

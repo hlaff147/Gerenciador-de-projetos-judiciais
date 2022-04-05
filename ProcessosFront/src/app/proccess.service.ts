@@ -5,18 +5,17 @@ import { Proccess } from './proccess';
 import { PROCCESSES } from './mock-proccesslist';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProccessService {
-
-  constructor() { }
+  constructor() {}
 
   getProcesses(): Observable<Proccess[]> {
     return of(PROCCESSES);
   }
 
   getProccess(id: number): Observable<Proccess | undefined> {
-    const proccess = PROCCESSES.find(p => p.id === id);
+    const proccess = PROCCESSES.find((p) => p.id === id);
     return of(proccess);
   }
 }

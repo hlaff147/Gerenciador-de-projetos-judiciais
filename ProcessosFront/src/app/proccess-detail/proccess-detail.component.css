@@ -4,7 +4,8 @@ ul i {
   font-size: 4.5rem;
 }
 
-.card, .btn-outline-secondary {
+.card,
+.btn-outline-secondary {
   height: 10rem;
 }
 
@@ -13,6 +14,6 @@ ul i {
   background-color: rgba(0, 0, 0, 0.65);
 }
 
-.process-detail-body{
-    padding-left:1.5rem
+.process-detail-body {
+  padding-left: 1.5rem;
 }

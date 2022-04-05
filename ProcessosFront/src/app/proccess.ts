@@ -5,16 +5,11 @@ export class Proccess {
   judge: string;
   status: string;
 
-  constructor(
-    id: number,
-    name: string,
-    judge: string,
-  ) {
+  constructor(id: number, name: string, judge: string) {
     this.id = id;
     this.name = name;
-    this. judge = judge;
+    this.judge = judge;
     this.startDate = new Date();
-    this.status = "em andamento";
+    this.status = 'em andamento';
   }
 }
-
