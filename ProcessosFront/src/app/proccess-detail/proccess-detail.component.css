@@ -1,5 +1,19 @@
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 
-.process-detail-body{
-    padding-left:1.5rem
+.card,
+.btn-outline-secondary {
+  height: 10rem;
+}
+
+.modal {
+  display: block;
+  background-color: rgba(0, 0, 0, 0.65);
+}
+
+.process-detail-body {
+  padding-left: 1.5rem;
+}
+
+.document-list-icon {
+  font-size: 4.5rem;
 }

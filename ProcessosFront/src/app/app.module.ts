@@ -16,14 +16,10 @@ import { ProccessDetailComponent } from './proccess-detail/proccess-detail.compo
     LoginFormComponent,
     SignupFormComponent,
     ProfileComponent,
-    ProccessDetailComponent
+    ProccessDetailComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
