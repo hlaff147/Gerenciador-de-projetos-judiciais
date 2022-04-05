@@ -5,12 +5,6 @@
       <div class="mb-3">
         <label for="inName" class="form-label">Nome</label>
         <input type="text" class="form-control" id="inName" />
-        <!----[(ngModel)]="name" name="name" #name="ngModel"
-            (ngModelChange)="updateName($event)" required>
-            <div [hidden]="!submitted || name !== ''"
-            class="alert alert-danger">Campo Nome é obrigatório.</div>
-            <div [hidden]="!nameInvalid"
-            class="alert alert-danger">Nome deve ser apenas letras.</div> --->
       </div>
 
       <div class="mb-3">
@@ -136,7 +130,7 @@
           Campo repetir senha obrigatorio
         </div>
         <div [hidden]="check_password" class="alert alert-danger">
-          Senhas nao correspondem
+          Senhas não correspondem
         </div>
         <div id="confirmHelp" class="form-text">
           Este campo deve ser exatamente igual à senha

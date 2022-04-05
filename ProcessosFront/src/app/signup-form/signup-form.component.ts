@@ -52,17 +52,11 @@ export class SignupFormComponent implements OnInit {
   sigIn(): void {
     this.submitted = true;
     if (!this.cpfIsValid()) return;
-    console.log('oi 1');
     if (!this.passwordIsValid()) return;
-    console.log('oi 2');
     if (!this.phoneIsValid()) return;
-    console.log('oi 3');
     if (!this.funcaoIsValid()) return;
-    console.log('oi 4');
     if (!this.emailIsValid()) return;
-    console.log('oi 5');
     if (!this.repeatPasswordIsValid()) return;
-    console.log('oi 6');
 
     this.router.navigate(['/']);
   }
