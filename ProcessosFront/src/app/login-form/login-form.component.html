@@ -1,33 +1,57 @@
-<div class="card" style="width: 40rem;">
+<div class="card" style="width: 40rem">
   <div class="card-body">
     <h5 class="card-title">Bem-vindo de volta!</h5>
     <form #loginForm="ngForm">
       <div class="mb-3">
-	<label for="inCpf" class="form-label">CPF</label>
-	<input type="text" class="form-control" id="inCpf"
-	  [(ngModel)]="cpf" name="cpf" #name="ngModel"
-	  (ngModelChange)="updateCpf($event)" required>
-	  <div [hidden]="!submitted || cpf !== ''"
-	    class="alert alert-danger">Campo CPF é obrigatório.</div>
-	  <div [hidden]="!cpfInvalid"
-	    class="alert alert-danger">CPF deve ser apenas números.</div>
+        <label for="inCpf" class="form-label">CPF</label>
+        <input
+          type="text"
+          class="form-control"
+          id="inCpf"
+          [(ngModel)]="cpf"
+          name="cpf"
+          #name="ngModel"
+          (ngModelChange)="updateCpf($event)"
+          required
+        />
+        <div [hidden]="!submitted || cpf !== ''" class="alert alert-danger">
+          Campo CPF é obrigatório.
+        </div>
+        <div [hidden]="!cpfInvalid" class="alert alert-danger">
+          CPF deve ser apenas números.
+        </div>
       </div>
       <div class="mb-3">
-	<label for="inPassword" class="form-label">Senha</label>
-	<input type="password" class="form-control" id="inPassword"
-	  [(ngModel)]="password" name="password "required>
-	  <div [hidden]="!submitted || passwordIsValid()" class="alert alert-danger">
-	    Campo senha é obrigatório
-	  </div>
+        <label for="inPassword" class="form-label">Senha</label>
+        <input
+          type="password"
+          class="form-control"
+          id="inPassword"
+          [(ngModel)]="password"
+          name="password "
+          required
+        />
+        <div
+          [hidden]="!submitted || passwordIsValid()"
+          class="alert alert-danger"
+        >
+          Campo senha é obrigatório
+        </div>
       </div>
       <div class="mb-3 form-check">
-	<input type="checkbox" class="form-check-input" id="inCheck"
-	  [(ngModel)]="rememberUser" name="rememberUser">
-	<label class="form-check-label fst-italic fs-6" for="inCheck">Lembre-se de mim.</label>
+        <input
+          type="checkbox"
+          class="form-check-input"
+          id="inCheck"
+          [(ngModel)]="rememberUser"
+          name="rememberUser"
+        />
+        <label class="form-check-label fst-italic fs-6" for="inCheck"
+          >Lembre-se de mim.</label
+        >
       </div>
-      <button type="submit" class="btn btn-primary"
-	(click)="loginUser()">
-	Login
+      <button type="submit" class="btn btn-primary" (click)="loginUser()">
+        Login
       </button>
     </form>
   </div>
