@@ -8,14 +8,14 @@
   <ul class="list-unstyled row row-cols-5 row-cols-md-5 g-2" style="width: 60%;">
     <li>
       <div class="card text-center">
-	<button class="btn btn-outline-secondary">
+	<button (click)="toggleAddDocument()" class="btn btn-outline-secondary document-list-item">
 	  <i class="bi bi-plus d-block"></i>
 	</button>
       </div>
     </li>
     <li *ngFor="let doc of documents" class="col">
       <div class="card text-center">
-	<button (click)="selectDocument(doc.id)" class="btn btn-outline-secondary">
+	<button (click)="selectDocument(doc.id)" class="btn btn-outline-secondary document-list-item">
 	  <i class="bi bi-file-earmark-text"></i>
 	  <small>{{ doc.name }}</small>
 	</button>
@@ -37,6 +37,43 @@
 	  <div class="modal-footer">
 	    <button type="button" class="btn btn-danger">Remover</button>
 	    <button (click)="unselectDocument()" type="button" class="btn btn-secondary">Fechar</button>
+	  </div>
+	</div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="addDocument">
+    <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+      <div class="modal-dialog">
+	<div class="modal-content">
+	  <div class="modal-header">
+	    <h5 class="modal-title" id="exampleModalLabel">Adicione um documento</h5>
+	    <button (click)="toggleAddDocument()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	  </div>
+
+	  <div class="modal-body">
+	    <form #documentForm="ngForm">
+	      <div class="mb-3">
+		<label for="inFile" class="form-label">Arquivo para anexo</label>
+		<input [(ngModel)]="selFile" name="selFile" #name="ngModel" class="form-control" type="file" id="inFile" required>
+		<div [hidden]="!submitted || fileIsValid" class="alert alert-danger">
+		  Os formatos de documento suportados são: PDF, PNG e JPG. Por favor, escolha um deles
+		</div>
+	      </div>
+	      <div class="mb-3">
+		<label for="inDate" class="form-label">Data de anexo</label>
+		<input [(ngModel)]="currDate" name="currDate" #name="ngModel"  type="date" class="form-control" id="inDate" required>
+		<div [hidden]="!fileIsValid"class="alert alert-danger">
+		  o campo "Data de anexo" é obrigatório
+		</div>
+	      </div>
+	    </form>
+	  </div>
+
+	  <div class="modal-footer">
+	    <button (click)="toggleAddDocument()" type="button" class="btn btn-danger">Cancelar</button>
+	    <button (click)="validateFile()" type="button" class="btn btn-primary">Salvar</button>
 	  </div>
 	</div>
       </div>

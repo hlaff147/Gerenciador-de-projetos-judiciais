@@ -18,6 +18,11 @@ export class ProccessDetailComponent implements OnInit {
   proccess: Proccess | undefined;
   documents: Document[] = [];
   selectedDoc: Document | undefined;
+  addDocument: boolean = false;
+  currDate: string = "";
+  selFile: string = "";
+  fileIsValid: boolean = false;
+  submitted: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -49,5 +54,25 @@ export class ProccessDetailComponent implements OnInit {
 
   unselectDocument(): void {
     this.selectedDoc = undefined;
+  }
+
+  toggleAddDocument(): void {
+    this.addDocument = !this.addDocument;
+  }
+
+  dateIsValid(): boolean {
+    return this.currDate !== "";
+  }
+
+  validateFile(): void {
+    this.submitted = true;
+
+    this.fileIsValid = Boolean(this.selFile.match(/(.+)?\.(png|jpg|pdf)/));
+
+    if (!this.dateIsValid())
+      return ;
+
+    if (this.fileIsValid)
+      this.toggleAddDocument();
   }
 }
