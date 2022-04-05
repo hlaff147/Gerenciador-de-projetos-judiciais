@@ -1,6 +1,29 @@
 <div *ngIf="proccess">
   <h5 class="fs-2">{{ proccess.name }}</h5>
-  <p>Juiz: <span class="fst-italic text-muted">{{ proccess.judge }}</span></p>
-  <p>Data de início: <span class="fst-italic text-muted">{{ proccess.startDate.getDate() }}/{{ proccess.startDate.getMonth() }}/{{ proccess.startDate.getFullYear() }}</span></p>
-  <p>Status: <span class="fst-italic text-muted">{{ proccess.status }}</span></p>
+  <p>
+    Juiz: <span class="fst-italic text-muted">{{ proccess.judge }}</span>
+  </p>
+  <p>
+    Data de início:
+    <span class="fst-italic text-muted"
+      >{{ proccess.startDate.getDate() }}/{{ proccess.startDate.getMonth() }}/{{
+        proccess.startDate.getFullYear()
+      }}</span
+    >
+  </p>
+  <div *ngIf="proccess.status === 'concluído'">
+    <p>
+      Status: <span class="fst-italic text-success">{{ proccess.status }}</span>
+    </p>
+  </div>
+  <div *ngIf="proccess.status === 'atrasado'">
+    <p>
+      Status: <span class="fst-italic text-danger">{{ proccess.status }}</span>
+    </p>
+  </div>
+  <div *ngIf="proccess.status === 'em andamento'">
+    <p>
+      Status: <span class="fst-italic text-primary">{{ proccess.status }}</span>
+    </p>
+  </div>
 </div>

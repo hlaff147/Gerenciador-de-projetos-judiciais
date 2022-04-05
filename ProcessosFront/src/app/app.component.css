@@ -1,0 +1,18 @@
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+.custom-nav-item {
+  display: flex;
+  align-items: center;
+  border-radius: 1rem;
+  padding: 0.2rem;
+}
+
+.custom-navbar {
+  width: 65%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.custom-nav-item:hover {
+  background-color: #f7934c;
+}
