@@ -4,7 +4,25 @@
     <form>
       <div class="mb-3">
         <label for="inName" class="form-label">Nome</label>
-        <input type="text" class="form-control" id="inName" />
+        <input
+          type="text"
+          class="form-control"
+          id="inName"
+          [(ngModel)]="username"
+          name="username"
+          #name="ngModel"
+          (ngModelChange)="updateName($event)"
+          required
+        />
+        <div
+          [hidden]="!submitted || username !== ''"
+          class="alert alert-danger"
+        >
+          Campo nome é obrigatório.
+        </div>
+        <div [hidden]="!nameInvalid" class="alert alert-danger">
+          O nome não deve conter números.
+        </div>
       </div>
 
       <div class="mb-3">
@@ -23,7 +41,7 @@
           Campo CPF é obrigatório.
         </div>
         <div [hidden]="!cpfInvalid" class="alert alert-danger">
-          CPF deve ser apenas números.
+          O CPF deve ser apenas números.
         </div>
       </div>
 
@@ -38,7 +56,7 @@
           required
         />
         <div [hidden]="!submitted || emailIsValid()" class="alert alert-danger">
-          email é obrigatório
+          Campo e-mail é obrigatório.
         </div>
       </div>
 
@@ -58,7 +76,7 @@
           Campo telefone é obrigatório.
         </div>
         <div [hidden]="!phoneInvalid" class="alert alert-danger">
-          telefone deve ser apenas números.
+          O telefone deve ser apenas números.
         </div>
       </div>
 
@@ -79,11 +97,8 @@
         <div
           [hidden]="!submitted || funcaoIsValid()"
           class="alert alert-danger"
-          [(ngModel)]="funcao"
-          name="funcao "
-          required
         >
-          funcao é obrigatória
+          A função é obrigatória.
         </div>
       </div>
 
@@ -102,7 +117,7 @@
           [hidden]="!submitted || passwordIsValid()"
           class="alert alert-danger"
         >
-          Campo senha é obrigatório
+          Campo senha é obrigatório.
         </div>
         <div id="passwordHelp" class="form-text">
           A senha deve conter, pelo menos, 5 dígitos e não deve fazer uso de
@@ -127,13 +142,13 @@
           [hidden]="!submitted || repeatPasswordIsValid()"
           class="alert alert-danger"
         >
-          Campo repetir senha obrigatorio
+          Campo repetir senha é obrigatório.
         </div>
         <div [hidden]="check_password" class="alert alert-danger">
-          Senhas não correspondem
+          Senhas não correspondem.
         </div>
         <div id="confirmHelp" class="form-text">
-          Este campo deve ser exatamente igual à senha
+          Este campo deve ser exatamente igual à senha.
         </div>
       </div>
       <button (click)="sigIn()" type="submit" class="btn btn-primary">

@@ -10,7 +10,7 @@ export class SignupFormComponent implements OnInit {
   cpf: string = '';
   password: string = '';
   repeatPassword: string = '';
-  name: string = '';
+  username: string = '';
   email: string = '';
   phone: string = '';
   funcao: string = '';
@@ -41,7 +41,7 @@ export class SignupFormComponent implements OnInit {
     return this.email !== '';
   }
   nameIsValid(): boolean {
-    return !(this.nameInvalid || this.name === '');
+    return !(this.nameInvalid || this.username === '');
   }
   phoneIsValid(): boolean {
     return !(this.phoneInvalid || this.phone === '');
@@ -64,7 +64,7 @@ export class SignupFormComponent implements OnInit {
   reset(): void {
     this.cpf = '';
     this.password = '';
-    this.name = '';
+    this.username = '';
     this.email = '';
     this.phone = '';
     this.funcao = '';
