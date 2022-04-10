@@ -28,6 +28,9 @@
         >
           CPF deve ser apenas números.
         </div>
+        <div [hidden]="!submitted || cpfLenght" class="alert alert-danger">
+          O CPF deve conter 11 dígitos.
+        </div>
       </div>
       <div class="mb-3">
         <label for="inPassword" class="form-label">Senha</label>
