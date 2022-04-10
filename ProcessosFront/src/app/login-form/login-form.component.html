@@ -1,4 +1,4 @@
-<div class="card" style="width: 40rem">
+<div class="card" style="width: 40rem" data-cy="login-form">
   <div class="card-body">
     <h5 class="card-title">Bem-vindo de volta!</h5>
     <form #loginForm="ngForm">
@@ -14,7 +14,11 @@
           (ngModelChange)="updateCpf($event)"
           required
         />
-        <div [hidden]="!submitted || cpf !== ''" class="alert alert-danger">
+        <div
+          [hidden]="!submitted || cpf !== ''"
+          class="alert alert-danger"
+          data-cy="login-cpf-missing"
+        >
           Campo CPF é obrigatório.
         </div>
         <div [hidden]="!cpfInvalid" class="alert alert-danger">
@@ -34,6 +38,7 @@
         <div
           [hidden]="!submitted || passwordIsValid()"
           class="alert alert-danger"
+          data-cy="login-password-missing"
         >
           Campo senha é obrigatório
         </div>
@@ -50,7 +55,12 @@
           >Lembre-se de mim.</label
         >
       </div>
-      <button type="submit" class="btn btn-primary" (click)="loginUser()">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        (click)="loginUser()"
+        data-cy="login-btn"
+      >
         Login
       </button>
     </form>
