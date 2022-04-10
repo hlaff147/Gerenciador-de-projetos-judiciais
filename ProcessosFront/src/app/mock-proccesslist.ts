@@ -1,6 +1,6 @@
 import { Proccess } from './proccess';
 
-export const PROCCESSES: Proccess[] = [
+export var PROCCESSES: Proccess[] = [
   {
     id: 6,
     name: 'Processo Judicial 7',
