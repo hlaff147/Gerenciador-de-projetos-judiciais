@@ -23,6 +23,12 @@ describe("Testes de login", () => {
     cy.get('[data-cy="login-cpf-error-letters"]').should("be.visible");
   });
 
+  it("CPF deve ter 11 dígitos", () => {
+    cy.get("input[name=cpf").type("1111111111");
+    cy.get('[data-cy="login-btn"]').click();
+    cy.get('[data-cy="login-cpf-error-length"]').should("be.visible");
+  });
+
   it("Login com dados válidos leva à página inicial", () => {
     cy.get("input[name=cpf]").type("11111111111");
     cy.get("input[name=password]").type("senha1234");
