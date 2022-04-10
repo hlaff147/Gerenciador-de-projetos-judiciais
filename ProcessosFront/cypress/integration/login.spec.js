@@ -13,4 +13,10 @@ describe("Testes de login", () => {
     cy.get('[data-cy="login-cpf-missing"]').should("be.visible");
     cy.get('[data-cy="login-password-missing"]').should("be.visible");
   });
+
+  it("CPF não pode conter letras", () => {
+    cy.visit("login");
+    cy.get("input[name=cpf]").type("1111111111a");
+    cy.get('[data-cy="login-cpf-error-letters"]').should("be.visible");
+  });
 });

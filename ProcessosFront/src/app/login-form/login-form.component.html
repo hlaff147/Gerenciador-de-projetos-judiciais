@@ -21,7 +21,11 @@
         >
           Campo CPF é obrigatório.
         </div>
-        <div [hidden]="!cpfInvalid" class="alert alert-danger">
+        <div
+          [hidden]="!cpfInvalid"
+          class="alert alert-danger"
+          data-cy="login-cpf-error-letters"
+        >
           CPF deve ser apenas números.
         </div>
       </div>
