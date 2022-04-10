@@ -1,1 +1,6 @@
 @import "~bootstrap-icons/font/bootstrap-icons.css";
+
+.process-action{
+    display: flex;
+    justify-content: space-between;
+}
