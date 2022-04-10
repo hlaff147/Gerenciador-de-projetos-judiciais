@@ -18,4 +18,10 @@ export class ProccessService {
     const proccess = PROCCESSES.find((p) => p.id === id);
     return of(proccess);
   }
+
+  deleteProcess(id: number): Observable<Proccess[]> {
+    PROCCESSES.splice(PROCCESSES.findIndex((p) => p.id === id), 1);
+    return of(PROCCESSES);
+  }
+
 }

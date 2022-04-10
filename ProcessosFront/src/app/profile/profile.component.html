@@ -31,6 +31,14 @@
           role="button"
           >Ver mais</a
         >
+        <div class="">
+          <button class="border-0 ml-2 btn-icon btn-icon-only btn-pill btn btn-outline-focus btn-sm">
+            <i class="bi bi-pencil-square"></i>
+          </button>
+          <button (click)="deleteProcess(proccess.id)" class="border-0 ml-2 btn-icon btn-icon-only btn-pill btn btn-outline-focus btn-sm">
+            <i class="bi bi-trash3-fill"></i>
+          </button>
+        </div>
       </li>
     </ul>
   </div>

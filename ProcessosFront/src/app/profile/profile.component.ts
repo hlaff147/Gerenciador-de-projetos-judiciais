@@ -18,4 +18,7 @@ export class ProfileComponent implements OnInit {
       .getProcesses()
       .subscribe((proccesses) => (this.proccesses = proccesses));
   }
+  deleteProcess(id: number): void {
+    this.proccessService.deleteProcess(id).subscribe((proccesses) => (this.proccesses = proccesses));
+  }
 }
