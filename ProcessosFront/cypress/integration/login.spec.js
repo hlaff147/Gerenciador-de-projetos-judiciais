@@ -1,6 +1,10 @@
 /// <reference types="cypress" />
 
 describe("Testes de login", () => {
+  beforeEach(() => {
+    cy.visit("login");
+  });
+
   it("Clicar em item `Login` na barra de navegação abre página de login", () => {
     cy.visit("");
     cy.get('[data-cy="login-link"]').click();
@@ -15,8 +19,14 @@ describe("Testes de login", () => {
   });
 
   it("CPF não pode conter letras", () => {
-    cy.visit("login");
     cy.get("input[name=cpf]").type("1111111111a");
     cy.get('[data-cy="login-cpf-error-letters"]').should("be.visible");
+  });
+
+  it("Login com dados válidos leva à página inicial", () => {
+    cy.get("input[name=cpf]").type("11111111111");
+    cy.get("input[name=password]").type("senha1234");
+    cy.get('[data-cy="login-btn').click();
+    cy.url().should("eq", Cypress.config().baseUrl + "/");
   });
 });
