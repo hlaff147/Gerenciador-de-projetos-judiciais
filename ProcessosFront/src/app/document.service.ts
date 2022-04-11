@@ -19,4 +19,11 @@ export class DocumentService {
     const document = DOCUMENTS.find((d) => d.id === id);
     return of(document);
   }
+  deleteDocument(id: number): Observable<Document[]> {
+    DOCUMENTS.splice(
+      DOCUMENTS.findIndex((d) => d.id === id),
+      1
+    );
+    return of(DOCUMENTS);
+  }
 }

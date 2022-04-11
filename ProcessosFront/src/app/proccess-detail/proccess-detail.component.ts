@@ -74,4 +74,9 @@ export class ProccessDetailComponent implements OnInit {
 
     if (this.fileIsValid) this.toggleAddDocument();
   }
+  deleteDocument(id: number): void {
+    this.documentService.deleteDocument(id)
+    this.getDocuments();
+  }
+
 }
