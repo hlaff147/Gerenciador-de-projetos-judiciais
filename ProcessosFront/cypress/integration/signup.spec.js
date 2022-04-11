@@ -16,4 +16,9 @@ describe("Testes de signup", () => {
     cy.get("input[name=username]").type("Humbert0");
     cy.get("[data-error='name-numbers']").should("be.visible");
   });
+
+  it("Telefone não deve ter letras", () => {
+    cy.get("input[name=phone]").type("9111b1111");
+    cy.get("[data-error='phone-letters']").should("be.visible");
+  });
 });

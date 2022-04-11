@@ -79,7 +79,11 @@
         <div [hidden]="!submitted || phone !== ''" class="alert alert-danger">
           Campo telefone é obrigatório.
         </div>
-        <div [hidden]="!phoneInvalid" class="alert alert-danger">
+        <div
+          [hidden]="!phoneInvalid"
+          class="alert alert-danger"
+          data-error="phone-letters"
+        >
           O telefone deve ser apenas números.
         </div>
       </div>
