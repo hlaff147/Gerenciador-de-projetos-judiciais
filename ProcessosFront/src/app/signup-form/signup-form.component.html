@@ -20,7 +20,11 @@
         >
           Campo nome é obrigatório.
         </div>
-        <div [hidden]="!nameInvalid" class="alert alert-danger">
+        <div
+          [hidden]="!nameInvalid"
+          class="alert alert-danger"
+          data-error="name-numbers"
+        >
           O nome não deve conter números.
         </div>
       </div>
