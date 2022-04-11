@@ -14,6 +14,7 @@ export class SignupFormComponent implements OnInit {
   email: string = '';
   phone: string = '';
   funcao: string = '';
+  cpfLenght = false;
   rememberUser = false;
   cpfInvalid = false;
   submitted = false;
@@ -24,6 +25,9 @@ export class SignupFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  cpfLenghtIsValid(): boolean {
+    return !(this.cpfLenght || this.cpf.length !== 11);
+  }
   cpfIsValid(): boolean {
     return !(this.cpfInvalid || this.cpf === '');
   }
