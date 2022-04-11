@@ -98,7 +98,13 @@
             himself.
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger">Remover</button>
+            <button
+              type="button"
+              class="btn btn-danger"
+              (click)="deleteDocument(selectedDoc.id)"
+            >
+              Remover
+            </button>
             <button
               (click)="unselectDocument()"
               type="button"

@@ -26,4 +26,10 @@ export class DocumentService {
     DOCUMENTS.push(document);
     return of(DOCUMENTS);
   }
+
+  deleteDocument(id: number): Observable<unknown> {
+    const index: number = DOCUMENTS.findIndex((doc) => doc.id == id);
+    DOCUMENTS.splice(index, 1);
+    return of(DOCUMENTS);
+  }
 }

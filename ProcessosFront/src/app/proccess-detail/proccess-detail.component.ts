@@ -87,4 +87,10 @@ export class ProccessDetailComponent implements OnInit {
     this.documentService.addDocument(doc).subscribe();
     this.getDocuments();
   }
+
+  deleteDocument(id: number): void {
+    this.documentService.deleteDocument(id).subscribe();
+    this.unselectDocument();
+    this.getDocuments();
+  }
 }
