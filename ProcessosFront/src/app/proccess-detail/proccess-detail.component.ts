@@ -16,7 +16,8 @@ export class ProccessDetailComponent implements OnInit {
   proccess: Proccess | undefined;
   documents: Document[] = [];
   selectedDoc: Document | undefined;
-  addDocument: boolean = false;
+  showDocModal: boolean = false;
+  newDocName: string = '';
   currDate: string = '';
   selFile: string = '';
   fileIsValid: boolean = false;
@@ -58,7 +59,7 @@ export class ProccessDetailComponent implements OnInit {
   }
 
   toggleAddDocument(): void {
-    this.addDocument = !this.addDocument;
+    this.showDocModal = !this.showDocModal;
   }
 
   dateIsValid(): boolean {
@@ -73,5 +74,17 @@ export class ProccessDetailComponent implements OnInit {
     if (!this.dateIsValid()) return;
 
     if (this.fileIsValid) this.toggleAddDocument();
+
+    this.addDocument();
+  }
+
+  addDocument(): void {
+    let doc: Document = {
+      id: 0,
+      name: this.newDocName,
+      proccessId: this.proccess!.id,
+    };
+    this.documentService.addDocument(doc).subscribe();
+    this.getDocuments();
   }
 }

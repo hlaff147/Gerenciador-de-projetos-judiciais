@@ -112,7 +112,7 @@
     </div>
   </div>
 
-  <div *ngIf="addDocument">
+  <div *ngIf="showDocModal">
     <div
       class="modal"
       id="exampleModal"
@@ -155,6 +155,23 @@
                 >
                   Os formatos de documento suportados são: PDF, PNG e JPG. Por
                   favor, escolha um deles
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="docName" class="form-label"
+                  >Nome do documento</label
+                >
+                <input
+                  [(ngModel)]="newDocName"
+                  name="newDocName"
+                  #name="ngModel"
+                  type="text"
+                  class="form-control"
+                  id="newDocName"
+                  required
+                />
+                <div [hidden]="newDocName != ''" class="alert alert-danger">
+                  o campo "Nome do documento" é obrigatório
                 </div>
               </div>
               <div class="mb-3">

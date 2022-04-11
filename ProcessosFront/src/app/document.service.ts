@@ -19,4 +19,11 @@ export class DocumentService {
     const document = DOCUMENTS.find((d) => d.id === id);
     return of(document);
   }
+
+  addDocument(document: Document): Observable<Document[]> {
+    const id = DOCUMENTS[DOCUMENTS.length - 1].id;
+    document.id = id + 1;
+    DOCUMENTS.push(document);
+    return of(DOCUMENTS);
+  }
 }
