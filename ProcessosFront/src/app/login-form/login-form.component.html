@@ -14,13 +14,25 @@
           (ngModelChange)="updateCpf($event)"
           required
         />
-        <div [hidden]="!submitted || cpf !== ''" class="alert alert-danger">
+        <div
+          [hidden]="!submitted || cpf !== ''"
+          class="alert alert-danger"
+          data-error="cpf-missing"
+        >
           Campo CPF é obrigatório.
         </div>
-        <div [hidden]="!cpfInvalid" class="alert alert-danger">
+        <div
+          [hidden]="!cpfInvalid"
+          class="alert alert-danger"
+          data-error="cpf-letters"
+        >
           CPF deve ser apenas números.
         </div>
-        <div [hidden]="!submitted || cpfLenght" class="alert alert-danger">
+        <div
+          [hidden]="!submitted || cpfLenght"
+          class="alert alert-danger"
+          data-error="cpf-length"
+        >
           O CPF deve conter 11 dígitos.
         </div>
       </div>
@@ -31,12 +43,13 @@
           class="form-control"
           id="inPassword"
           [(ngModel)]="password"
-          name="password "
+          name="password"
           required
         />
         <div
           [hidden]="!submitted || passwordIsValid()"
           class="alert alert-danger"
+          data-error="password-missing"
         >
           Campo senha é obrigatório
         </div>
@@ -53,7 +66,12 @@
           >Lembre-se de mim.</label
         >
       </div>
-      <button type="submit" class="btn btn-primary" (click)="loginUser()">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        (click)="loginUser()"
+        data-cy="login-btn"
+      >
         Login
       </button>
     </form>

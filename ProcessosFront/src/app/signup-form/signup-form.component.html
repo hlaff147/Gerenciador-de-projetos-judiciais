@@ -20,7 +20,11 @@
         >
           Campo nome é obrigatório.
         </div>
-        <div [hidden]="!nameInvalid" class="alert alert-danger">
+        <div
+          [hidden]="!nameInvalid"
+          class="alert alert-danger"
+          data-error="name-numbers"
+        >
           O nome não deve conter números.
         </div>
       </div>
@@ -75,7 +79,11 @@
         <div [hidden]="!submitted || phone !== ''" class="alert alert-danger">
           Campo telefone é obrigatório.
         </div>
-        <div [hidden]="!phoneInvalid" class="alert alert-danger">
+        <div
+          [hidden]="!phoneInvalid"
+          class="alert alert-danger"
+          data-error="phone-letters"
+        >
           O telefone deve ser apenas números.
         </div>
       </div>
@@ -110,7 +118,7 @@
           id="inPassword"
           aria-describedby="passwordHelp"
           [(ngModel)]="password"
-          name="password "
+          name="password"
           required
         />
         <div
@@ -144,7 +152,11 @@
         >
           Campo repetir senha é obrigatório.
         </div>
-        <div [hidden]="check_password" class="alert alert-danger">
+        <div
+          [hidden]="check_password"
+          class="alert alert-danger"
+          data-error="password-divergent"
+        >
           Senhas não correspondem.
         </div>
         <div id="confirmHelp" class="form-text">
