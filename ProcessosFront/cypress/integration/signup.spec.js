@@ -21,4 +21,12 @@ describe("Testes de signup", () => {
     cy.get("input[name=phone]").type("9111b1111");
     cy.get("[data-error='phone-letters']").should("be.visible");
   });
+
+  it("Senha de confirmação deve ser igual à senha", () => {
+    cy.get("input[name=password]").type("senha1234");
+    cy.get("input[name=repeatPassword]").type("senha123");
+    cy.get("[data-error='password-divergent']").should("be.visible");
+    cy.get("input[name=repeatPassword]").type("4");
+    cy.get("[data-error='password-divergent']").should("not.be.visible");
+  });
 });
