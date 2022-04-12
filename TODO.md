@@ -1,0 +1,26 @@
+# Gerenciador de Processos Judiciais - TODO
+
+### Novas funcionalidades
+
+- [ ] Verificar formato de e-mail
+- [ ] Limitar caracteres em telefone
+- [ ] Formatar cpf durante escrita
+- [ ] Aviso sobre número de caracteres durante escrita
+- [ ] Restringir cadastro sem "Nome"
+- [ ] Opção "Esqueci minha senha"
+- [ ] Adicionar botão de "Concluir" nos processos (usuário juiz)
+- [ ] Confirmação para mudar estado de processo (status e apagar)
+
+### Design
+
+- [ ] Mudar link "Ver mais" para botão "Detalhes de processo"
+- [ ] Preencher a página "Home"
+- [ ] Adicionar informações na página de processo
+
+### Refatoração
+
+- [ ] Melhorar responsividade
+- [ ] Modularizar componentes
+- [ ] Renomear componente "element-dialog"
+- [ ] Criar diretório para componentes
+- [ ] Separar página de perfil e de processos
