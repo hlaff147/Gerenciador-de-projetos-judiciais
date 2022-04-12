@@ -36,7 +36,7 @@ export class ProfileComponent implements OnInit {
 
   openModal(element: Proccess | null): void {
     const dialogRef = this.dialog.open(ElementDialog, {
-      width: '250px',
+      width: '30rem',
       data:
         element === null
           ? {
