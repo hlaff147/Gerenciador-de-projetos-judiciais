@@ -43,3 +43,11 @@ describe("Testes de acesso a documentos", () => {
     cy.get(".modal").should("not.exist");
   });
 });
+
+describe("Testes de gerência de documentos", () => {
+  it("Botão de adicionar documento abre menu de criação", () => {
+    cy.get(".modal").should("not.exist");
+    cy.get("[data-btn='add-document']").click();
+    cy.get(".modal").should("exist").and("be.visible");
+  });
+});
