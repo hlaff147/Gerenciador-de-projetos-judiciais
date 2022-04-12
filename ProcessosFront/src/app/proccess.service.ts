@@ -19,9 +19,17 @@ export class ProccessService {
     return of(proccess);
   }
 
-  deleteProcess(id: number): Observable<Proccess[]> {
-    PROCCESSES.splice(PROCCESSES.findIndex((p) => p.id === id), 1);
+  deleteProccess(id: number): Observable<Proccess[]> {
+    PROCCESSES.splice(
+      PROCCESSES.findIndex((p) => p.id === id),
+      1
+    );
     return of(PROCCESSES);
   }
 
+  addProccess(proccess: Proccess): Observable<unknown> {
+    proccess.id = PROCCESSES[PROCCESSES.length - 1].id + 1;
+    PROCCESSES.push(proccess);
+    return of(PROCCESSES);
+  }
 }

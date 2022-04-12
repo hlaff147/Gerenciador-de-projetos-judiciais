@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit {
   }
   deleteProcess(id: number): void {
     this.proccessService
-      .deleteProcess(id)
+      .deleteProccess(id)
       .subscribe((proccesses) => (this.proccesses = proccesses));
   }
 
@@ -42,7 +42,7 @@ export class ProfileComponent implements OnInit {
         element === null
           ? {
               name: '',
-              startDate: '',
+              startDate: new Date(),
               judge: '',
               status: '',
             }
@@ -51,8 +51,8 @@ export class ProfileComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result !== undefined) {
-        this.proccesses.push(result);
-        // this.getProcesses().push(result);
+        this.proccessService.addProccess(result).subscribe();
+        this.getProcesses();
       }
     });
   }
