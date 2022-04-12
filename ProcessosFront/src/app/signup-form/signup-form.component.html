@@ -4,7 +4,30 @@
     <form>
       <div class="mb-3">
         <label for="inName" class="form-label">Nome</label>
-        <input type="text" class="form-control" id="inName" />
+        <input
+          type="text"
+          class="form-control"
+          id="inName"
+          [(ngModel)]="username"
+          name="username"
+          #name="ngModel"
+          (ngModelChange)="updateName($event)"
+          required
+        />
+        <div
+          [hidden]="!submitted || username !== ''"
+          class="alert alert-danger"
+          data-error="username-missing"
+        >
+          Campo nome é obrigatório.
+        </div>
+        <div
+          [hidden]="!nameInvalid"
+          class="alert alert-danger"
+          data-error="name-numbers"
+        >
+          O nome não deve conter números.
+        </div>
       </div>
 
       <div class="mb-3">
@@ -19,11 +42,26 @@
           (ngModelChange)="updateCpf($event)"
           required
         />
-        <div [hidden]="!submitted || cpf !== ''" class="alert alert-danger">
+        <div
+          [hidden]="!submitted || cpf !== ''"
+          class="alert alert-danger"
+          data-error="cpf-missing"
+        >
           Campo CPF é obrigatório.
         </div>
-        <div [hidden]="!cpfInvalid" class="alert alert-danger">
-          CPF deve ser apenas números.
+        <div
+          [hidden]="!submitted || cpfLenght"
+          class="alert alert-danger"
+          data-error="cpf-length"
+        >
+          O CPF deve conter 11 dígitos.
+        </div>
+        <div
+          [hidden]="!cpfInvalid"
+          class="alert alert-danger"
+          data-error="cpf-letters"
+        >
+          O CPF deve ser apenas números.
         </div>
       </div>
 
@@ -34,11 +72,15 @@
           class="form-control"
           id="inEmail"
           [(ngModel)]="email"
-          name="email "
+          name="email"
           required
         />
-        <div [hidden]="!submitted || emailIsValid()" class="alert alert-danger">
-          email é obrigatório
+        <div
+          [hidden]="!submitted || emailIsValid()"
+          class="alert alert-danger"
+          data-error="email-missing"
+        >
+          Campo e-mail é obrigatório.
         </div>
       </div>
 
@@ -54,11 +96,19 @@
           (ngModelChange)="updatePhone($event)"
           required
         />
-        <div [hidden]="!submitted || phone !== ''" class="alert alert-danger">
+        <div
+          [hidden]="!submitted || phone !== ''"
+          class="alert alert-danger"
+          data-error="phone-missing"
+        >
           Campo telefone é obrigatório.
         </div>
-        <div [hidden]="!phoneInvalid" class="alert alert-danger">
-          telefone deve ser apenas números.
+        <div
+          [hidden]="!phoneInvalid"
+          class="alert alert-danger"
+          data-error="phone-letters"
+        >
+          O telefone deve ser apenas números.
         </div>
       </div>
 
@@ -68,7 +118,7 @@
           id="inUserType"
           class="form-select"
           [(ngModel)]="funcao"
-          name="funcao "
+          name="funcao"
           required
         >
           <option></option>
@@ -79,11 +129,9 @@
         <div
           [hidden]="!submitted || funcaoIsValid()"
           class="alert alert-danger"
-          [(ngModel)]="funcao"
-          name="funcao "
-          required
+          data-error="function-missing"
         >
-          funcao é obrigatória
+          A função é obrigatória.
         </div>
       </div>
 
@@ -95,19 +143,20 @@
           id="inPassword"
           aria-describedby="passwordHelp"
           [(ngModel)]="password"
-          name="password "
+          name="password"
           required
         />
         <div
           [hidden]="!submitted || passwordIsValid()"
           class="alert alert-danger"
+          data-error="password-missing"
         >
-          Campo senha é obrigatório
+          Campo senha é obrigatório.
         </div>
         <div id="passwordHelp" class="form-text">
           A senha deve conter, pelo menos, 5 dígitos e não deve fazer uso de
           espaços ou emojis. Também recomendamos misturar letras maiúsculas e
-          minúsculas e números
+          minúsculas e números.
         </div>
       </div>
 
@@ -126,17 +175,27 @@
         <div
           [hidden]="!submitted || repeatPasswordIsValid()"
           class="alert alert-danger"
+          data-error="confirm_password-missing"
         >
-          Campo repetir senha obrigatorio
+          Campo repetir senha é obrigatório.
         </div>
-        <div [hidden]="check_password" class="alert alert-danger">
-          Senhas não correspondem
+        <div
+          [hidden]="check_password"
+          class="alert alert-danger"
+          data-error="password-divergent"
+        >
+          Senhas não correspondem.
         </div>
         <div id="confirmHelp" class="form-text">
-          Este campo deve ser exatamente igual à senha
+          Este campo deve ser exatamente igual à senha.
         </div>
       </div>
-      <button (click)="sigIn()" type="submit" class="btn btn-primary">
+      <button
+        (click)="sigIn()"
+        type="submit"
+        class="btn btn-primary"
+        data-cy="signup-btn"
+      >
         Fazer cadastro
       </button>
     </form>

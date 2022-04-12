@@ -12,6 +12,7 @@ export class LoginFormComponent implements OnInit {
   password: string = "";
   rememberUser = false;
   cpfInvalid = false;
+  cpfLenght = false;
   submitted = false;
   nameInvalid = false
   constructor(private router: Router) { }
@@ -21,6 +22,10 @@ export class LoginFormComponent implements OnInit {
 
   cpfIsValid(): boolean {
       return !(this.cpfInvalid || this.cpf === "");
+  }
+
+  cpfLenghtIsValid(): boolean {
+    return !(this.cpfLenght || this.cpf.length !== 11);
   }
 
   passwordIsValid(): boolean {
@@ -34,7 +39,11 @@ export class LoginFormComponent implements OnInit {
 
     if (!this.passwordIsValid())
       return ;
+          
+    if (!this.cpfLenghtIsValid())
+      return ;
 
+    this.cpfLenght = this.cpfLenghtIsValid()
     this.router.navigate(['/']);
   }
 

@@ -1,4 +1,11 @@
 <div class="card">
+  <button
+    class="custom-add-process border-0 ml-2 btn-icon btn-icon-only btn-pill btn btn-outline-focus btn-sm"
+    (click)="openModal(null)"
+  >
+    <i class="bi bi-file-plus" style="margin-right: 5px"></i>
+    Criar um processo
+  </button>
   <div class="card-body">
     <ul class="list-group list-group-flush" style="width: 70rem">
       <li
@@ -19,11 +26,26 @@
             <small class="text-primary"> Status: {{ proccess.status }} </small>
           </div>
         </div>
-        <small class="text-muted">
-          Início: {{ proccess.startDate.getDate() }}/{{
-            proccess.startDate.getMonth()
-          }}/{{ proccess.startDate.getFullYear() }}
-        </small>
+        <div class="process-action">
+          <small class="text-muted">
+            Início: {{ proccess.startDate.getDate() }}/{{
+              proccess.startDate.getMonth()
+            }}/{{ proccess.startDate.getFullYear() }}
+          </small>
+          <div class="">
+            <button
+              class="border-0 ml-2 btn-icon btn-icon-only btn-pill btn btn-outline-focus btn-sm"
+            >
+              <i class="bi bi-pencil-square"></i>
+            </button>
+            <button
+              (click)="deleteProcess(proccess.id)"
+              class="border-0 ml-2 btn-icon btn-icon-only btn-pill btn btn-outline-focus btn-sm"
+            >
+              <i class="bi bi-trash3-fill"></i>
+            </button>
+          </div>
+        </div>
         <p class="mb-1">Juiz: {{ proccess.judge }}</p>
         <a
           routerLink="/processos/{{ proccess.id }}"
