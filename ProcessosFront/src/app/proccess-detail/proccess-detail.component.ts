@@ -60,6 +60,7 @@ export class ProccessDetailComponent implements OnInit {
 
   toggleAddDocument(): void {
     this.showDocModal = !this.showDocModal;
+    this.submitted = false;
   }
 
   dateIsValid(): boolean {
@@ -73,8 +74,9 @@ export class ProccessDetailComponent implements OnInit {
 
     if (!this.dateIsValid()) return;
 
-    if (this.fileIsValid) this.toggleAddDocument();
+    if (!this.fileIsValid) return;
 
+    this.toggleAddDocument();
     this.addDocument();
   }
 

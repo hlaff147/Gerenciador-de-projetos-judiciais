@@ -51,12 +51,29 @@ describe("Testes de gerência de documentos", () => {
     cy.get(".modal").should("exist").and("be.visible");
   });
 
+  it("Submeter documento inválido não o adiciona à lista", () => {
+    cy.get("[data-cy='document-list']").children().should("have.length", 3);
+    cy.get("[data-btn='document-save']").click();
+    cy.get("[data-cy='document-list']").children().should("have.length", 3);
+  });
+
+  it("Botão de `Cancelar` deve fechar menu de criação", () => {
+    cy.get(".modal").should("exist").and("be.visible");
+    cy.get("[data-btn='document-cancel']").click();
+    cy.get(".modal").should("not.exist");
+  });
+
   it("Submeter documento com campos vazios exibe mensagens de erro", () => {
+    // Exibir o modal
+    cy.get("[data-btn='add-document']").click();
+    cy.get(".modal").should("exist").and("be.visible");
+
+    // Não aparecem mensagens de erro
     cy.get("[data-error='document-format']").should("not.be.visible");
     cy.get("[data-error='document-name']").should("not.be.visible");
     cy.get("[data-error='document-date']").should("not.be.visible");
 
-    cy.get("[data-btn='save-document']").click();
+    cy.get("[data-btn='document-save']").click();
 
     cy.get("[data-error='document-format']").should("be.visible");
     cy.get("[data-error='document-name']").should("be.visible");
