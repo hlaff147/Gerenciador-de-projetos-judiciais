@@ -13,7 +13,7 @@
 
 ### Design
 
-- [ ] Mudar link "Ver mais" para botão "Detalhes de processo"
+- [x] Mudar link "Ver mais" para botão "Detalhes de processo"
 - [ ] Preencher a página "Home"
 - [ ] Adicionar informações na página de processo
 
