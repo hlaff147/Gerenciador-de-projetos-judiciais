@@ -79,4 +79,20 @@ describe("Testes de gerência de documentos", () => {
     cy.get("[data-error='document-name']").should("be.visible");
     cy.get("[data-error='document-date']").should("be.visible");
   });
+
+  it("Submeter documento com campos válidos o adiciona à lista", () => {
+    cy.get("input[name=selFile]").selectFile(
+      "cypress/fixtures/danny-devito.jpg"
+    );
+    cy.get("input[name=newDocName]").type("Documento de teste");
+    cy.get("input[name=currDate]").type("2022-04-11");
+
+    cy.get("[data-cy='document-list']").children().should("have.length", 3);
+    cy.get("[data-btn='document-save']").click();
+
+    cy.get(".modal").should("not.exist");
+    cy.get("[data-cy='document-list']")
+      .children()
+      .should("have.length.above", 3);
+  });
 });
