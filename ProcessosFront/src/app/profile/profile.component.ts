@@ -3,12 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { Proccess } from '../proccess';
 import { ProccessService } from '../proccess.service';
 import { Inject } from '@angular/core';
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ElementDialog } from '../element-dialog/element-dialog.component';
+import { PROCCESSES } from '../mock-proccesslist';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -18,6 +16,9 @@ import { ElementDialog } from '../element-dialog/element-dialog.component';
 export class ProfileComponent implements OnInit {
   proccesses: Proccess[] = [];
 
+  getProcesses(): Observable<Proccess[]> {
+    return of(PROCCESSES);
+  }
   constructor(
     private proccessService: ProccessService,
     public dialog: MatDialog
@@ -51,6 +52,7 @@ export class ProfileComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result !== undefined) {
         this.proccesses.push(result);
+        // this.getProcesses().push(result);
       }
     });
   }

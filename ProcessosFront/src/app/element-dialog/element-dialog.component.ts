@@ -9,7 +9,7 @@ import {
 @Component({
   selector: 'app-element-dialog',
   templateUrl: './element-dialog.component.html',
-  styleUrls: ['./profile.component.css'],
+  styleUrls: ['./element-dialog.component.css'],
 })
 export class ElementDialog implements OnInit {
   element!: Proccess;
