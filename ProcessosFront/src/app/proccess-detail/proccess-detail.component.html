@@ -38,6 +38,7 @@
     <ul
       class="list-unstyled row row-cols-5 row-cols-md-5 g-2"
       style="width: 60%"
+      data-cy="document-list"
     >
       <li>
         <div class="card text-center">
@@ -63,16 +64,11 @@
     </ul>
   </div>
   <div *ngIf="selectedDoc">
-    <div
-      class="modal"
-      id="exampleModal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-    >
+    <div class="modal" tabindex="-1" aria-labelledby="documentModalLabel">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">
+            <h5 class="modal-title" id="documentModalLabel">
               {{ selectedDoc.name }}
             </h5>
             <button
@@ -123,12 +119,12 @@
       class="modal"
       id="exampleModal"
       tabindex="-1"
-      aria-labelledby="exampleModalLabel"
+      aria-labelledby="addDocModalLabel"
     >
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">
+            <h5 class="modal-title" id="addDocModalLabel">
               Adicione um documento
             </h5>
             <button
