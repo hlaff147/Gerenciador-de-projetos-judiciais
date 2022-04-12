@@ -118,12 +118,7 @@
   </div>
 
   <div *ngIf="showDocModal">
-    <div
-      class="modal"
-      id="exampleModal"
-      tabindex="-1"
-      aria-labelledby="addDocModalLabel"
-    >
+    <div class="modal" tabindex="-1" aria-labelledby="addDocModalLabel">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -157,6 +152,7 @@
                 <div
                   [hidden]="!submitted || fileIsValid"
                   class="alert alert-danger"
+                  data-error="document-format"
                 >
                   Os formatos de documento suportados são: PDF, PNG e JPG. Por
                   favor, escolha um deles
@@ -175,7 +171,11 @@
                   id="newDocName"
                   required
                 />
-                <div [hidden]="newDocName != ''" class="alert alert-danger">
+                <div
+                  [hidden]="!submitted || newDocName != ''"
+                  class="alert alert-danger"
+                  data-error="document-name"
+                >
                   o campo "Nome do documento" é obrigatório
                 </div>
               </div>
@@ -190,7 +190,11 @@
                   id="inDate"
                   required
                 />
-                <div [hidden]="!fileIsValid" class="alert alert-danger">
+                <div
+                  [hidden]="!submitted || currDate"
+                  class="alert alert-danger"
+                  data-error="document-date"
+                >
                   o campo "Data de anexo" é obrigatório
                 </div>
               </div>
@@ -209,6 +213,7 @@
               (click)="validateFile()"
               type="button"
               class="btn btn-primary"
+              data-btn="save-document"
             >
               Salvar
             </button>

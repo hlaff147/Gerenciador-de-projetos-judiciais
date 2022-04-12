@@ -50,4 +50,16 @@ describe("Testes de gerência de documentos", () => {
     cy.get("[data-btn='add-document']").click();
     cy.get(".modal").should("exist").and("be.visible");
   });
+
+  it("Submeter documento com campos vazios exibe mensagens de erro", () => {
+    cy.get("[data-error='document-format']").should("not.be.visible");
+    cy.get("[data-error='document-name']").should("not.be.visible");
+    cy.get("[data-error='document-date']").should("not.be.visible");
+
+    cy.get("[data-btn='save-document']").click();
+
+    cy.get("[data-error='document-format']").should("be.visible");
+    cy.get("[data-error='document-name']").should("be.visible");
+    cy.get("[data-error='document-date']").should("be.visible");
+  });
 });
