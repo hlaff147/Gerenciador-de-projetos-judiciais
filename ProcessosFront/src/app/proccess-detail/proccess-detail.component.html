@@ -38,12 +38,14 @@
     <ul
       class="list-unstyled row row-cols-5 row-cols-md-5 g-2"
       style="width: 60%"
+      data-cy="document-list"
     >
       <li>
         <div class="card text-center">
           <button
             (click)="toggleAddDocument()"
             class="btn btn-outline-secondary document-list-icon"
+            data-btn="add-document"
           >
             <i class="bi bi-plus d-block doc-list-item"></i>
           </button>
@@ -63,16 +65,11 @@
     </ul>
   </div>
   <div *ngIf="selectedDoc">
-    <div
-      class="modal"
-      id="exampleModal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-    >
+    <div class="modal" tabindex="-1" aria-labelledby="documentModalLabel">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">
+            <h5 class="modal-title" id="documentModalLabel">
               {{ selectedDoc.name }}
             </h5>
             <button
@@ -81,6 +78,7 @@
               class="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
+              data-btn="close-doc-1"
             ></button>
           </div>
           <div class="modal-body">
@@ -109,6 +107,7 @@
               (click)="unselectDocument()"
               type="button"
               class="btn btn-secondary"
+              data-btn="close-doc-2"
             >
               Fechar
             </button>
@@ -119,16 +118,11 @@
   </div>
 
   <div *ngIf="showDocModal">
-    <div
-      class="modal"
-      id="exampleModal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-    >
+    <div class="modal" tabindex="-1" aria-labelledby="addDocModalLabel">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">
+            <h5 class="modal-title" id="addDocModalLabel">
               Adicione um documento
             </h5>
             <button
@@ -158,6 +152,7 @@
                 <div
                   [hidden]="!submitted || fileIsValid"
                   class="alert alert-danger"
+                  data-error="document-format"
                 >
                   Os formatos de documento suportados são: PDF, PNG e JPG. Por
                   favor, escolha um deles
@@ -176,7 +171,11 @@
                   id="newDocName"
                   required
                 />
-                <div [hidden]="newDocName != ''" class="alert alert-danger">
+                <div
+                  [hidden]="!submitted || newDocName != ''"
+                  class="alert alert-danger"
+                  data-error="document-name"
+                >
                   o campo "Nome do documento" é obrigatório
                 </div>
               </div>
@@ -191,7 +190,11 @@
                   id="inDate"
                   required
                 />
-                <div [hidden]="!fileIsValid" class="alert alert-danger">
+                <div
+                  [hidden]="!submitted || currDate"
+                  class="alert alert-danger"
+                  data-error="document-date"
+                >
                   o campo "Data de anexo" é obrigatório
                 </div>
               </div>
@@ -203,6 +206,7 @@
               (click)="toggleAddDocument()"
               type="button"
               class="btn btn-danger"
+              data-btn="document-cancel"
             >
               Cancelar
             </button>
@@ -210,6 +214,7 @@
               (click)="validateFile()"
               type="button"
               class="btn btn-primary"
+              data-btn="document-save"
             >
               Salvar
             </button>
