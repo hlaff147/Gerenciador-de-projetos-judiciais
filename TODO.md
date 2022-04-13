@@ -14,7 +14,7 @@
 ### Design
 
 - [x] Mudar link "Ver mais" para botão "Detalhes de processo"
-- [ ] Preencher a página "Home"
+- [x] Preencher a página "Home"
 - [ ] Adicionar informações na página de processo
 
 ### Refatoração

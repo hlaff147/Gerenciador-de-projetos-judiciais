@@ -7,6 +7,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { ProccessDetailComponent } from './proccess-detail/proccess-detail.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginFormComponent },
   { path: 'cadastro', component: SignupFormComponent },
   { path: 'perfil', component: ProfileComponent },
