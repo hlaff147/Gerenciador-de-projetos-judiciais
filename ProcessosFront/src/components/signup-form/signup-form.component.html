@@ -1,203 +1,157 @@
-<div class="card" style="width: 45rem">
-  <div class="card-body">
-    <h5 class="card-title">Bem-vindo!</h5>
-    <form>
-      <div class="mb-3">
-        <label for="inName" class="form-label">Nome</label>
-        <input
-          type="text"
-          class="form-control"
-          id="inName"
-          [(ngModel)]="username"
-          name="username"
-          #name="ngModel"
-          (ngModelChange)="updateName($event)"
-          required
-        />
-        <div
-          [hidden]="!submitted || username !== ''"
-          class="alert alert-danger"
-          data-error="username-missing"
-        >
-          Campo nome é obrigatório.
-        </div>
-        <div
-          [hidden]="!nameInvalid"
-          class="alert alert-danger"
-          data-error="name-numbers"
-        >
-          O nome não deve conter números.
-        </div>
-      </div>
+<div class="signup-container">
+  <p class="fs-2 mb-3">Bem-vindo!</p>
+  <form class="signup-form">
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        placeholder="Nome"
+        [formControl]="name"
+        [errorStateMatcher]="matcher"
+        type="text"
+        pattern="[a-zA-z ]*"
+        required
+      />
+      <mat-hint></mat-hint>
+      <mat-error *ngIf="name.errors?.['required']">
+        Nome é obrigatório.
+      </mat-error>
+      <mat-error *ngIf="name.errors?.['pattern'] && !name.errors?.['required']">
+        Nome deve conter apenas letras.
+      </mat-error>
+    </mat-form-field>
 
-      <div class="mb-3">
-        <label for="inCpf" class="form-label">CPF</label>
-        <input
-          type="text"
-          class="form-control"
-          id="inCpf"
-          [(ngModel)]="cpf"
-          name="cpf"
-          #name="ngModel"
-          (ngModelChange)="updateCpf($event)"
-          required
-        />
-        <div
-          [hidden]="!submitted || cpf !== ''"
-          class="alert alert-danger"
-          data-error="cpf-missing"
-        >
-          Campo CPF é obrigatório.
-        </div>
-        <div
-          [hidden]="!submitted || cpfLenght"
-          class="alert alert-danger"
-          data-error="cpf-length"
-        >
-          O CPF deve conter 11 dígitos.
-        </div>
-        <div
-          [hidden]="!cpfInvalid"
-          class="alert alert-danger"
-          data-error="cpf-letters"
-        >
-          O CPF deve ser apenas números.
-        </div>
-      </div>
-
-      <div class="mb-3">
-        <label for="inEmail" class="form-label">E-mail</label>
-        <input
-          type="email"
-          class="form-control"
-          id="inEmail"
-          [(ngModel)]="email"
-          name="email"
-          required
-        />
-        <div
-          [hidden]="!submitted || emailIsValid()"
-          class="alert alert-danger"
-          data-error="email-missing"
-        >
-          Campo e-mail é obrigatório.
-        </div>
-      </div>
-
-      <div class="mb-3">
-        <label for="inPhone" class="form-label">Telefone</label>
-        <input
-          type="text"
-          class="form-control"
-          id="inPhone"
-          [(ngModel)]="phone"
-          name="phone"
-          #name="ngModel"
-          (ngModelChange)="updatePhone($event)"
-          required
-        />
-        <div
-          [hidden]="!submitted || phone !== ''"
-          class="alert alert-danger"
-          data-error="phone-missing"
-        >
-          Campo telefone é obrigatório.
-        </div>
-        <div
-          [hidden]="!phoneInvalid"
-          class="alert alert-danger"
-          data-error="phone-letters"
-        >
-          O telefone deve ser apenas números.
-        </div>
-      </div>
-
-      <div class="mb-3">
-        <label for="inUserType" class="form-label">Função</label>
-        <select
-          id="inUserType"
-          class="form-select"
-          [(ngModel)]="funcao"
-          name="funcao"
-          required
-        >
-          <option></option>
-          <option>Advogado</option>
-          <option>Juiz</option>
-          <option>Réu</option>
-        </select>
-        <div
-          [hidden]="!submitted || funcaoIsValid()"
-          class="alert alert-danger"
-          data-error="function-missing"
-        >
-          A função é obrigatória.
-        </div>
-      </div>
-
-      <div class="mb-3">
-        <label for="inPassword" class="form-label">Senha</label>
-        <input
-          type="password"
-          class="form-control"
-          id="inPassword"
-          aria-describedby="passwordHelp"
-          [(ngModel)]="password"
-          name="password"
-          required
-        />
-        <div
-          [hidden]="!submitted || passwordIsValid()"
-          class="alert alert-danger"
-          data-error="password-missing"
-        >
-          Campo senha é obrigatório.
-        </div>
-        <div id="passwordHelp" class="form-text">
-          A senha deve conter, pelo menos, 5 dígitos e não deve fazer uso de
-          espaços ou emojis. Também recomendamos misturar letras maiúsculas e
-          minúsculas e números.
-        </div>
-      </div>
-
-      <div class="mb-3">
-        <label for="inConfirm" class="form-label">Confirme a senha</label>
-        <input
-          type="password"
-          class="form-control"
-          id="inConfirm"
-          aria-describedby="confirmHelp"
-          [(ngModel)]="repeatPassword"
-          name="repeatPassword"
-          required
-          (ngModelChange)="repeatPasswordIsCorrect($event)"
-        />
-        <div
-          [hidden]="!submitted || repeatPasswordIsValid()"
-          class="alert alert-danger"
-          data-error="confirm_password-missing"
-        >
-          Campo repetir senha é obrigatório.
-        </div>
-        <div
-          [hidden]="check_password"
-          class="alert alert-danger"
-          data-error="password-divergent"
-        >
-          Senhas não correspondem.
-        </div>
-        <div id="confirmHelp" class="form-text">
-          Este campo deve ser exatamente igual à senha.
-        </div>
-      </div>
-      <button
-        (click)="sigIn()"
-        type="submit"
-        class="btn btn-primary"
-        data-cy="signup-btn"
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        placeholder="CPF"
+        [formControl]="cpf"
+        [errorStateMatcher]="matcher"
+        type="text"
+        minlength="11"
+        maxlength="11"
+        pattern="\d+"
+        required
+      />
+      <mat-hint></mat-hint>
+      <mat-error *ngIf="cpf.errors?.['required']">
+        CPF é obrigatório.
+      </mat-error>
+      <mat-error *ngIf="cpf.errors?.['pattern'] && !cpf.errors?.['required']">
+        CPF deve conter apenas números.
+      </mat-error>
+      <mat-error
+        *ngIf="(cpf.errors?.['minlength'] || cpf.errors?.['maxlength']) && !cpf.errors?.['pattern'] && !cpf.errors?.['required']"
       >
-        Fazer cadastro
-      </button>
-    </form>
-  </div>
+        CPF deve conter 11 dígitos.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        placeholder="E-mail"
+        [formControl]="email"
+        [errorStateMatcher]="matcher"
+        type="text"
+        email
+        required
+      />
+      <mat-hint></mat-hint>
+      <mat-error *ngIf="email.errors?.['required']">
+        E-mail é obrigatório.
+      </mat-error>
+      <mat-error *ngIf="email.errors?.['email'] && !email.errors?.['required']">
+        Por favor, entre um e-mail válido.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        placeholder="Telefone"
+        [formControl]="phone"
+        [errorStateMatcher]="matcher"
+        type="text"
+        pattern="\d+"
+        minlength="9"
+        maxlength="9"
+        required
+      />
+      <mat-hint></mat-hint>
+      <mat-error *ngIf="phone.errors?.['required']">
+        Telefone é obrigatório.
+      </mat-error>
+      <mat-error
+        *ngIf="phone.errors?.['pattern'] && !phone.errors?.['required']"
+      >
+        Telefine deve conter apenas números.
+      </mat-error>
+      <mat-error
+        *ngIf="(phone.errors?.['minlength'] || phone.errors?.['maxlength']) && !phone.errors?.['pattern'] && !phone.errors?.['required']"
+      >
+        Telefone deve ter 9 dígitos.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-select
+        placeholder="Função"
+        [formControl]="function"
+        [errorStateMatcher]="matcher"
+        required
+      >
+        <mat-option></mat-option>
+        <mat-option *ngFor="let function of functions" [value]="function">
+          {{ function | titlecase }}
+        </mat-option>
+      </mat-select>
+      <mat-hint></mat-hint>
+      <mat-error *nfIg="function.errors?.['required']">
+        Função é obrigatório.
+      </mat-error>
+      <mat-error *ngIf="function.value == ''"> Escolha uma função. </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        placeholder="Senha"
+        [formControl]="password"
+        [errorStateMatcher]="matcher"
+        type="text"
+        required
+      />
+      <mat-hint></mat-hint>
+      <mat-error *ngIf="password.errors?.['required']">
+        Senha é obrigatória.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        placeholder="Senha de confirmação"
+        [formControl]="confPassword"
+        [errorStateMatcher]="matcher"
+        type="text"
+        required
+      />
+      <mat-hint></mat-hint>
+      <mat-error *ngIf="confPassword.errors?.['required']">
+        Senha de confirmação é obrigatória.
+      </mat-error>
+    </mat-form-field>
+
+    <button
+      class="mt-3"
+      style="width: 60%"
+      mat-flat-button
+      type="submit"
+      data-cy="signup-btn"
+      color="primary"
+      (click)="signupUser()"
+    >
+      Registrar-se
+    </button>
+  </form>
 </div>

@@ -1,91 +1,57 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {
+  FormControl,
+  Validators,
+  FormGroupDirective,
+  NgForm,
+} from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(
+      control &&
+      control.invalid &&
+      (control.dirty || control.touched || isSubmitted)
+    );
+  }
+}
+
 @Component({
   selector: 'app-signup-form',
   templateUrl: './signup-form.component.html',
   styleUrls: ['./signup-form.component.css'],
 })
 export class SignupFormComponent implements OnInit {
-  check_password: boolean = true;
-  cpf: string = '';
-  password: string = '';
-  repeatPassword: string = '';
-  username: string = '';
-  email: string = '';
-  phone: string = '';
-  funcao: string = '';
-  cpfLenght = false;
-  rememberUser = false;
-  cpfInvalid = false;
-  submitted = false;
-  nameInvalid = false;
-  phoneInvalid = false;
-  funcaoInvalid = false;
+  name = new FormControl('');
+  cpf = new FormControl('');
+  email = new FormControl('');
+  phone = new FormControl('');
+  password = new FormControl('');
+  confPassword = new FormControl('');
+  function = new FormControl('');
+
+  functions = ['advogado', 'juiz', 'cliente', 'réu'];
+  matcher = new MyErrorStateMatcher();
+
   constructor(private router: Router) {}
 
   ngOnInit(): void {}
 
-  cpfLenghtIsValid(): boolean {
-    return !(this.cpfLenght || this.cpf.length !== 11);
-  }
-  cpfIsValid(): boolean {
-    return !(this.cpfInvalid || this.cpf === '');
-  }
+  signupUser(): void {
+    if (!this.name.valid) return;
+    if (!this.cpf.valid) return;
+    if (!this.email.valid) return;
+    if (!this.phone.valid) return;
+    if (!this.password.valid) return;
+    if (!this.confPassword.valid) return;
+    if (!this.function.valid) return;
 
-  passwordIsValid(): boolean {
-    return this.password !== '';
-  }
-  repeatPasswordIsValid(): boolean {
-    return this.repeatPassword !== '';
-  }
-  repeatPasswordIsCorrect(event: any): void {
-    this.check_password = this.repeatPassword === this.password;
-  }
-  emailIsValid(): boolean {
-    return this.email !== '';
-  }
-  nameIsValid(): boolean {
-    return !(this.nameInvalid || this.username === '');
-  }
-  phoneIsValid(): boolean {
-    return !(this.phoneInvalid || this.phone === '');
-  }
-  funcaoIsValid(): boolean {
-    return !(this.funcaoInvalid || this.funcao === '');
-  }
-  sigIn(): void {
-    this.submitted = true;
-
-    if (!this.nameIsValid()) return;
-    if (!this.cpfIsValid()) return;
-    if (!this.passwordIsValid()) return;
-    if (!this.phoneIsValid()) return;
-    if (!this.funcaoIsValid()) return;
-    if (!this.emailIsValid()) return;
-    if (!this.repeatPasswordIsValid()) return;
-
-    this.router.navigate(['/']);
-  }
-
-  reset(): void {
-    this.cpf = '';
-    this.password = '';
-    this.username = '';
-    this.email = '';
-    this.phone = '';
-    this.funcao = '';
-    this.password = '';
-    this.rememberUser = false;
-    this.submitted = false;
-  }
-
-  updateCpf(event: any): void {
-    this.cpfInvalid = isNaN(event);
-  }
-  updatePhone(event: any): void {
-    this.phoneInvalid = isNaN(event);
-  }
-  updateName(event: any): void {
-    this.nameInvalid = event.search(/\d+/) !== -1;
+    this.router.navigate(['/processos']);
   }
 }
