@@ -20,7 +20,7 @@
 ### Refatoração
 
 - [ ] Melhorar responsividade
-- [ ] Modularizar componentes
+- [x] Modularizar componentes
 - [ ] Renomear componente "element-dialog"
 - [ ] Criar diretório para componentes
 - [ ] Separar página de perfil e de processos

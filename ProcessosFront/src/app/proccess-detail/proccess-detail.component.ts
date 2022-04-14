@@ -20,11 +20,6 @@ export class ProccessDetailComponent implements OnInit {
   proccess: Proccess | undefined;
   selectedDoc: Document | undefined;
   showDocModal: boolean = false;
-  newDocName: string = '';
-  currDate: string = '';
-  selFile: string = '';
-  fileIsValid: boolean = false;
-  submitted: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -53,24 +48,12 @@ export class ProccessDetailComponent implements OnInit {
 
   toggleAddDocument(): void {
     this.showDocModal = !this.showDocModal;
-    this.submitted = false;
   }
 
-  dateIsValid(): boolean {
-    return this.currDate !== '';
-  }
-
-  validateFile(): void {
-    this.submitted = true;
-
-    this.fileIsValid = Boolean(this.selFile.match(/(.+)?\.(png|jpg|pdf)/));
-
-    if (!this.dateIsValid()) return;
-
-    if (!this.fileIsValid) return;
-
-    this.toggleAddDocument();
-    // this.addDocument();
+  addDocument(document: Document): void {
+    document.proccessId = this.proccess!.id;
+    this.documentService.addDocument(document);
+    this.documentList?.getDocuments();
   }
 
   deleteDocument(id: number): void {

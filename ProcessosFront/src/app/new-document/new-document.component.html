@@ -1,0 +1,100 @@
+<div class="modal" tabindex="-1" aria-labelledby="addDocModalLabel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fs-4" id="addDocModalLabel">
+          Adicione um documento
+        </h5>
+        <button
+          (click)="closeModal()"
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <div class="modal-body">
+        <form #documentForm="ngForm">
+          <div class="mb-3">
+            <label for="inFile" class="form-label">Arquivo para anexo</label>
+            <input
+              [(ngModel)]="selFile"
+              name="selFile"
+              #name="ngModel"
+              class="form-control"
+              type="file"
+              id="inFile"
+              required
+            />
+            <div
+              [hidden]="!submitted || fileIsValid()"
+              class="alert alert-danger"
+              data-error="document-format"
+            >
+              Os formatos de documento suportados são: PDF, PNG e JPG. Por
+              favor, escolha um deles
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="docName" class="form-label">Nome do documento</label>
+            <input
+              [(ngModel)]="newDocName"
+              name="newDocName"
+              #name="ngModel"
+              type="text"
+              class="form-control"
+              id="newDocName"
+              required
+            />
+            <div
+              [hidden]="!submitted || nameIsValid()"
+              class="alert alert-danger"
+              data-error="document-name"
+            >
+              o campo "Nome do documento" é obrigatório
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="inDate" class="form-label">Data de anexo</label>
+            <input
+              [(ngModel)]="currDate"
+              name="currDate"
+              #name="ngModel"
+              type="date"
+              class="form-control"
+              id="inDate"
+              required
+            />
+            <div
+              [hidden]="!submitted || currDate"
+              class="alert alert-danger"
+              data-error="document-date"
+            >
+              o campo "Data de anexo" é obrigatório
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button
+          (click)="closeModal()"
+          type="button"
+          class="btn btn-danger"
+          data-btn="document-cancel"
+        >
+          Cancelar
+        </button>
+        <button
+          (click)="validateFile()"
+          type="button"
+          class="btn btn-primary"
+          data-btn="document-save"
+        >
+          Salvar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

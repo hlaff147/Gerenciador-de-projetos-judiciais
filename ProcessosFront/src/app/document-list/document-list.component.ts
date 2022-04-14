@@ -11,6 +11,7 @@ import { DocumentService } from '../document.service';
 export class DocumentListComponent implements OnInit {
   @Input('proccess-id') proccessId: number | undefined = undefined;
   @Output() selectDocumentEvent = new EventEmitter<Document>();
+  @Output() newDocumentEvent = new EventEmitter<null>();
 
   documents: Document[] = [];
 
@@ -30,7 +31,9 @@ export class DocumentListComponent implements OnInit {
       .subscribe((documents) => (this.documents = documents));
   }
 
-  toggleAddDocument(): void {}
+  addDocument(): void {
+    this.newDocumentEvent.emit();
+  }
 
   selectDocument(id: number): void {
     this.documentService.getDocument(id).subscribe((document) => {
