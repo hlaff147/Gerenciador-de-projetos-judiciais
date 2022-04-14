@@ -17,3 +17,7 @@
 .document-list-icon {
   font-size: 4.5rem;
 }
+
+.back-btn * {
+  font-size: 3rem;
+}

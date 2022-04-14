@@ -1,28 +1,26 @@
-<ul
-  class="list-unstyled row row-cols-5 row-cols-md-5 g-2"
-  style="width: 60%"
+<h5 class="fs-4 mb-3">Documentos do Processo</h5>
+<button
+  mat-button
+  type="button"
+  (click)="addDocument()"
+  data-btn="add-document"
+  color="primary"
+  class="mb-2"
+>
+  <mat-icon>note_add</mat-icon>
+  Anexe um documento
+</button>
+<div
+  class="container row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 w-100"
   data-cy="document-list"
 >
-  <li>
-    <div class="card text-center">
-      <button
-        (click)="addDocument()"
-        class="btn btn-outline-secondary document-list-icon"
-        data-btn="add-document"
-      >
-        <i class="bi bi-plus d-block doc-list-item"></i>
-      </button>
-    </div>
-  </li>
-  <li *ngFor="let doc of documents" class="col">
-    <div class="card text-center">
-      <button
-        (click)="selectDocument(doc.id)"
-        class="btn btn-outline-secondary document-list-item"
-      >
-        <i class="bi bi-file-earmark-text document-list-icon"></i>
-        <small>{{ doc.name }}</small>
-      </button>
-    </div>
-  </li>
-</ul>
+  <button
+    *ngFor="let doc of documents"
+    mat-stroked-button
+    type="button"
+    (click)="selectDocument(doc.id)"
+    class="col text-muted"
+  >
+    {{ doc.name }}
+  </button>
+</div>

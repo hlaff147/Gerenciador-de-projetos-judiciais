@@ -1,40 +1,47 @@
 <div *ngIf="proccess">
-  <div class="process-detail-body">
-    <a class="nav-link" routerLink="/processos">
-      <i class="bi bi-arrow-left-circle"></i>
-    </a>
-    <h5 class="fs-2">{{ proccess.name }}</h5>
-    <p>
-      Juiz: <span class="fst-italic text-muted">{{ proccess.judge }}</span>
-    </p>
-    <p>
-      Data de início:
-      <span class="fst-italic text-muted"
-        >{{ proccess.startDate.getDate() }}/{{
-          proccess.startDate.getMonth()
-        }}/{{ proccess.startDate.getFullYear() }}</span
+  <div class="container my-4 d-flex flex-column">
+    <div class="mb-5">
+      <a
+        mat-icon-button
+        role="button"
+        routerLink="/processos"
+        color="primary"
+        class="back-btn position-absolute top-0 start-0"
       >
-    </p>
-    <div *ngIf="proccess.status === 'concluído'">
+        <mat-icon>arrow_circle_left</mat-icon>
+      </a>
+      <h5 class="fs-2">{{ proccess.name }}</h5>
       <p>
-        Status:
-        <span class="fst-italic text-success">{{ proccess.status }}</span>
+        Juiz: <span class="fst-italic text-muted">{{ proccess.judge }}</span>
       </p>
-    </div>
-    <div *ngIf="proccess.status === 'atrasado'">
       <p>
-        Status:
-        <span class="fst-italic text-danger">{{ proccess.status }}</span>
+        Data de início:
+        <span class="fst-italic text-muted"
+          >{{ proccess.startDate.getDate() }}/{{
+            proccess.startDate.getMonth()
+          }}/{{ proccess.startDate.getFullYear() }}</span
+        >
       </p>
-    </div>
-    <div *ngIf="proccess.status === 'em andamento'">
-      <p>
-        Status:
-        <span class="fst-italic text-primary">{{ proccess.status }}</span>
-      </p>
+      <div *ngIf="proccess.status === 'concluído'">
+        <p>
+          Status:
+          <span class="fst-italic text-success">{{ proccess.status }}</span>
+        </p>
+      </div>
+      <div *ngIf="proccess.status === 'atrasado'">
+        <p>
+          Status:
+          <span class="fst-italic text-danger">{{ proccess.status }}</span>
+        </p>
+      </div>
+      <div *ngIf="proccess.status === 'em andamento'">
+        <p>
+          Status:
+          <span class="fst-italic text-primary">{{ proccess.status }}</span>
+        </p>
+      </div>
     </div>
 
-    <h5 class="fs-4 mb-4">Documentos do Processo</h5>
     <app-document-list
       [proccess-id]="proccess.id"
       (selectDocumentEvent)="selectDocument($event)"
