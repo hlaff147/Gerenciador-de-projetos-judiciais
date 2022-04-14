@@ -1,5 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {
+  FormControl,
+  Validators,
+  FormGroupDirective,
+  NgForm,
+} from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(
+      control &&
+      control.invalid &&
+      (control.dirty || control.touched || isSubmitted)
+    );
+  }
+}
 
 @Component({
   selector: 'app-login-form',
@@ -7,52 +28,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./login-form.component.css'],
 })
 export class LoginFormComponent implements OnInit {
-  cpf: string = '';
-  password: string = '';
-  rememberUser = false;
-  cpfInvalid = false;
-  cpfLenght = false;
-  submitted = false;
-  nameInvalid = false;
+  cpf = new FormControl('', [Validators.required, Validators.pattern(/\d*/)]);
+  password = new FormControl('', [Validators.required]);
+  rememberUser = new FormControl('');
+
+  matcher = new MyErrorStateMatcher();
+
   constructor(private router: Router) {}
 
   ngOnInit(): void {}
 
-  cpfIsValid(): boolean {
-    return !(this.cpfInvalid || this.cpf === '');
-  }
-
-  cpfLenghtIsValid(): boolean {
-    return !(this.cpfLenght || this.cpf.length !== 11);
-  }
-
-  passwordIsValid(): boolean {
-    return this.password !== '';
-  }
-
   loginUser(): void {
-    this.submitted = true;
-    if (!this.cpfIsValid()) return;
+    if (!this.cpf.valid) return;
+    if (!this.password.valid) return;
 
-    if (!this.passwordIsValid()) return;
-
-    if (!this.cpfLenghtIsValid()) return;
-
-    this.cpfLenght = this.cpfLenghtIsValid();
-    this.router.navigate(['/perfil']);
-  }
-
-  reset(): void {
-    this.cpf = '';
-    this.password = '';
-    this.rememberUser = false;
-    this.submitted = false;
-  }
-
-  updateCpf(event: any): void {
-    this.cpfInvalid = isNaN(event);
-  }
-  updateName(event: any): void {
-    this.cpfInvalid = event.search(/\d+/) === -1;
+    this.router.navigate(['/processos']);
   }
 }

@@ -1,84 +1,60 @@
-<div class="card" style="width: 40rem">
-  <div class="card-body">
-    <h5 class="card-title">Bem-vindo de volta!</h5>
-    <form #loginForm="ngForm">
-      <div class="mb-3">
-        <label for="inCpf" class="form-label">CPF</label>
-        <input
-          type="text"
-          class="form-control"
-          id="inCpf"
-          [(ngModel)]="cpf"
-          name="cpf"
-          #name="ngModel"
-          (ngModelChange)="updateCpf($event)"
-          required
-        />
-        <div
-          [hidden]="!submitted || cpf !== ''"
-          class="alert alert-danger"
-          data-error="cpf-missing"
-        >
-          Campo CPF é obrigatório.
-        </div>
-        <div
-          [hidden]="!cpfInvalid"
-          class="alert alert-danger"
-          data-error="cpf-letters"
-        >
-          CPF deve ser apenas números.
-        </div>
-        <div
-          [hidden]="!submitted || cpfLenght"
-          class="alert alert-danger"
-          data-error="cpf-length"
-        >
-          O CPF deve conter 11 dígitos.
-        </div>
-      </div>
-      <div class="mb-3">
-        <label for="inPassword" class="form-label">Senha</label>
-        <input
-          type="password"
-          class="form-control"
-          id="inPassword"
-          [(ngModel)]="password"
-          name="password"
-          required
-        />
-        <div
-          [hidden]="!submitted || passwordIsValid()"
-          class="alert alert-danger"
-          data-error="password-missing"
-        >
-          Campo senha é obrigatório
-        </div>
-      </div>
-      <div class="mb-3 form-check">
-        <input
-          type="checkbox"
-          class="form-check-input"
-          id="inCheck"
-          [(ngModel)]="rememberUser"
-          name="rememberUser"
-        />
-        <label class="form-check-label fst-italic fs-6" for="inCheck"
-          >Lembre-se de mim.</label
-        >
-      </div>
-      <div class="mb-4 mt-3">
-        <a class="text-muted text-small" routerLink="/login"
-          >Esqueci minha senha</a
-        >
-      </div>
-      <button
-        type="submit"
-        class="btn btn-primary"
-        (click)="loginUser()"
-        data-cy="login-btn"
+<div class="login-container">
+  <p class="fs-2 mb-3">Bem-vindo de volta!</p>
+  <form class="login-form">
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        placeholder="CPF"
+        [formControl]="cpf"
+        [errorStateMatcher]="matcher"
+        type="text"
+        minlength="11"
+        maxlength="11"
+        pattern="\d+"
+      />
+      <mat-hint></mat-hint>
+      <mat-error *ngIf="cpf.errors?.['required']">
+        CPF é obrigatório.
+      </mat-error>
+      <mat-error *ngIf="cpf.errors?.['pattern'] && !cpf.errors?.['required']">
+        CPF deve conter apenas números.
+      </mat-error>
+      <mat-error
+        *ngIf="(cpf.errors?.['minlength'] || cpf.errors?.['maxlength']) && !cpf.errors?.['pattern'] && !cpf.errors?.['required']"
       >
-        Login
-      </button>
-    </form>
-  </div>
+        CPF deve conter 11 dígitos.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        placeholder="Senha"
+        [formControl]="password"
+        [errorStateMatcher]="matcher"
+        type="text"
+      />
+      <mat-hint></mat-hint>
+      <mat-error *ngIf="password.errors?.['required']">
+        Senha é obrigatória.
+      </mat-error>
+    </mat-form-field>
+
+    <div class="login-checkbox">
+      <mat-checkbox [formControl]="rememberUser" color="primary" class="foo"
+        >Lembre-se de mim</mat-checkbox
+      >
+      <a routerLink="/" class="text-muted fst-italic"> Esqueci minha senha. </a>
+    </div>
+
+    <button
+      mat-flat-button
+      type="submit"
+      data-cy="login-btn"
+      color="primary"
+      (click)="loginUser()"
+    >
+      Entrar
+    </button>
+  </form>
 </div>

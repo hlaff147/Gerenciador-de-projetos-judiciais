@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +19,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { LoginFormComponent } from '../components/login-form/login-form.component';
 import { SignupFormComponent } from '../components/signup-form/signup-form.component';
@@ -47,6 +48,7 @@ import { ProfileComponent } from 'src/components/profile/profile.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
@@ -61,6 +63,7 @@ import { ProfileComponent } from 'src/components/profile/profile.component';
     MatButtonModule,
     MatMenuModule,
     MatSidenavModule,
+    MatCheckboxModule,
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },
