@@ -31,7 +31,6 @@ export class ProccessDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProccess();
-    this.getDocuments();
   }
 
   getProccess(): void {
@@ -39,13 +38,6 @@ export class ProccessDetailComponent implements OnInit {
     this.proccessService
       .getProccess(id)
       .subscribe((proccess) => (this.proccess = proccess));
-  }
-
-  getDocuments(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.documentService
-      .getDocuments(id)
-      .subscribe((documents) => (this.documents = documents));
   }
 
   selectDocument(id: number): void {
@@ -77,22 +69,12 @@ export class ProccessDetailComponent implements OnInit {
     if (!this.fileIsValid) return;
 
     this.toggleAddDocument();
-    this.addDocument();
-  }
-
-  addDocument(): void {
-    let doc: Document = {
-      id: 0,
-      name: this.newDocName,
-      proccessId: this.proccess!.id,
-    };
-    this.documentService.addDocument(doc).subscribe();
-    this.getDocuments();
+    // this.addDocument();
   }
 
   deleteDocument(id: number): void {
     this.documentService.deleteDocument(id).subscribe();
     this.unselectDocument();
-    this.getDocuments();
+    // this.getDocuments();
   }
 }

@@ -1,0 +1,28 @@
+<ul
+  class="list-unstyled row row-cols-5 row-cols-md-5 g-2"
+  style="width: 60%"
+  data-cy="document-list"
+>
+  <li>
+    <div class="card text-center">
+      <button
+        (click)="toggleAddDocument()"
+        class="btn btn-outline-secondary document-list-icon"
+        data-btn="add-document"
+      >
+        <i class="bi bi-plus d-block doc-list-item"></i>
+      </button>
+    </div>
+  </li>
+  <li *ngFor="let doc of documents" class="col">
+    <div class="card text-center">
+      <button
+        (click)="selectDocument(doc.id)"
+        class="btn btn-outline-secondary document-list-item"
+      >
+        <i class="bi bi-file-earmark-text document-list-icon"></i>
+        <small>{{ doc.name }}</small>
+      </button>
+    </div>
+  </li>
+</ul>
