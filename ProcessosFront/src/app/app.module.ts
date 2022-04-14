@@ -19,6 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { DocumentListComponent } from './document-list/document-list.component';
+import { DocumentDetailComponent } from './document-detail/document-detail.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { DocumentListComponent } from './document-list/document-list.component';
     ProccessDetailComponent,
     ElementDialog,
     DocumentListComponent,
+    DocumentDetailComponent,
   ],
   imports: [
     BrowserModule,
