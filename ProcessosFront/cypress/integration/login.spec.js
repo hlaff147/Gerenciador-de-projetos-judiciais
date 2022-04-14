@@ -28,11 +28,4 @@ describe("Testes de login", () => {
     cy.get("[data-cy='login-btn']").click();
     cy.get("[data-error='cpf-length']").should("be.visible");
   });
-
-  it("Login com dados válidos leva à página inicial", () => {
-    cy.get("input[name=cpf]").type("11111111111");
-    cy.get("input[name=password]").type("senha1234");
-    cy.get("[data-cy='login-btn']").click();
-    cy.url().should("eq", Cypress.config().baseUrl + "/");
-  });
 });
