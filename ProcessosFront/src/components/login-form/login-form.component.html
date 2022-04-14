@@ -4,6 +4,7 @@
     <mat-form-field class="full-width">
       <input
         matInput
+        name="cpf"
         placeholder="CPF"
         [formControl]="cpf"
         [errorStateMatcher]="matcher"
@@ -13,14 +14,18 @@
         pattern="\d+"
       />
       <mat-hint></mat-hint>
-      <mat-error *ngIf="cpf.errors?.['required']">
+      <mat-error *ngIf="cpf.errors?.['required']" data-error="cpf-missing">
         CPF é obrigatório.
       </mat-error>
-      <mat-error *ngIf="cpf.errors?.['pattern'] && !cpf.errors?.['required']">
+      <mat-error
+        *ngIf="cpf.errors?.['pattern'] && !cpf.errors?.['required']"
+        data-error="cpf-letters"
+      >
         CPF deve conter apenas números.
       </mat-error>
       <mat-error
         *ngIf="(cpf.errors?.['minlength'] || cpf.errors?.['maxlength']) && !cpf.errors?.['pattern'] && !cpf.errors?.['required']"
+        data-error="cpf-length"
       >
         CPF deve conter 11 dígitos.
       </mat-error>
@@ -29,13 +34,17 @@
     <mat-form-field class="full-width">
       <input
         matInput
+        name="password"
         placeholder="Senha"
         [formControl]="password"
         [errorStateMatcher]="matcher"
         type="text"
       />
       <mat-hint></mat-hint>
-      <mat-error *ngIf="password.errors?.['required']">
+      <mat-error
+        *ngIf="password.errors?.['required']"
+        data-error="password-missing"
+      >
         Senha é obrigatória.
       </mat-error>
     </mat-form-field>
@@ -50,7 +59,7 @@
     <button
       mat-flat-button
       type="submit"
-      data-cy="login-btn"
+      data-btn="login"
       color="primary"
       (click)="loginUser()"
     >

@@ -22,7 +22,7 @@ describe("Testes de acesso a documentos", () => {
 
     cy.get(".modal").should("not.exist");
     cy.get("[data-cy='document-list']").should("have.length.at.least", 1);
-    cy.get("[data-cy='document-list'] li:last div").click();
+    cy.get("[data-cy='document-list'] [data-cy='document-icon']:last").click();
     cy.get(".modal").should("exist").and("be.visible");
   });
 
@@ -36,7 +36,7 @@ describe("Testes de acesso a documentos", () => {
 
   it("Botão `Fechar` fecha o modal", () => {
     // Exibe o modal
-    cy.get("[data-cy='document-list'] li:last div").click();
+    cy.get("[data-cy='document-list'] [data-cy='document-icon']:last").click();
     cy.get(".modal").should("exist").and("be.visible");
 
     cy.get("[data-btn='close-doc-2']").click();
@@ -52,9 +52,14 @@ describe("Testes de gerência de documentos", () => {
   });
 
   it("Submeter documento inválido não o adiciona à lista", () => {
-    cy.get("[data-cy='document-list']").children().should("have.length", 3);
+    const listLength = 2;
+    cy.get("[data-cy='document-list']")
+      .children()
+      .should("have.length", listLength);
     cy.get("[data-btn='document-save']").click();
-    cy.get("[data-cy='document-list']").children().should("have.length", 3);
+    cy.get("[data-cy='document-list']")
+      .children()
+      .should("have.length", listLength);
   });
 
   it("Botão de `Cancelar` deve fechar menu de criação", () => {
@@ -81,18 +86,22 @@ describe("Testes de gerência de documentos", () => {
   });
 
   it("Submeter documento com campos válidos o adiciona à lista", () => {
+    const listLength = 2;
+
     cy.get("input[name=selFile]").selectFile(
       "cypress/fixtures/danny-devito.jpg"
     );
     cy.get("input[name=newDocName]").type("Documento de teste");
     cy.get("input[name=currDate]").type("2022-04-11");
 
-    cy.get("[data-cy='document-list']").children().should("have.length", 3);
+    cy.get("[data-cy='document-list']")
+      .children()
+      .should("have.length", listLength);
     cy.get("[data-btn='document-save']").click();
 
     cy.get(".modal").should("not.exist");
     cy.get("[data-cy='document-list']")
       .children()
-      .should("have.length.above", 3);
+      .should("have.length", listLength + 1);
   });
 });

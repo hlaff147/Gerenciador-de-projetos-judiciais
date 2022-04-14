@@ -4,6 +4,7 @@
     <mat-form-field class="full-width">
       <input
         matInput
+        name="name"
         placeholder="Nome"
         [formControl]="name"
         [errorStateMatcher]="matcher"
@@ -12,10 +13,13 @@
         required
       />
       <mat-hint></mat-hint>
-      <mat-error *ngIf="name.errors?.['required']">
+      <mat-error *ngIf="name.errors?.['required']" data-error="name-missing">
         Nome é obrigatório.
       </mat-error>
-      <mat-error *ngIf="name.errors?.['pattern'] && !name.errors?.['required']">
+      <mat-error
+        *ngIf="name.errors?.['pattern'] && !name.errors?.['required']"
+        data-error="name-numbers"
+      >
         Nome deve conter apenas letras.
       </mat-error>
     </mat-form-field>
@@ -23,6 +27,7 @@
     <mat-form-field class="full-width">
       <input
         matInput
+        name="cpf"
         placeholder="CPF"
         [formControl]="cpf"
         [errorStateMatcher]="matcher"
@@ -33,14 +38,18 @@
         required
       />
       <mat-hint></mat-hint>
-      <mat-error *ngIf="cpf.errors?.['required']">
+      <mat-error *ngIf="cpf.errors?.['required']" data-error="cpf-missing">
         CPF é obrigatório.
       </mat-error>
-      <mat-error *ngIf="cpf.errors?.['pattern'] && !cpf.errors?.['required']">
+      <mat-error
+        *ngIf="cpf.errors?.['pattern'] && !cpf.errors?.['required']"
+        data-error="cpf-letters"
+      >
         CPF deve conter apenas números.
       </mat-error>
       <mat-error
         *ngIf="(cpf.errors?.['minlength'] || cpf.errors?.['maxlength']) && !cpf.errors?.['pattern'] && !cpf.errors?.['required']"
+        data-error="cpf-length"
       >
         CPF deve conter 11 dígitos.
       </mat-error>
@@ -49,6 +58,7 @@
     <mat-form-field class="full-width">
       <input
         matInput
+        name="email"
         placeholder="E-mail"
         [formControl]="email"
         [errorStateMatcher]="matcher"
@@ -57,10 +67,13 @@
         required
       />
       <mat-hint></mat-hint>
-      <mat-error *ngIf="email.errors?.['required']">
+      <mat-error *ngIf="email.errors?.['required']" data-error="email-missing">
         E-mail é obrigatório.
       </mat-error>
-      <mat-error *ngIf="email.errors?.['email'] && !email.errors?.['required']">
+      <mat-error
+        *ngIf="email.errors?.['email'] && !email.errors?.['required']"
+        data-error="email-format"
+      >
         Por favor, entre um e-mail válido.
       </mat-error>
     </mat-form-field>
@@ -68,6 +81,7 @@
     <mat-form-field class="full-width">
       <input
         matInput
+        name="phone"
         placeholder="Telefone"
         [formControl]="phone"
         [errorStateMatcher]="matcher"
@@ -78,16 +92,18 @@
         required
       />
       <mat-hint></mat-hint>
-      <mat-error *ngIf="phone.errors?.['required']">
+      <mat-error *ngIf="phone.errors?.['required']" data-error="phone-missing">
         Telefone é obrigatório.
       </mat-error>
       <mat-error
         *ngIf="phone.errors?.['pattern'] && !phone.errors?.['required']"
+        data-error="phone-letters"
       >
         Telefine deve conter apenas números.
       </mat-error>
       <mat-error
         *ngIf="(phone.errors?.['minlength'] || phone.errors?.['maxlength']) && !phone.errors?.['pattern'] && !phone.errors?.['required']"
+        data-error="phone-length"
       >
         Telefone deve ter 9 dígitos.
       </mat-error>
@@ -96,6 +112,7 @@
     <mat-form-field class="full-width">
       <mat-select
         placeholder="Função"
+        name="function"
         [formControl]="function"
         [errorStateMatcher]="matcher"
         required
@@ -106,15 +123,15 @@
         </mat-option>
       </mat-select>
       <mat-hint></mat-hint>
-      <mat-error *nfIg="function.errors?.['required']">
-        Função é obrigatório.
+      <mat-error *ngIf="function.value == ''" data-error="function-missing">
+        Escolha uma função.
       </mat-error>
-      <mat-error *ngIf="function.value == ''"> Escolha uma função. </mat-error>
     </mat-form-field>
 
     <mat-form-field class="full-width">
       <input
         matInput
+        name="password"
         placeholder="Senha"
         [formControl]="password"
         [errorStateMatcher]="matcher"
@@ -122,7 +139,10 @@
         required
       />
       <mat-hint></mat-hint>
-      <mat-error *ngIf="password.errors?.['required']">
+      <mat-error
+        *ngIf="password.errors?.['required']"
+        data-error="password-missing"
+      >
         Senha é obrigatória.
       </mat-error>
     </mat-form-field>
@@ -130,6 +150,7 @@
     <mat-form-field class="full-width">
       <input
         matInput
+        name="conf-password"
         placeholder="Senha de confirmação"
         [formControl]="confPassword"
         [errorStateMatcher]="matcher"
@@ -137,7 +158,10 @@
         required
       />
       <mat-hint></mat-hint>
-      <mat-error *ngIf="confPassword.errors?.['required']">
+      <mat-error
+        *ngIf="confPassword.errors?.['required']"
+        data-error="conf-password-missing"
+      >
         Senha de confirmação é obrigatória.
       </mat-error>
     </mat-form-field>
@@ -147,7 +171,7 @@
       style="width: 60%"
       mat-flat-button
       type="submit"
-      data-cy="signup-btn"
+      data-btn="signup"
       color="primary"
       (click)="signupUser()"
     >
