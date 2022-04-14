@@ -23,4 +23,4 @@
 - [x] Modularizar componentes
 - [ ] Renomear componente "element-dialog"
 - [x] Criar diretório para componentes
-- [ ] Separar página de perfil e de processos
+- [x] Separar página de perfil e de processos

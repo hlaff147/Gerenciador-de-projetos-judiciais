@@ -2,12 +2,12 @@
 
 describe("Testes de detalhe de processo", () => {
   beforeEach(() => {
-    cy.visit("perfil");
+    cy.visit("processos");
     cy.get("[data-cy='proccess-list'] > li:last a").click();
   });
 
   it("Selecionar um processo na lista de processos leva à sua página de detlalhes", () => {
-    cy.visit("perfil");
+    cy.visit("processos");
     cy.get("[data-cy='proccess-list']").should("have.length.at.least", 1);
     cy.get("[data-cy='proccess-list'] > li:last a").click();
     cy.url().should("match", /processos\/\d+/);
@@ -17,7 +17,7 @@ describe("Testes de detalhe de processo", () => {
 describe("Testes de acesso a documentos", () => {
   it("Clicar em um documento na lista de documentos exibe modal", () => {
     // Acessa processo mais antigo na lista
-    cy.visit("perfil");
+    cy.visit("processos");
     cy.get("[data-cy='proccess-list'] > li:last a").click();
 
     cy.get(".modal").should("not.exist");

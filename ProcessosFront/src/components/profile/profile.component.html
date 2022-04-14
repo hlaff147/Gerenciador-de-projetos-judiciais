@@ -1,63 +1,35 @@
-<div class="card">
-  <button
-    class="custom-add-process border-0 ml-2 btn-icon btn-icon-only btn-pill btn btn-outline-focus btn-sm"
-    (click)="openModal(null)"
-  >
-    <i class="bi bi-file-plus" style="margin-right: 5px"></i>
-    Criar um processo
-  </button>
+<div class="card" style="width: 45rem">
   <div class="card-body">
-    <ul
-      class="list-group list-group-flush"
-      style="width: 70rem"
-      data-cy="proccess-list"
-    >
-      <li
-        *ngFor="let proccess of proccesses"
-        class="list-group-item list-group-item-action"
-      >
-        <div class="d-flex w-100 justify-content-between">
-          <h5 class="mb-1">
-            {{ proccess.name }}
-          </h5>
-          <div *ngIf="proccess.status == 'concluído'">
-            <small class="text-success"> Status: {{ proccess.status }} </small>
-          </div>
-          <div *ngIf="proccess.status == 'atrasado'">
-            <small class="text-danger"> Status: {{ proccess.status }} </small>
-          </div>
-          <div *ngIf="proccess.status == 'em andamento'">
-            <small class="text-primary"> Status: {{ proccess.status }} </small>
-          </div>
-        </div>
-        <div class="process-action">
-          <small class="text-muted">
-            Início: {{ proccess.startDate.getDate() }}/{{
-              proccess.startDate.getMonth()
-            }}/{{ proccess.startDate.getFullYear() }}
-          </small>
-          <div class="">
-            <button
-              class="border-0 ml-2 btn-icon btn-icon-only btn-pill btn btn-outline-focus btn-sm"
-            >
-              <i class="bi bi-pencil-square"></i>
-            </button>
-            <button
-              (click)="deleteProcess(proccess.id)"
-              class="border-0 ml-2 btn-icon btn-icon-only btn-pill btn btn-outline-focus btn-sm"
-            >
-              <i class="bi bi-trash3-fill"></i>
-            </button>
-          </div>
-        </div>
-        <p class="mb-1">Juiz: {{ proccess.judge }}</p>
-        <a
-          routerLink="/processos/{{ proccess.id }}"
-          class="btn btn-primary btn-sm"
-          role="button"
-          >Detalhes do processo</a
-        >
-      </li>
-    </ul>
+    <h5 class="card-title fs-4 mb-4">Perfil</h5>
+    <form>
+      <div class="mb-3">
+        <label for="inName" class="form-label">Nome</label>
+        <input type="text" class="form-control" />
+      </div>
+
+      <div class="mb-3">
+        <label for="inCpf" class="form-label">CPF</label>
+        <input type="text" class="form-control" />
+      </div>
+
+      <div class="mb-3">
+        <label for="inEmail" class="form-label">E-mail</label>
+        <input type="email" class="form-control" />
+      </div>
+
+      <div class="mb-3">
+        <label for="inPhone" class="form-label">Telefone</label>
+        <input type="text" class="form-control" />
+      </div>
+
+      <div class="mb-4">
+        <label for="inPassword" class="form-label">Senha</label>
+        <input type="password" class="form-control" />
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-sm">
+        Salvar mudanças
+      </button>
+    </form>
   </div>
 </div>
