@@ -40,10 +40,8 @@ export class ProccessDetailComponent implements OnInit {
       .subscribe((proccess) => (this.proccess = proccess));
   }
 
-  selectDocument(id: number): void {
-    this.documentService
-      .getDocument(id)
-      .subscribe((document) => (this.selectedDoc = document));
+  selectDocument(document: Document): void {
+    this.selectedDoc = document;
   }
 
   unselectDocument(): void {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Document } from '../document';
 import { DocumentService } from '../document.service';
@@ -10,6 +10,7 @@ import { DocumentService } from '../document.service';
 })
 export class DocumentListComponent implements OnInit {
   @Input('proccess-id') proccessId: number | undefined = undefined;
+  @Output() selectDocumentEvent = new EventEmitter<Document>();
 
   documents: Document[] = [];
 
@@ -31,5 +32,9 @@ export class DocumentListComponent implements OnInit {
 
   toggleAddDocument(): void {}
 
-  selectDocument(id: number): void {}
+  selectDocument(id: number): void {
+    this.documentService.getDocument(id).subscribe((document) => {
+      this.selectDocumentEvent.emit(document);
+    });
+  }
 }

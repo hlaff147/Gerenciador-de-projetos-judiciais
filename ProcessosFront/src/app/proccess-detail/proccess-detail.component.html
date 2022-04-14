@@ -35,7 +35,10 @@
     </div>
 
     <h5 class="fs-4 mb-4">Documentos do Processo</h5>
-    <app-document-list [proccess-id]="proccess.id"></app-document-list>
+    <app-document-list
+      [proccess-id]="proccess.id"
+      (selectDocumentEvent)="selectDocument($event)"
+    ></app-document-list>
   </div>
   <div *ngIf="selectedDoc">
     <div class="modal" tabindex="-1" aria-labelledby="documentModalLabel">
