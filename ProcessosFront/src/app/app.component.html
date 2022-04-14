@@ -1,57 +1,57 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/">Gerenciador de Projetos Judiciais</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 custom-navbar">
-        <li class="nav-item custom-nav-item">
-          <a class="nav-link" routerLink="/">
-            <i class="bi bi-house"></i>
-            Home
-          </a>
-        </li>
-        <li class="nav-item custom-nav-item">
-          <a
-            class="nav-link"
-            style="margin-right: 5px"
-            routerLink="/cadastro"
-            data-cy="signup-link"
-          >
-            <i class="bi bi-person-plus"></i>
-            Cadastro
-          </a>
-        </li>
-        <li class="nav-item custom-nav-item">
-          <a class="nav-link" routerLink="/login" data-cy="login-link">
-            <i class="bi bi-person"></i>
-            Login
-          </a>
-        </li>
-        <li class="nav-item custom-nav-item">
-          <a class="nav-link" routerLink="/perfil">
-            <i class="bi bi-gear"></i>
-            Perfil
-          </a>
-        </li>
-        <li class="nav-item custom-nav-item">
-          <a class="nav-link" routerLink="/processos">
-            <i class="bi bi-files"></i>
-            Processos
-          </a>
-        </li>
-      </ul>
+<div style="height: 100vh">
+  <mat-toolbar color="primary">
+    <div fxShow="true" fxHide.gt-sm="true">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
     </div>
-  </div>
-</nav>
-
-<router-outlet></router-outlet>
+    <a mat-button class="companyName" routerLink="/">
+      <span>Gerenciador de Processos Judiciais</span>
+    </a>
+    <span class="example-spacer"></span>
+    <div fxShow="true" fxHide.lt-md="true">
+      <a mat-button routerLink="/"> <mat-icon>home</mat-icon> Home </a>
+      <a mat-button routerLink="/cadastro" data-cy="signup-link">
+        <mat-icon>person_add</mat-icon>Cadastro
+      </a>
+      <a mat-button routerLink="/login" data-cy="login-link">
+        <mat-icon>person</mat-icon>Login
+      </a>
+      <a mat-button routerLink="/perfil">
+        <mat-icon>manage_accounts</mat-icon>Perfil
+      </a>
+      <a mat-button routerLink="/processos">
+        <mat-icon>list</mat-icon>Processos
+      </a>
+    </div>
+  </mat-toolbar>
+  <mat-sidenav-container fxFlexFill class="example-container">
+    <mat-sidenav
+      color="primary"
+      #sidenav
+      fxLayout="column"
+      mode="over"
+      opened="false"
+      fxHide.gt-sm="true"
+    >
+      <div fxLayout="column">
+        <a mat-button routerLink="/"> <mat-icon>home</mat-icon> Home </a>
+        <a mat-button routerLink="/cadastro" data-cy="signup-link">
+          <mat-icon>person_add</mat-icon>Cadastro
+        </a>
+        <a mat-button routerLink="/login" data-cy="login-link">
+          <mat-icon>person</mat-icon>Login
+        </a>
+        <a mat-button routerLink="/perfil">
+          <mat-icon>manage_accounts</mat-icon>Perfil
+        </a>
+        <a mat-button routerLink="/processos">
+          <mat-icon>list</mat-icon>Processos
+        </a>
+      </div>
+    </mat-sidenav>
+    <mat-sidenav-content fxFlexFill>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

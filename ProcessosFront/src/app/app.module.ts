@@ -13,6 +13,12 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { LoginFormComponent } from '../components/login-form/login-form.component';
 import { SignupFormComponent } from '../components/signup-form/signup-form.component';
@@ -45,10 +51,16 @@ import { ProfileComponent } from 'src/components/profile/profile.component';
     MatFormFieldModule,
     MatInputModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
     MatDialogModule,
     MatSelectModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatSidenavModule,
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },
