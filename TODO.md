@@ -19,7 +19,7 @@
 
 ### Refatoração
 
-- [ ] Melhorar responsividade
+- [x] Melhorar responsividade
 - [x] Modularizar componentes
 - [ ] Renomear componente "element-dialog"
 - [x] Criar diretório para componentes
