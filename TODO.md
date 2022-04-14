@@ -2,10 +2,10 @@
 
 ### Novas funcionalidades
 
-- [ ] Verificar formato de e-mail
-- [ ] Limitar caracteres em telefone
-- [ ] Formatar cpf durante escrita
-- [ ] Aviso sobre número de caracteres durante escrita
+- [x] Verificar formato de e-mail
+- [x] Limitar caracteres em telefone
+- [x] Formatar cpf durante escrita
+- [x] Aviso sobre número de caracteres durante escrita
 - [x] Restringir cadastro sem "Nome"
 - [x] Opção "Esqueci minha senha"
 - [ ] Adicionar botão de "Concluir" nos processos (usuário juiz)
