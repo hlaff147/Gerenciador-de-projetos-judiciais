@@ -2,10 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 
-import { Proccess } from '../proccess';
-import { Document } from '../document';
-import { ProccessService } from '../proccess.service';
-import { DocumentService } from '../document.service';
+import { Proccess } from '../../types/proccess';
+import { Document } from '../../types/document';
+import { ProccessService } from '../../services/proccess.service';
+import { DocumentService } from '../../services/document.service';
 import { DocumentListComponent } from '../document-list/document-list.component';
 
 @Component({

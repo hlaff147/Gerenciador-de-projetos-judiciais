@@ -1,4 +1,4 @@
-import { Proccess } from './proccess';
+import { Proccess } from '../types/proccess';
 
 export var PROCCESSES: Proccess[] = [
   {

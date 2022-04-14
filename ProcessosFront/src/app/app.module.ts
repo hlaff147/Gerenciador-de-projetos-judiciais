@@ -5,11 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { LoginFormComponent } from './login-form/login-form.component';
-import { SignupFormComponent } from './signup-form/signup-form.component';
-import { ProfileComponent } from './profile/profile.component';
-import { ElementDialog } from './element-dialog/element-dialog.component';
-import { ProccessDetailComponent } from './proccess-detail/proccess-detail.component';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -18,9 +13,15 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { DocumentListComponent } from './document-list/document-list.component';
-import { DocumentDetailComponent } from './document-detail/document-detail.component';
-import { NewDocumentComponent } from './new-document/new-document.component';
+
+import { LoginFormComponent } from '../components/login-form/login-form.component';
+import { SignupFormComponent } from '../components/signup-form/signup-form.component';
+import { ProfileComponent } from '../components/profile/profile.component';
+import { ElementDialog } from '../components/element-dialog/element-dialog.component';
+import { ProccessDetailComponent } from '../components/proccess-detail/proccess-detail.component';
+import { DocumentListComponent } from '../components/document-list/document-list.component';
+import { DocumentDetailComponent } from '../components/document-detail/document-detail.component';
+import { NewDocumentComponent } from '../components/new-document/new-document.component';
 
 @NgModule({
   declarations: [

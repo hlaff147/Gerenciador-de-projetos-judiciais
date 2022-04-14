@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Proccess } from '../proccess';
-import { ProccessService } from '../proccess.service';
-import { Inject } from '@angular/core';
+import { Proccess } from '../../types/proccess';
+import { ProccessService } from '../../services/proccess.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ElementDialog } from '../element-dialog/element-dialog.component';
-import { PROCCESSES } from '../mock-proccesslist';
+import { PROCCESSES } from '../../mocks/mock-proccesslist';
 import { Observable, of } from 'rxjs';
 
 @Component({

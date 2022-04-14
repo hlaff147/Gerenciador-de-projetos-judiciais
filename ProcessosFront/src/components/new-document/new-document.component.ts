@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Document } from '../document';
+import { Document } from '../../types/document';
 
 @Component({
   selector: 'app-new-document',

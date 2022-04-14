@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Document } from '../document';
-import { DocumentService } from '../document.service';
+import { Document } from '../../types/document';
+import { DocumentService } from '../../services/document.service';
 
 @Component({
   selector: 'app-document-list',

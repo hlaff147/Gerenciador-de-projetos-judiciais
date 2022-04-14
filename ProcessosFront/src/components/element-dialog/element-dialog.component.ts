@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Proccess } from '../proccess';
+import { Proccess } from '../../types/proccess';
 import {
   MatDialog,
   MatDialogRef,

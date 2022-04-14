@@ -1,4 +1,4 @@
-import { Document } from './document';
+import { Document } from '../types/document';
 
 export let DOCUMENTS: Document[] = [
   { id: 7, name: 'Documento 1', proccessId: 5 },

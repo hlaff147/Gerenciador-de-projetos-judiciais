@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
-import { Proccess } from './proccess';
-import { PROCCESSES } from './mock-proccesslist';
+import { Proccess } from '../types/proccess';
+import { PROCCESSES } from '../mocks/mock-proccesslist';
 
 @Injectable({
   providedIn: 'root',
