@@ -55,6 +55,8 @@ export class SignupFormComponent implements OnInit {
   }
   sigIn(): void {
     this.submitted = true;
+
+    if (!this.nameIsValid()) return;
     if (!this.cpfIsValid()) return;
     if (!this.passwordIsValid()) return;
     if (!this.phoneIsValid()) return;

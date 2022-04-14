@@ -6,7 +6,7 @@
 - [ ] Limitar caracteres em telefone
 - [ ] Formatar cpf durante escrita
 - [ ] Aviso sobre número de caracteres durante escrita
-- [ ] Restringir cadastro sem "Nome"
+- [x] Restringir cadastro sem "Nome"
 - [ ] Opção "Esqueci minha senha"
 - [ ] Adicionar botão de "Concluir" nos processos (usuário juiz)
 - [ ] Confirmação para mudar estado de processo (status e apagar)

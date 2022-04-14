@@ -14,6 +14,7 @@ describe("Testes de signup", () => {
 
   it("Cadastro não pode ser efetuado com campos vazios", () => {
     cy.get("[data-cy='signup-btn']").click();
+    cy.get("[data-error='username-missing']").should("be.visible");
     cy.get("[data-error='cpf-missing']").should("be.visible");
     cy.get("[data-error='password-missing']").should("be.visible");
     cy.get("[data-error='username-missing']").should("be.visible");
