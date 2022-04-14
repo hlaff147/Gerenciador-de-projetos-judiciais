@@ -12,7 +12,7 @@ export class DocumentService {
 
   getDocuments(proccessId: number): Observable<Document[]> {
     const documents = DOCUMENTS.filter((d) => d.proccessId === proccessId);
-    return of(documents);
+    return of(documents.reverse());
   }
 
   getDocument(id: number): Observable<Document | undefined> {
