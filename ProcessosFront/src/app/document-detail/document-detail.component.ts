@@ -9,6 +9,7 @@ import { Document } from '../document';
 export class DocumentDetailComponent implements OnInit {
   @Input() document: Document | undefined = undefined;
   @Output() unselectDocumentEvent = new EventEmitter<null>();
+  @Output() deleteDocumentEvent = new EventEmitter<number>();
 
   constructor() {}
 
@@ -18,5 +19,7 @@ export class DocumentDetailComponent implements OnInit {
     this.unselectDocumentEvent.emit();
   }
 
-  deleteDocument(): void {}
+  deleteDocument(): void {
+    this.deleteDocumentEvent.emit(this.document!.id);
+  }
 }

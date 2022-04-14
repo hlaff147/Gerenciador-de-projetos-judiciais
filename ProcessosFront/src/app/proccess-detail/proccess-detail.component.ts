@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 
@@ -6,6 +6,7 @@ import { Proccess } from '../proccess';
 import { Document } from '../document';
 import { ProccessService } from '../proccess.service';
 import { DocumentService } from '../document.service';
+import { DocumentListComponent } from '../document-list/document-list.component';
 
 @Component({
   selector: 'app-proccess-detail',
@@ -13,8 +14,10 @@ import { DocumentService } from '../document.service';
   styleUrls: ['./proccess-detail.component.css'],
 })
 export class ProccessDetailComponent implements OnInit {
+  @ViewChild(DocumentListComponent, { static: false })
+  documentList?: DocumentListComponent;
+
   proccess: Proccess | undefined;
-  documents: Document[] = [];
   selectedDoc: Document | undefined;
   showDocModal: boolean = false;
   newDocName: string = '';
@@ -73,6 +76,6 @@ export class ProccessDetailComponent implements OnInit {
   deleteDocument(id: number): void {
     this.documentService.deleteDocument(id).subscribe();
     this.unselectDocument();
-    // this.getDocuments();
+    this.documentList?.getDocuments();
   }
 }

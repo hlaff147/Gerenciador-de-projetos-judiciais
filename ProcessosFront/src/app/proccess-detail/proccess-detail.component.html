@@ -45,6 +45,7 @@
     <app-document-detail
       [document]="selectedDoc"
       (unselectDocumentEvent)="unselectDocument()"
+      (deleteDocumentEvent)="deleteDocument($event)"
     ></app-document-detail>
   </div>
 
