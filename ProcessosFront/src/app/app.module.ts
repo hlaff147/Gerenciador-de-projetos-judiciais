@@ -20,6 +20,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDividerModule } from '@angular/material/divider';
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 
 import { LoginFormComponent } from '../components/login-form/login-form.component';
@@ -31,6 +32,7 @@ import { DocumentListComponent } from '../components/document-list/document-list
 import { DocumentDetailComponent } from '../components/document-detail/document-detail.component';
 import { NewDocumentComponent } from '../components/new-document/new-document.component';
 import { ProfileComponent } from 'src/components/profile/profile.component';
+import { ConfirmModalComponent } from '../components/confirm-modal/confirm-modal.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,7 @@ import { ProfileComponent } from 'src/components/profile/profile.component';
     DocumentDetailComponent,
     NewDocumentComponent,
     ProfileComponent,
+    ConfirmModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,6 +69,7 @@ import { ProfileComponent } from 'src/components/profile/profile.component';
     MatMenuModule,
     MatSidenavModule,
     MatCheckboxModule,
+    MatDividerModule,
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },
