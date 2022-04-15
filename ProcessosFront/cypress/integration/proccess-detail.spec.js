@@ -20,35 +20,26 @@ describe("Testes de acesso a documentos", () => {
     cy.visit("processos");
     cy.get("[data-cy='proccess-list'] > li:last a").click();
 
-    cy.get(".modal").should("not.exist");
+    cy.get("app-document-detail").should("not.exist");
     cy.get("[data-cy='document-list']").should("have.length.at.least", 1);
     cy.get("[data-cy='document-list'] [data-cy='document-icon']:last").click();
-    cy.get(".modal").should("exist").and("be.visible");
-  });
-
-  it("Botão de fechar documento fecha o modal", () => {
-    // Modal exibido em teste anterior
-    cy.get(".modal").should("exist").and("be.visible");
-
-    cy.get("[data-btn='close-doc-1']").click();
-    cy.get(".modal").should("not.exist");
+    cy.get("app-document-detail").should("be.visible");
   });
 
   it("Botão `Fechar` fecha o modal", () => {
-    // Exibe o modal
-    cy.get("[data-cy='document-list'] [data-cy='document-icon']:last").click();
-    cy.get(".modal").should("exist").and("be.visible");
+    // Modal exibido em teste anterior
+    cy.get("app-document-detail").should("exist");
 
-    cy.get("[data-btn='close-doc-2']").click();
-    cy.get(".modal").should("not.exist");
+    cy.get("[data-btn='close']").click();
+    cy.get("app-document-detail").should("not.exist");
   });
 });
 
 describe("Testes de gerência de documentos", () => {
   it("Botão de adicionar documento abre menu de criação", () => {
-    cy.get(".modal").should("not.exist");
+    cy.get("app-new-document").should("not.exist");
     cy.get("[data-btn='add-document']").click();
-    cy.get(".modal").should("exist").and("be.visible");
+    cy.get("app-new-document").should("exist");
   });
 
   it("Submeter documento inválido não o adiciona à lista", () => {
@@ -63,45 +54,22 @@ describe("Testes de gerência de documentos", () => {
   });
 
   it("Botão de `Cancelar` deve fechar menu de criação", () => {
-    cy.get(".modal").should("exist").and("be.visible");
+    cy.get("app-new-document").should("exist");
     cy.get("[data-btn='document-cancel']").click();
-    cy.get(".modal").should("not.exist");
+    cy.get("app-new-document").should("not.exist");
   });
 
   it("Submeter documento com campos vazios exibe mensagens de erro", () => {
     // Exibir o modal
     cy.get("[data-btn='add-document']").click();
-    cy.get(".modal").should("exist").and("be.visible");
+    cy.get("app-new-document").should("exist");
 
     // Não aparecem mensagens de erro
-    cy.get("[data-error='document-format']").should("not.be.visible");
-    cy.get("[data-error='document-name']").should("not.be.visible");
-    cy.get("[data-error='document-date']").should("not.be.visible");
+    cy.get("[data-error='name-missing']").should("not.exist");
 
     cy.get("[data-btn='document-save']").click();
 
-    cy.get("[data-error='document-format']").should("be.visible");
-    cy.get("[data-error='document-name']").should("be.visible");
-    cy.get("[data-error='document-date']").should("be.visible");
-  });
-
-  it("Submeter documento com campos válidos o adiciona à lista", () => {
-    const listLength = 2;
-
-    cy.get("input[name=selFile]").selectFile(
-      "cypress/fixtures/danny-devito.jpg"
-    );
-    cy.get("input[name=newDocName]").type("Documento de teste");
-    cy.get("input[name=currDate]").type("2022-04-11");
-
-    cy.get("[data-cy='document-list']")
-      .children()
-      .should("have.length", listLength);
-    cy.get("[data-btn='document-save']").click();
-
-    cy.get(".modal").should("not.exist");
-    cy.get("[data-cy='document-list']")
-      .children()
-      .should("have.length", listLength + 1);
+    cy.get("[data-error='name-missing']").should("exist");
+    cy.get("app-new-document").should("exist");
   });
 });

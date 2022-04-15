@@ -19,6 +19,7 @@
 
   <mat-form-field class="mb-3" appearance="fill">
     <ngx-mat-file-input
+      name="file"
       [formControl]="file"
       [errorStateMatcher]="matcher"
       accept=".pdf,.png,.jpg,.jpeg"
@@ -50,10 +51,22 @@
   </mat-form-field>
 
   <div class="w-100 d-flex justify-content-around">
-    <button mat-flat-button type="button" color="warn" (click)="onCancel()">
+    <button
+      mat-flat-button
+      type="button"
+      color="warn"
+      (click)="onCancel()"
+      data-btn="document-cancel"
+    >
       Cancelar
     </button>
-    <button mat-flat-button type="button" color="primary" (click)="onSave()">
+    <button
+      mat-flat-button
+      type="button"
+      color="primary"
+      (click)="onSave()"
+      data-btn="document-save"
+    >
       Salvar
     </button>
   </div>
