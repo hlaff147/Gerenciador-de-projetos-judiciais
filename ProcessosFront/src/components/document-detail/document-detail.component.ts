@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Document } from '../../types/document';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-document-detail',
@@ -7,19 +8,22 @@ import { Document } from '../../types/document';
   styleUrls: ['./document-detail.component.css'],
 })
 export class DocumentDetailComponent implements OnInit {
-  @Input() document: Document | undefined = undefined;
-  @Output() unselectDocumentEvent = new EventEmitter<null>();
-  @Output() deleteDocumentEvent = new EventEmitter<number>();
+  document!: Document;
 
-  constructor() {}
+  constructor(
+    public dialogRef: MatDialogRef<DocumentDetailComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
 
-  ngOnInit(): void {}
-
-  unselectDocument(): void {
-    this.unselectDocumentEvent.emit();
+  ngOnInit(): void {
+    this.document = this.data.document;
   }
 
-  deleteDocument(): void {
-    this.deleteDocumentEvent.emit(this.document!.id);
+  onClose(): void {
+    this.dialogRef.close(null);
+  }
+
+  onRemove(): void {
+    this.dialogRef.close(this.document.id);
   }
 }

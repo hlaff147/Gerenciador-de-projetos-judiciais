@@ -5,7 +5,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Proccess } from '../../types/proccess';
 import { Document } from '../../types/document';
 import { ProccessService } from '../../services/proccess.service';
-import { DocumentService } from '../../services/document.service';
 import { DocumentListComponent } from '../document-list/document-list.component';
 
 @Component({
@@ -23,8 +22,7 @@ export class ProccessDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private proccessService: ProccessService,
-    private documentService: DocumentService
+    private proccessService: ProccessService
   ) {}
 
   ngOnInit(): void {
@@ -36,19 +34,5 @@ export class ProccessDetailComponent implements OnInit {
     this.proccessService
       .getProccess(id)
       .subscribe((proccess) => (this.proccess = proccess));
-  }
-
-  selectDocument(document: Document): void {
-    this.selectedDoc = document;
-  }
-
-  unselectDocument(): void {
-    this.selectedDoc = undefined;
-  }
-
-  deleteDocument(id: number): void {
-    this.documentService.deleteDocument(id).subscribe();
-    this.unselectDocument();
-    this.documentList?.getDocuments();
   }
 }

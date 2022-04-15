@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Document } from '../../types/document';
 import { DocumentService } from '../../services/document.service';
 import { NewDocumentComponent } from '../new-document/new-document.component';
 import { MatDialog } from '@angular/material/dialog';
+import { DocumentDetailComponent } from '../document-detail/document-detail.component';
 
 @Component({
   selector: 'app-document-list',
@@ -12,7 +13,6 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class DocumentListComponent implements OnInit {
   @Input('proccess-id') proccessId: number | undefined = undefined;
-  @Output() selectDocumentEvent = new EventEmitter<Document>();
 
   documents: Document[] = [];
 
@@ -41,14 +41,27 @@ export class DocumentListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result: Document) => {
-      this.documentService.addDocument(result);
-      this.getDocuments();
+      this.documentService
+        .addDocument(result)
+        .subscribe(() => this.getDocuments());
     });
   }
 
   selectDocument(id: number): void {
     this.documentService.getDocument(id).subscribe((document) => {
-      this.selectDocumentEvent.emit(document);
+      const dialogRef = this.dialog.open(DocumentDetailComponent, {
+        data: {
+          document: document,
+        },
+      });
+
+      dialogRef.afterClosed().subscribe((result: number) => {
+        if (!result) return;
+
+        this.documentService
+          .deleteDocument(result)
+          .subscribe(() => this.getDocuments());
+      });
     });
   }
 }
