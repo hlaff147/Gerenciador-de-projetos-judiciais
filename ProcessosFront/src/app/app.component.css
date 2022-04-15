@@ -4,6 +4,12 @@ body {
   margin: 0%;
 }
 
+.custom-app-container {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
 .custom-nav-item {
   display: flex;
   align-items: center;
