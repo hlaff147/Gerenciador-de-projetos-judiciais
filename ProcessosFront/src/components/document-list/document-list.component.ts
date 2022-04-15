@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Document } from '../../types/document';
 import { DocumentService } from '../../services/document.service';
+import { NewDocumentComponent } from '../new-document/new-document.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-document-list',
@@ -11,13 +13,13 @@ import { DocumentService } from '../../services/document.service';
 export class DocumentListComponent implements OnInit {
   @Input('proccess-id') proccessId: number | undefined = undefined;
   @Output() selectDocumentEvent = new EventEmitter<Document>();
-  @Output() newDocumentEvent = new EventEmitter<null>();
 
   documents: Document[] = [];
 
   constructor(
     private documentService: DocumentService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -32,7 +34,16 @@ export class DocumentListComponent implements OnInit {
   }
 
   addDocument(): void {
-    this.newDocumentEvent.emit();
+    const dialogRef = this.dialog.open(NewDocumentComponent, {
+      data: {
+        proccessId: this.proccessId,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result: Document) => {
+      this.documentService.addDocument(result);
+      this.getDocuments();
+    });
   }
 
   selectDocument(id: number): void {

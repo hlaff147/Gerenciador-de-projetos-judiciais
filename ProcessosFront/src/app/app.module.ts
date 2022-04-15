@@ -20,6 +20,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 
 import { LoginFormComponent } from '../components/login-form/login-form.component';
 import { SignupFormComponent } from '../components/signup-form/signup-form.component';
@@ -54,6 +55,7 @@ import { ProfileComponent } from 'src/components/profile/profile.component';
     MatInputModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
+    NgxMatFileInputModule,
     MatDialogModule,
     MatSelectModule,
     MatNativeDateModule,

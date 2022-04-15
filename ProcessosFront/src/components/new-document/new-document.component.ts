@@ -1,5 +1,27 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Inject } from '@angular/core';
+import {
+  FormControl,
+  Validators,
+  FormGroupDirective,
+  NgForm,
+} from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { Document } from '../../types/document';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(
+      control &&
+      control.invalid &&
+      (control.dirty || control.touched || isSubmitted)
+    );
+  }
+}
 
 @Component({
   selector: 'app-new-document',
@@ -10,44 +32,36 @@ export class NewDocumentComponent implements OnInit {
   @Output() closeModalEvent = new EventEmitter<null>();
   @Output() addDocumentEvent = new EventEmitter<Document>();
 
-  newDocName: string = '';
-  currDate: string = '';
-  selFile: string = '';
-  submitted: boolean = false;
+  name = new FormControl('');
+  file = new FormControl('', [Validators.required]);
+  date = new FormControl('');
+  fileError: boolean = false;
 
-  constructor() {}
+  matcher = new MyErrorStateMatcher();
+
+  constructor(
+    public dialogRef: MatDialogRef<NewDocumentComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
 
   ngOnInit(): void {}
 
-  closeModal(): void {
-    this.closeModalEvent.emit();
+  onCancel(): void {
+    this.dialogRef.close(null);
   }
 
-  dateIsValid(): boolean {
-    return this.currDate !== '';
-  }
+  onSave(): void {
+    if (!this.name.valid) return;
+    console.log('Passou pelo nome');
+    if (!this.file.valid) return;
+    console.log('Passou pelo arquivo');
+    if (!this.date.valid) return;
 
-  fileIsValid(): boolean {
-    return Boolean(this.selFile.match(/(.+)?\.(png|jpg|pdf)/));
-  }
-
-  nameIsValid(): boolean {
-    return Boolean(this.newDocName.match(/\w+/));
-  }
-
-  addDocument(): void {
-    const doc = { id: 0, name: this.newDocName, proccessId: 0 };
-    this.addDocumentEvent.emit(doc);
-  }
-
-  validateFile(): void {
-    this.submitted = true;
-
-    if (!this.dateIsValid()) return;
-    if (!this.fileIsValid()) return;
-    if (!this.nameIsValid()) return;
-
-    this.addDocument();
-    this.closeModal();
+    const document: Document = {
+      id: 0,
+      name: this.name.value,
+      proccessId: this.data.proccessId,
+    };
+    this.dialogRef.close(document);
   }
 }

@@ -45,7 +45,6 @@
     <app-document-list
       [proccess-id]="proccess.id"
       (selectDocumentEvent)="selectDocument($event)"
-      (newDocumentEvent)="toggleAddDocument()"
     ></app-document-list>
   </div>
 
@@ -55,12 +54,5 @@
       (unselectDocumentEvent)="unselectDocument()"
       (deleteDocumentEvent)="deleteDocument($event)"
     ></app-document-detail>
-  </div>
-
-  <div *ngIf="showDocModal">
-    <app-new-document
-      (closeModalEvent)="toggleAddDocument()"
-      (addDocumentEvent)="addDocument($event)"
-    ></app-new-document>
   </div>
 </div>

@@ -46,16 +46,6 @@ export class ProccessDetailComponent implements OnInit {
     this.selectedDoc = undefined;
   }
 
-  toggleAddDocument(): void {
-    this.showDocModal = !this.showDocModal;
-  }
-
-  addDocument(document: Document): void {
-    document.proccessId = this.proccess!.id;
-    this.documentService.addDocument(document);
-    this.documentList?.getDocuments();
-  }
-
   deleteDocument(id: number): void {
     this.documentService.deleteDocument(id).subscribe();
     this.unselectDocument();
