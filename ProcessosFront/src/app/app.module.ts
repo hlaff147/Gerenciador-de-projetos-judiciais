@@ -9,6 +9,7 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -59,6 +60,7 @@ import { ConfirmModalComponent } from '../components/confirm-modal/confirm-modal
     BrowserAnimationsModule,
     FlexLayoutModule,
     NgxMatFileInputModule,
+    NgxMaskModule.forRoot(),
     MatDialogModule,
     MatSelectModule,
     MatNativeDateModule,
