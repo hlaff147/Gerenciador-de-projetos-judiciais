@@ -1,6 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Document } from '../../types/document';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
+import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
 
 @Component({
   selector: 'app-document-detail',
@@ -12,7 +17,8 @@ export class DocumentDetailComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<DocumentDetailComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -24,6 +30,15 @@ export class DocumentDetailComponent implements OnInit {
   }
 
   onRemove(): void {
-    this.dialogRef.close(this.document.id);
+    const dialogRef = this.dialog.open(ConfirmModalComponent, {
+      data: {
+        message: 'Tem certeza que quer apagar este documento?',
+        confirm: 'Sim, eu tenho',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) this.dialogRef.close(this.document.id);
+    });
   }
 }
