@@ -52,9 +52,7 @@ export class NewDocumentComponent implements OnInit {
 
   onSave(): void {
     if (!this.name.valid) return;
-    console.log('Passou pelo nome');
     if (!this.file.valid) return;
-    console.log('Passou pelo arquivo');
     if (!this.date.valid) return;
 
     const document: Document = {
