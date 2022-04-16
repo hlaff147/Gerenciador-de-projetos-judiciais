@@ -69,26 +69,14 @@
         [formControl]="phone"
         [errorStateMatcher]="matcher"
         type="text"
-        pattern="\d+"
-        minlength="9"
-        maxlength="9"
-        required
+        mask="(00) 00000-0000"
       />
       <mat-hint></mat-hint>
       <mat-error *ngIf="phone.errors?.['required']" data-error="phone-missing">
         Telefone é obrigatório.
       </mat-error>
-      <mat-error
-        *ngIf="phone.errors?.['pattern'] && !phone.errors?.['required']"
-        data-error="phone-letters"
-      >
-        Telefine deve conter apenas números.
-      </mat-error>
-      <mat-error
-        *ngIf="(phone.errors?.['minlength'] || phone.errors?.['maxlength']) && !phone.errors?.['pattern'] && !phone.errors?.['required']"
-        data-error="phone-length"
-      >
-        Telefone deve ter 9 dígitos.
+      <mat-error *ngIf="phone.errors?.['length']" data-error="phone-length">
+        Telefone deve ter 9 dígitos mais o DDD.
       </mat-error>
     </mat-form-field>
 
