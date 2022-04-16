@@ -41,6 +41,8 @@ export class DocumentListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result: Document) => {
+      if (!result) return;
+
       this.documentService
         .addDocument(result)
         .subscribe(() => this.getDocuments());
