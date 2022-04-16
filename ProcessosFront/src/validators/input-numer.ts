@@ -1,11 +1,11 @@
 import { ValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
 
-export function cpfValdiator(): ValidatorFn {
+export function inputNumberValdiator(targetLength: number): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
-    const cpf = control.value;
+    const num = control.value;
 
-    const isEmpty = cpf === '';
-    const hasWrongLength = cpf.length != 11;
+    const isEmpty = num === '';
+    const hasWrongLength = num.length != targetLength;
 
     const isValid = !isEmpty && !hasWrongLength;
 
