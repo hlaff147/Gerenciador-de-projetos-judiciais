@@ -106,8 +106,7 @@
         placeholder="Senha"
         [formControl]="password"
         [errorStateMatcher]="matcher"
-        type="text"
-        required
+        type="password"
       />
       <mat-hint></mat-hint>
       <mat-error
@@ -115,6 +114,24 @@
         data-error="password-missing"
       >
         Senha é obrigatória.
+      </mat-error>
+      <mat-error
+        *ngIf="password.errors?.['length']"
+        data-error="password-length"
+      >
+        Senha deve ter, pelo menos, 5 dígitos.
+      </mat-error>
+      <mat-error
+        *ngIf="password.errors?.['invalidchar']"
+        data-error="password-invalidchar"
+      >
+        Senha não deve ter emojis.
+      </mat-error>
+      <mat-error
+        *ngIf="password.errors?.['novalidchar']"
+        data-error="password-novalidchar"
+      >
+        Senha deve ter letras maiúsculas e minúsculas e números.
       </mat-error>
     </mat-form-field>
 
