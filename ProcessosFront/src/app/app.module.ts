@@ -35,6 +35,7 @@ import { NewDocumentComponent } from '../components/new-document/new-document.co
 import { ProfileComponent } from 'src/components/profile/profile.component';
 import { ConfirmModalComponent } from '../components/confirm-modal/confirm-modal.component';
 import { NavbarComponent } from 'src/components/navbar/navbar.component';
+import { AuthService } from 'src/services/login/auth.service';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { NavbarComponent } from 'src/components/navbar/navbar.component';
     MatDividerModule,
   ],
   providers: [
+    AuthService,
     { provide: MAT_DIALOG_DATA, useValue: {} },
     { provide: MatDialogRef, useValue: {} },
   ],
