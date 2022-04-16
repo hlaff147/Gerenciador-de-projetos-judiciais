@@ -142,8 +142,7 @@
         placeholder="Senha de confirmação"
         [formControl]="confPassword"
         [errorStateMatcher]="matcher"
-        type="text"
-        required
+        type="password"
       />
       <mat-hint></mat-hint>
       <mat-error
@@ -151,6 +150,12 @@
         data-error="conf-password-missing"
       >
         Senha de confirmação é obrigatória.
+      </mat-error>
+      <mat-error
+        *ngIf="confPassword.errors?.['nomatch']"
+        data-error="conf-password-unmatched"
+      >
+        Senhas não correspondem.
       </mat-error>
     </mat-form-field>
 

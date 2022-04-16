@@ -1,10 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
+import {
+  FormControl,
+  FormGroupDirective,
+  NgForm,
+  Validators,
+} from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { nameValidator } from 'src/validators/name';
 import { inputNumberValdiator } from 'src/validators/input-numer';
 import { passwordValidator } from 'src/validators/password';
+import { confPasswordValidator } from 'src/validators/confirm-password';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
@@ -31,7 +37,10 @@ export class SignupFormComponent implements OnInit {
   email = new FormControl('');
   phone = new FormControl('', [inputNumberValdiator(11)]);
   password = new FormControl('', [passwordValidator()]);
-  confPassword = new FormControl('');
+  confPassword = new FormControl('', [
+    Validators.required,
+    confPasswordValidator(this.password),
+  ]);
   function = new FormControl('');
 
   functions = ['advogado', 'juiz', 'cliente', 'réu'];
