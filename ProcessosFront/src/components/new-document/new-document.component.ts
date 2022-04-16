@@ -32,9 +32,9 @@ export class NewDocumentComponent implements OnInit {
   @Output() closeModalEvent = new EventEmitter<null>();
   @Output() addDocumentEvent = new EventEmitter<Document>();
 
-  name = new FormControl('');
+  name = new FormControl('', [Validators.required]);
   file = new FormControl('', [Validators.required]);
-  date = new FormControl('');
+  date = new FormControl('', [Validators.required]);
   fileError: boolean = false;
 
   matcher = new MyErrorStateMatcher();
@@ -51,6 +51,8 @@ export class NewDocumentComponent implements OnInit {
   }
 
   onSave(): void {
+    this.updateForms();
+
     if (!this.name.valid) return;
     if (!this.file.valid) return;
     if (!this.date.valid) return;
@@ -61,5 +63,11 @@ export class NewDocumentComponent implements OnInit {
       proccessId: this.data.proccessId,
     };
     this.dialogRef.close(document);
+  }
+
+  updateForms(): void {
+    this.name.markAsTouched();
+    this.file.markAsTouched();
+    this.date.markAsTouched();
   }
 }

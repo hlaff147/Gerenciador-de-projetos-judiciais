@@ -9,7 +9,6 @@
       [formControl]="name"
       [errorStateMatcher]="matcher"
       type="text"
-      required
     />
     <mat-hint></mat-hint>
     <mat-error *ngIf="name.errors?.['required']" data-error="name-missing"
@@ -23,30 +22,31 @@
       [formControl]="file"
       [errorStateMatcher]="matcher"
       accept=".pdf,.png,.jpg,.jpeg"
+      placeholder="Arquivo de anexo"
     >
       <mat-icon ngxMatFileInputIcon>folder</mat-icon>
     </ngx-mat-file-input>
-    <mat-hint>Não se esqueça de anexar um documento.</mat-hint>
+    <mat-hint></mat-hint>
     <mat-error *ngIf="file.errors?.['required']" data-error="file-missing"
       >Documento é obrigatório.</mat-error
     >
   </mat-form-field>
 
   <mat-form-field class="mb-3" appearance="fill">
-    <mat-label>Data de anexo</mat-label>
     <input
       matInput
       [matDatepicker]="picker"
       [formControl]="date"
       [errorStateMatcher]="matcher"
-      required
+      placeholder="Data de anexo"
+      readonly
     />
     <mat-hint>DD/MM/YYYY</mat-hint>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
     <mat-hint></mat-hint>
     <mat-error *ngIf="date.errors?.['required']" data-error="date-missing"
-      >Selecione uma data no ícone de calendário.</mat-error
+      >Data de anexo é obrigatória.</mat-error
     >
   </mat-form-field>
 
