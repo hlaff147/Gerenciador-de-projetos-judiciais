@@ -34,8 +34,8 @@ export class NewDocumentComponent implements OnInit {
 
   name = new FormControl('', [Validators.required]);
   file = new FormControl('', [Validators.required]);
-  date = new FormControl('', [Validators.required]);
-  fileError: boolean = false;
+  date = new FormControl('');
+  timeStr!: string;
 
   matcher = new MyErrorStateMatcher();
 
@@ -44,7 +44,11 @@ export class NewDocumentComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const currDate = new Date();
+    this.date.setValue(currDate);
+    this.timeStr = `${currDate.getHours()}:${currDate.getMinutes()}`;
+  }
 
   onCancel(): void {
     this.dialogRef.close(null);
@@ -55,7 +59,6 @@ export class NewDocumentComponent implements OnInit {
 
     if (!this.name.valid) return;
     if (!this.file.valid) return;
-    if (!this.date.valid) return;
 
     const document: Document = {
       id: 0,
@@ -68,6 +71,5 @@ export class NewDocumentComponent implements OnInit {
   updateForms(): void {
     this.name.markAsTouched();
     this.file.markAsTouched();
-    this.date.markAsTouched();
   }
 }

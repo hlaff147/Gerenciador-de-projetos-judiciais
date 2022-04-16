@@ -32,23 +32,26 @@
     >
   </mat-form-field>
 
-  <mat-form-field class="mb-3" appearance="fill">
-    <input
-      matInput
-      [matDatepicker]="picker"
-      [formControl]="date"
-      [errorStateMatcher]="matcher"
-      placeholder="Data de anexo"
-      readonly
-    />
-    <mat-hint>DD/MM/YYYY</mat-hint>
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-    <mat-hint></mat-hint>
-    <mat-error *ngIf="date.errors?.['required']" data-error="date-missing"
-      >Data de anexo é obrigatória.</mat-error
-    >
-  </mat-form-field>
+  <div class="w-100 mb-4">
+    <mat-form-field class="w-50" appearance="fill">
+      <mat-label>Data de anexo</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        [formControl]="date"
+        [errorStateMatcher]="matcher"
+        placeholder="Data de anexo"
+        readonly
+      />
+      <mat-hint>DD/MM/YYYY</mat-hint>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="w-50" appearance="fill">
+      <mat-label>Hora de anexo</mat-label>
+      <input matInput [defaultValue]="timeStr" readonly />
+    </mat-form-field>
+  </div>
 
   <div class="w-100 d-flex justify-content-around">
     <button
