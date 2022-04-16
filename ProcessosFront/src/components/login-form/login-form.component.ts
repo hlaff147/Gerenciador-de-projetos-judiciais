@@ -7,6 +7,7 @@ import {
   NgForm,
 } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { inputNumberValdiator } from 'src/validators/input-numer';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
@@ -28,7 +29,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./login-form.component.css'],
 })
 export class LoginFormComponent implements OnInit {
-  cpf = new FormControl('', [Validators.required, Validators.pattern(/\d*/)]);
+  cpf = new FormControl('', [inputNumberValdiator(11)]);
   password = new FormControl('', [Validators.required]);
   rememberUser = new FormControl('');
 
