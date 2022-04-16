@@ -9,18 +9,13 @@
         [formControl]="name"
         [errorStateMatcher]="matcher"
         type="text"
-        pattern="[a-zA-z ]*"
-        required
       />
       <mat-hint></mat-hint>
       <mat-error *ngIf="name.errors?.['required']" data-error="name-missing">
         Nome é obrigatório.
       </mat-error>
-      <mat-error
-        *ngIf="name.errors?.['pattern'] && !name.errors?.['required']"
-        data-error="name-numbers"
-      >
-        Nome deve conter apenas letras.
+      <mat-error *ngIf="name.errors?.['invalidChar']" data-error="name-numbers">
+        Nome deve conter apenas letras e espaços.
       </mat-error>
     </mat-form-field>
 
