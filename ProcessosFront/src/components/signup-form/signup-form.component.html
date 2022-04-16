@@ -27,26 +27,13 @@
         [formControl]="cpf"
         [errorStateMatcher]="matcher"
         type="text"
-        minlength="11"
-        maxlength="14"
-        pattern="\d+"
         mask="000.000.000-00"
-        required
       />
       <mat-hint></mat-hint>
       <mat-error *ngIf="cpf.errors?.['required']" data-error="cpf-missing">
         CPF é obrigatório.
       </mat-error>
-      <mat-error
-        *ngIf="cpf.errors?.['pattern'] && !cpf.errors?.['required']"
-        data-error="cpf-letters"
-      >
-        CPF deve conter apenas números.
-      </mat-error>
-      <mat-error
-        *ngIf="(cpf.errors?.['minlength'] || cpf.errors?.['maxlength']) && !cpf.errors?.['pattern'] && !cpf.errors?.['required']"
-        data-error="cpf-length"
-      >
+      <mat-error *ngIf="cpf.errors?.['length']" data-error="cpf-length">
         CPF deve conter 11 dígitos.
       </mat-error>
     </mat-form-field>

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { nameValidator } from 'src/validators/name';
+import { cpfValdiator } from 'src/validators/cpf';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
@@ -25,7 +26,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class SignupFormComponent implements OnInit {
   name = new FormControl('', [nameValidator()]);
-  cpf = new FormControl('');
+  cpf = new FormControl('', [cpfValdiator()]);
   email = new FormControl('');
   phone = new FormControl('');
   password = new FormControl('');
