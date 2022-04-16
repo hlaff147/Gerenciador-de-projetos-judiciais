@@ -34,6 +34,7 @@ import { DocumentDetailComponent } from '../components/document-detail/document-
 import { NewDocumentComponent } from '../components/new-document/new-document.component';
 import { ProfileComponent } from 'src/components/profile/profile.component';
 import { ConfirmModalComponent } from '../components/confirm-modal/confirm-modal.component';
+import { NavbarComponent } from 'src/components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { ConfirmModalComponent } from '../components/confirm-modal/confirm-modal
     NewDocumentComponent,
     ProfileComponent,
     ConfirmModalComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
