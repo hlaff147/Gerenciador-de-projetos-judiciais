@@ -57,7 +57,7 @@ describe("Testes de cadastro", () => {
   });
 
   it("Senha deve ter letras minúsculas", () => {
-    cy.get("input[name=password]").type("senha1234");
+    cy.get("input[name=password]").type("SENHA1234");
     cy.get("[data-error='password-novalidchar']")
       .should("exist")
       .and("be.visible");
@@ -78,8 +78,8 @@ describe("Testes de cadastro", () => {
   });
 
   it("Senha de confirmação deve ser igual à senha", () => {
-    cy.get("input[name=password]").type("senha1234");
-    cy.get("input[name=conf-password]").type("senha123");
+    cy.get("input[name=password]").type("Senha1234");
+    cy.get("input[name=conf-password]").type("Senha123");
     cy.get("[data-error='conf-password-unmatched']")
       .should("exist")
       .and("be.visible");
@@ -89,7 +89,7 @@ describe("Testes de cadastro", () => {
 
   it("Cadastro com dados válidos não gera mensagems de erro", () => {
     cy.get("input[name=cpf]").type("11111111111");
-    cy.get("input[name=password]").type("senha1234");
+    cy.get("input[name=password]").type("Senha1234");
     cy.get("input[name=name]").type("joao");
     cy.get("input[name=email]").type("jaozinhoreidelas12@gmail.com");
     cy.get("input[name=phone]").type("81911223344");
@@ -99,12 +99,12 @@ describe("Testes de cadastro", () => {
 
     cy.get("[data-btn='signup']").first().click();
 
-    cy.get("[data-error='cpf-missing']").should("not.exist");
-    cy.get("[data-error='password-missing']").should("not.exist");
-    cy.get("[data-error='name-missing']").should("not.exist");
-    cy.get("[data-error='email-missing']").should("not.exist");
-    cy.get("[data-error='phone-missing']").should("not.exist");
-    cy.get("[data-error='function-missing']").should("not.exist");
-    cy.get("[data-error='conf-password-missing']").should("not.exist");
+    cy.get("[data-error]").should("not.exist");
+    cy.get("[data-error]").should("not.exist");
+    cy.get("[data-error]").should("not.exist");
+    cy.get("[data-error]").should("not.exist");
+    cy.get("[data-error]").should("not.exist");
+    cy.get("[data-error]").should("not.exist");
+    cy.get("[data-error]").should("not.exist");
   });
 });
