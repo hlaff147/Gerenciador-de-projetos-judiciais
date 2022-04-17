@@ -21,7 +21,7 @@ export class AuthService {
   logoutUser(user: User): void {
     this.userAuthed = false;
     this.userAuthEvent.emit(null);
-    this.router.navigate(['/']);
+    this.router.navigate(['/login']);
   }
 
   userIsAuthenticated(): boolean {
