@@ -28,7 +28,7 @@ describe("Testes de login", () => {
     cy.get("input[name=cpf]").type("11111111111");
     cy.get("input[name=password]").type("Senha1234");
     cy.get("[data-btn='login']").click();
-    cy.get("[data-error='cpf-missing']").should("not.exist");
-    cy.get("[data-error='password-missing']").should("not.exist");
+    cy.get("[data-error]").should("not.exist");
+    cy.get("[data-error]").should("not.exist");
   });
 });
