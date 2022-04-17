@@ -6,7 +6,7 @@ import { SignupFormComponent } from '../components/signup-form/signup-form.compo
 import { ProccessManagementComponent } from '../components/proccess-management/proccess-management.component';
 import { ProccessDetailComponent } from '../components/proccess-detail/proccess-detail.component';
 import { ProfileComponent } from 'src/components/profile/profile.component';
-import { AuthGuard } from 'src/guards/auth-guard.service';
+import { AuthGuard } from 'src/guards/auth.guard';
 
 const routes: Routes = [
   {
