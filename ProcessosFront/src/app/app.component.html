@@ -1,15 +1,15 @@
 <div class="custom-app-container">
   <mat-toolbar color="primary">
     <div fxShow="true" fxHide.gt-sm="true">
-      <button mat-icon-button (click)="sidenav.toggle()">
+      <button mat-icon-button (click)="sidenav.toggle()" data-btn="navbar">
         <mat-icon>menu</mat-icon>
       </button>
     </div>
-    <a mat-button class="companyName" routerLink="/">
+    <a mat-button class="companyName" routerLink="/" data-link="title">
       <span>Gerenciador de Processos Judiciais</span>
     </a>
     <span class="example-spacer"></span>
-    <div fxShow="true" fxHide.lt-md="true">
+    <div fxShow="true" fxHide.lt-md="true" data-cy="navbar-lg">
       <app-navbar></app-navbar>
     </div>
   </mat-toolbar>
@@ -22,7 +22,7 @@
       opened="false"
       fxHide.gt-sm="true"
     >
-      <div fxLayout="column">
+      <div fxLayout="column" data-cy="navbar-sm">
         <app-navbar></app-navbar>
       </div>
     </mat-sidenav>

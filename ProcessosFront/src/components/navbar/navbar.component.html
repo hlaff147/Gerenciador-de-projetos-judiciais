@@ -1,5 +1,7 @@
 <div *ngIf="!user" fxLayout="row" fxLayout.lt-md="column">
-  <a mat-button routerLink="/"> <mat-icon>home</mat-icon> Home </a>
+  <a mat-button routerLink="/" data-link="home">
+    <mat-icon>home</mat-icon>Home
+  </a>
   <a mat-button routerLink="/cadastro" data-link="signup">
     <mat-icon>person_add</mat-icon>Cadastro
   </a>
@@ -9,14 +11,16 @@
 </div>
 
 <div *ngIf="user" fxLayout="row" fxLayout.lt-md="column">
-  <a mat-button routerLink="/"> <mat-icon>home</mat-icon> Home </a>
+  <a mat-button routerLink="/" data-link="home">
+    <mat-icon>home</mat-icon> Home
+  </a>
   <a mat-button routerLink="/perfil" data-link="profile">
     <mat-icon>manage_accounts</mat-icon>Perfil
   </a>
   <a mat-button routerLink="/processos" data-link="proccesses">
     <mat-icon>list</mat-icon>Processos
   </a>
-  <button mat-button (click)="logout()" data-btn="logout">
+  <button mat-button (click)="logout()" data-link="logout">
     <mat-icon>login</mat-icon>Logout
   </button>
 </div>
