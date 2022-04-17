@@ -5,15 +5,8 @@ describe("Testes de login", () => {
     cy.visit("login");
   });
 
-  it("Clicar em item `Login` na barra de navegação abre página de login", () => {
-    cy.visit("");
-    cy.get("[data-link='login']").click();
-    cy.url().should("include", "login");
-    cy.get("app-login-form").should("be.visible");
-  });
-
   it("Login não pode ser efetuado com campos vazios", () => {
-    cy.get("[data-btn='login']").click();
+    cy.get("[data-btn='login']").first().click();
     cy.get("[data-error='cpf-missing']").should("be.visible");
     cy.get("[data-error='password-missing']").should("be.visible");
   });
@@ -25,7 +18,7 @@ describe("Testes de login", () => {
 
   it("CPF deve ter 11 dígitos", () => {
     cy.get("input[name=cpf]").type("1111111111");
-    cy.get("[data-btn='login']").click();
+    cy.get("[data-btn='login']").first().click();
     cy.get("[data-error='cpf-length']").should("be.visible");
   });
 });

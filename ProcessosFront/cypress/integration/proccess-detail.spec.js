@@ -1,23 +1,15 @@
 /// <reference types="cypress" />
 
-describe("Testes de detalhe de processo", () => {
-  beforeEach(() => {
-    cy.visit("processos");
-    cy.get("[data-cy='proccess-list'] > li:last a").click();
-  });
-
-  it("Selecionar um processo na lista de processos leva à sua página de detlalhes", () => {
-    cy.visit("processos");
-    cy.get("[data-cy='proccess-list']").should("have.length.at.least", 1);
-    cy.get("[data-cy='proccess-list'] > li:last a").click();
-    cy.url().should("match", /processos\/\d+/);
-  });
-});
-
 describe("Testes de acesso a documentos", () => {
+  before(() => {
+    cy.visit("/login");
+    cy.get("input[name=cpf]").type("11111111111");
+    cy.get("input[name=password]").type("Senha1234");
+    cy.get("[data-btn='login']").click();
+  });
+
   it("Clicar em um documento na lista de documentos exibe modal", () => {
     // Acessa processo mais antigo na lista
-    cy.visit("processos");
     cy.get("[data-cy='proccess-list'] > li:last a").click();
 
     cy.get("app-document-detail").should("not.exist");

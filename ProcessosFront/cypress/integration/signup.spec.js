@@ -5,15 +5,8 @@ describe("Testes de signup", () => {
     cy.visit("cadastro");
   });
 
-  it("Clicar em item `Cadastro` na barra de navegação abre página de cadastro", () => {
-    cy.visit("");
-    cy.get("[data-link='signup']").click();
-    cy.url().should("include", "cadastro");
-    cy.get("app-signup-form").should("be.visible");
-  });
-
   it("Cadastro não pode ser efetuado com campos vazios", () => {
-    cy.get("[data-btn='signup']").click();
+    cy.get("[data-btn='signup']").first().click();
     cy.get("[data-error='name-missing']").should("be.visible");
     cy.get("[data-error='cpf-missing']").should("be.visible");
     cy.get("[data-error='email-missing']").should("be.visible");
@@ -29,7 +22,7 @@ describe("Testes de signup", () => {
   });
   it("CPF deve ter 11 dígitos", () => {
     cy.get("input[name=cpf]").type("1111111111");
-    cy.get("[data-btn='signup']").click();
+    cy.get("[data-btn='signup']").first().click();
     cy.get("[data-error='cpf-length']").should("be.visible");
   });
 
@@ -61,7 +54,7 @@ describe("Testes de signup", () => {
     cy.get("[name=function]").click();
     cy.contains("Advogado").click();
 
-    cy.get("[data-link='signup']").click();
+    cy.get("[data-btn='signup']").first().click();
 
     cy.get("[data-error='cpf-missing']").should("not.exist");
     cy.get("[data-error='password-missing']").should("not.exist");
