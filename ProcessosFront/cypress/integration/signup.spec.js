@@ -34,6 +34,11 @@ describe("Testes de cadastro", () => {
     cy.get("[data-error='name-numbers']").should("exist").and("be.visible");
   });
 
+  it("Nome não deve ter caracteres especiais", () => {
+    cy.get("input[name=name]").type("Humbert😃");
+    cy.get("[data-error='name-numbers']").should("exist").and("be.visible");
+  });
+
   it("Telefone não deve ter letras", () => {
     cy.get("input[name=phone]").type("819112b3344");
     cy.get("input[name=phone]").should("have.value", "(81) 91123-344");
@@ -42,6 +47,13 @@ describe("Testes de cadastro", () => {
   it("Senha deve ter, no mínimo, 5 dígitos", () => {
     cy.get("input[name=password]").type("aaaa");
     cy.get("[data-error='password-length']").should("exist").and("be.visible");
+  });
+
+  it("Senha não deve ter emojis", () => {
+    cy.get("input[name=password]").type("senha😃");
+    cy.get("[data-error='password-invalidchar']")
+      .should("exist")
+      .and("be.visible");
   });
 
   it("Senha deve ter letras minúsculas", () => {
