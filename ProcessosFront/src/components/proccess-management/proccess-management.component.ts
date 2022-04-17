@@ -9,7 +9,7 @@ import { Observable, of } from 'rxjs';
 import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
 
 @Component({
-  selector: 'app-profile',
+  selector: 'app-proccess-management',
   templateUrl: './proccess-management.component.html',
   styleUrls: ['./proccess-management.component.css'],
 })
