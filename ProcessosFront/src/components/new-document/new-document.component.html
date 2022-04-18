@@ -1,0 +1,76 @@
+<h5 mat-dialog-title class="fs-4 mb-4">Anexe um documento</h5>
+
+<div mat-dialog-content class="d-flex flex-column">
+  <mat-form-field class="mb-3" appearance="fill">
+    <input
+      matInput
+      name="name"
+      placeholder="Nome do documento"
+      [formControl]="name"
+      [errorStateMatcher]="matcher"
+      type="text"
+    />
+    <mat-hint></mat-hint>
+    <mat-error *ngIf="name.errors?.['required']" data-error="name-missing"
+      >Nome do documento é obrigatório.</mat-error
+    >
+  </mat-form-field>
+
+  <mat-form-field class="mb-3" appearance="fill">
+    <ngx-mat-file-input
+      name="file"
+      [formControl]="file"
+      [errorStateMatcher]="matcher"
+      accept=".pdf,.png,.jpg,.jpeg"
+      placeholder="Arquivo de anexo"
+    >
+      <mat-icon ngxMatFileInputIcon>folder</mat-icon>
+    </ngx-mat-file-input>
+    <mat-hint></mat-hint>
+    <mat-error *ngIf="file.errors?.['required']" data-error="file-missing"
+      >Documento é obrigatório.</mat-error
+    >
+  </mat-form-field>
+
+  <div class="w-100 mb-4">
+    <mat-form-field class="w-50" appearance="fill">
+      <mat-label>Data de anexo</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        [formControl]="date"
+        [errorStateMatcher]="matcher"
+        placeholder="Data de anexo"
+        readonly
+      />
+      <mat-hint>DD/MM/YYYY</mat-hint>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="w-50" appearance="fill">
+      <mat-label>Hora de anexo</mat-label>
+      <input matInput [defaultValue]="timeStr" readonly />
+    </mat-form-field>
+  </div>
+
+  <div class="w-100 d-flex justify-content-around">
+    <button
+      mat-flat-button
+      type="button"
+      color="warn"
+      (click)="onCancel()"
+      data-btn="document-cancel"
+    >
+      Cancelar
+    </button>
+    <button
+      mat-flat-button
+      type="button"
+      color="primary"
+      (click)="onSave()"
+      data-btn="document-save"
+    >
+      Salvar
+    </button>
+  </div>
+</div>

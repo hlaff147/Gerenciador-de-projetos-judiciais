@@ -1,73 +1,110 @@
 /// <reference types="cypress" />
 
-describe("Testes de signup", () => {
+describe("Testes de cadastro", () => {
   beforeEach(() => {
     cy.visit("cadastro");
   });
 
-  it("Clicar em item `Cadastro` na barra de navegação abre página de cadastro", () => {
-    cy.visit("");
-    cy.get("[data-cy='signup-link']").click();
-    cy.url().should("include", "cadastro");
-    cy.get("app-signup-form").should("be.visible");
+  it("Submissão de campos vazios gera mensagens de erro", () => {
+    cy.get("[data-btn='signup']").first().click();
+    cy.get("[data-error='name-missing']").should("exist").and("be.visible");
+    cy.get("[data-error='cpf-missing']").should("exist").and("be.visible");
+    cy.get("[data-error='email-missing']").should("exist").and("be.visible");
+    cy.get("[data-error='phone-missing']").should("exist").and("be.visible");
+    cy.get("[data-error='function-missing']").should("exist").and("be.visible");
+    cy.get("[data-error='password-missing']").should("exist").and("be.visible");
+    cy.get("[data-error='conf-password-missing']")
+      .should("exist")
+      .and("be.visible");
   });
 
-  it("Cadastro não pode ser efetuado com campos vazios", () => {
-    cy.get("[data-cy='signup-btn']").click();
-    cy.get("[data-error='cpf-missing']").should("be.visible");
-    cy.get("[data-error='password-missing']").should("be.visible");
-    cy.get("[data-error='username-missing']").should("be.visible");
-    cy.get("[data-error='email-missing']").should("be.visible");
-    cy.get("[data-error='phone-missing']").should("be.visible");
-    cy.get("[data-error='function-missing']").should("be.visible");
-    cy.get("[data-error='confirm_password-missing']").should("be.visible");
-  });
-
-  it("CPF não pode conter letras", () => {
+  it("CPF não pode ter letras", () => {
     cy.get("input[name=cpf]").type("1111111111a");
-    cy.get("[data-error='cpf-letters']").should("be.visible");
+    cy.get("input[name=cpf]").should("have.value", "111.111.111-1");
   });
+
   it("CPF deve ter 11 dígitos", () => {
     cy.get("input[name=cpf]").type("1111111111");
-    cy.get("[data-cy='signup-btn']").click();
-    cy.get("[data-error='cpf-length']").should("be.visible");
+    cy.get("[data-btn='signup']").first().click();
+    cy.get("[data-error='cpf-length']").should("exist").and("be.visible");
   });
 
-  it("Nome não deve conter números", () => {
-    cy.get("input[name=username]").type("Humbert0");
-    cy.get("[data-error='name-numbers']").should("be.visible");
+  it("Nome não deve ter números", () => {
+    cy.get("input[name=name]").type("Humbert0");
+    cy.get("[data-error='name-numbers']").should("exist").and("be.visible");
+  });
+
+  it("Nome não deve ter caracteres especiais", () => {
+    cy.get("input[name=name]").type("Humbert😃");
+    cy.get("[data-error='name-numbers']").should("exist").and("be.visible");
   });
 
   it("Telefone não deve ter letras", () => {
-    cy.get("input[name=phone]").type("9111b1111");
-    cy.get("[data-error='phone-letters']").should("be.visible");
+    cy.get("input[name=phone]").type("819112b3344");
+    cy.get("input[name=phone]").should("have.value", "(81) 91123-344");
+  });
+
+  it("Senha deve ter, no mínimo, 5 dígitos", () => {
+    cy.get("input[name=password]").type("aaaa");
+    cy.get("[data-error='password-length']").should("exist").and("be.visible");
+  });
+
+  it("Senha não deve ter emojis", () => {
+    cy.get("input[name=password]").type("senha😃");
+    cy.get("[data-error='password-invalidchar']")
+      .should("exist")
+      .and("be.visible");
+  });
+
+  it("Senha deve ter letras minúsculas", () => {
+    cy.get("input[name=password]").type("SENHA1234");
+    cy.get("[data-error='password-novalidchar']")
+      .should("exist")
+      .and("be.visible");
+  });
+
+  it("Senha deve ter letras maiúsculas", () => {
+    cy.get("input[name=password]").type("senha1234");
+    cy.get("[data-error='password-novalidchar']")
+      .should("exist")
+      .and("be.visible");
+  });
+
+  it("Senha deve ter números", () => {
+    cy.get("input[name=password]").type("Senha");
+    cy.get("[data-error='password-novalidchar']")
+      .should("exist")
+      .and("be.visible");
   });
 
   it("Senha de confirmação deve ser igual à senha", () => {
-    cy.get("input[name=password]").type("senha1234");
-    cy.get("input[name=repeatPassword]").type("senha123");
-    cy.get("[data-error='password-divergent']").should("be.visible");
-    cy.get("input[name=repeatPassword]").type("4");
-    cy.get("[data-error='password-divergent']").should("not.be.visible");
+    cy.get("input[name=password]").type("Senha1234");
+    cy.get("input[name=conf-password]").type("Senha123");
+    cy.get("[data-error='conf-password-unmatched']")
+      .should("exist")
+      .and("be.visible");
+    cy.get("input[name=conf-password]").type("4");
+    cy.get("[data-error='conf-password-unmatched']").should("not.exist");
   });
 
-  it("Cadastro com dados válidos não gera mensagem de erro", () => {
+  it("Cadastro com dados válidos não gera mensagems de erro", () => {
     cy.get("input[name=cpf]").type("11111111111");
-    cy.get("input[name=password]").type("senha1234");
-    cy.get("input[name=username]").type("joao");
+    cy.get("input[name=password]").type("Senha1234");
+    cy.get("input[name=name]").type("joao");
     cy.get("input[name=email]").type("jaozinhoreidelas12@gmail.com");
     cy.get("input[name=phone]").type("81911223344");
-    cy.get("input[name=repeatPassword]").type("senha1234");
-    cy.get("select[name=funcao]").select("Advogado");
+    cy.get("input[name=conf-password]").type("Senha1234");
+    cy.get("[name=function]").click();
+    cy.contains("Advogado").click();
 
-    cy.get("[data-cy='signup-link']").click();
+    cy.get("[data-btn='signup']").first().click();
 
-    cy.get("[data-error='cpf-missing']").should("not.be.visible");
-    cy.get("[data-error='password-missing']").should("not.be.visible");
-    cy.get("[data-error='username-missing']").should("not.be.visible");
-    cy.get("[data-error='email-missing']").should("not.be.visible");
-    cy.get("[data-error='phone-missing']").should("not.be.visible");
-    cy.get("[data-error='function-missing']").should("not.be.visible");
-    cy.get("[data-error='confirm_password-missing']").should("not.be.visible");
+    cy.get("[data-error]").should("not.exist");
+    cy.get("[data-error]").should("not.exist");
+    cy.get("[data-error]").should("not.exist");
+    cy.get("[data-error]").should("not.exist");
+    cy.get("[data-error]").should("not.exist");
+    cy.get("[data-error]").should("not.exist");
+    cy.get("[data-error]").should("not.exist");
   });
 });

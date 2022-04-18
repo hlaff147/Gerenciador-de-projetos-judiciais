@@ -1,44 +1,33 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/">Gerenciador de Projetos Judiciais</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 custom-navbar">
-        <li class="nav-item custom-nav-item">
-          <i class="bi bi-house"></i>
-          <a class="nav-link" routerLink="/">Home</a>
-        </li>
-        <li class="nav-item custom-nav-item">
-          <i class="bi bi-person-plus"></i>
-          <a
-            class="nav-link"
-            style="margin-right: 5px"
-            routerLink="/cadastro"
-            data-cy="signup-link"
-            >Cadastro</a
-          >
-        </li>
-        <li class="nav-item custom-nav-item">
-          <i class="bi bi-person"></i>
-          <a class="nav-link" routerLink="/login" data-cy="login-link">Login</a>
-        </li>
-        <li class="nav-item custom-nav-item">
-          <i class="bi bi-files"></i>
-          <a class="nav-link" routerLink="/perfil">Processos</a>
-        </li>
-      </ul>
+<div class="custom-app-container">
+  <mat-toolbar color="primary">
+    <div fxShow="true" fxHide.gt-sm="true">
+      <button mat-icon-button (click)="sidenav.toggle()" data-btn="navbar">
+        <mat-icon>menu</mat-icon>
+      </button>
     </div>
-  </div>
-</nav>
-
-<router-outlet></router-outlet>
+    <a mat-button class="companyName" routerLink="/" data-link="title">
+      <span>Gerenciador de Processos Judiciais</span>
+    </a>
+    <span class="example-spacer"></span>
+    <div fxShow="true" fxHide.lt-md="true" data-cy="navbar-lg">
+      <app-navbar></app-navbar>
+    </div>
+  </mat-toolbar>
+  <mat-sidenav-container fxFlexFill class="example-container">
+    <mat-sidenav
+      color="primary"
+      #sidenav
+      fxLayout="column"
+      mode="over"
+      opened="false"
+      fxHide.gt-sm="true"
+    >
+      <div fxLayout="column" data-cy="navbar-sm">
+        <app-navbar></app-navbar>
+      </div>
+    </mat-sidenav>
+    <mat-sidenav-content fxFlexFill>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

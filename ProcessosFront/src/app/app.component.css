@@ -1,4 +1,14 @@
 @import "~bootstrap-icons/font/bootstrap-icons.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+body {
+  margin: 0%;
+}
+
+.custom-app-container {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
 
 .custom-nav-item {
   display: flex;
@@ -15,4 +25,35 @@
 
 .custom-nav-item:hover {
   background-color: #5894ee;
+}
+
+.spacer {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.companyName {
+  font-size: 150%;
+}
+div {
+  overflow: inherit;
+}
+a {
+  text-decoration: none;
+  font-size: 110%;
+  white-space: normal;
+}
+button {
+  font-size: 110%;
+  min-width: min-content;
+}
+.example-icon {
+  padding: 0 14px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+.mat-sidenav-content {
+  text-align: center;
 }
