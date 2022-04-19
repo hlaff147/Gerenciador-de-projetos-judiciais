@@ -1,0 +1,58 @@
+<div class="login-container mt-4">
+  <p class="fs-2 mb-3">Bem-vindo de volta!</p>
+  <form class="login-form container">
+    <mat-form-field class="full-width mb-3">
+      <input
+        matInput
+        name="cpf"
+        placeholder="CPF"
+        [formControl]="cpf"
+        [errorStateMatcher]="matcher"
+        type="text"
+        mask="000.000.000-00"
+      />
+      <mat-hint></mat-hint>
+      <mat-error *ngIf="cpf.errors?.['required']" data-error="cpf-missing">
+        CPF é obrigatório.
+      </mat-error>
+      <mat-error *ngIf="cpf.errors?.['length']" data-error="cpf-length">
+        CPF deve conter 11 dígitos.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        name="password"
+        placeholder="Senha"
+        [formControl]="password"
+        [errorStateMatcher]="matcher"
+        type="password"
+      />
+      <mat-hint></mat-hint>
+      <mat-error
+        *ngIf="password.errors?.['required']"
+        data-error="password-missing"
+      >
+        Senha é obrigatória.
+      </mat-error>
+    </mat-form-field>
+
+    <div class="login-checkbox">
+      <mat-checkbox [formControl]="rememberUser" color="primary" class="foo"
+        >Lembre-se de mim</mat-checkbox
+      >
+      <a routerLink="/" class="text-muted fst-italic"> Esqueci minha senha. </a>
+    </div>
+
+    <button
+      mat-flat-button
+      type="submit"
+      data-btn="login"
+      color="primary"
+      (click)="loginUser()"
+    >
+      Entrar
+    </button>
+  </form>
+</div>

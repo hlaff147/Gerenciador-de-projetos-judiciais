@@ -1,0 +1,17 @@
+<div mat-dialog-content class="d-flex flex-column">
+  <p class="fs-4 mb-3">{{ message }}</p>
+  <mat-divider class="mb-4"></mat-divider>
+  <div class="d-flex justify-content-around w-100">
+    <button mat-flat-button type="button" color="warn" (click)="onClose(false)">
+      {{ deny }}
+    </button>
+    <button
+      mat-flat-button
+      type="button"
+      color="primary"
+      (click)="onClose(true)"
+    >
+      {{ confirm }}
+    </button>
+  </div>
+</div>

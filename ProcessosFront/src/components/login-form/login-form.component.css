@@ -1,0 +1,26 @@
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.login-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.login-checkbox {
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  width: 100%;
+  text-align: left;
+  padding-left: 1rem;
+  margin: 0.6rem 0 0.5rem;
+}

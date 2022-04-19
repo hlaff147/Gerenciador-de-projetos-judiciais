@@ -5,34 +5,30 @@ describe("Testes de login", () => {
     cy.visit("login");
   });
 
-  it("Clicar em item `Login` na barra de navegação abre página de login", () => {
-    cy.visit("");
-    cy.get("[data-cy='login-link']").click();
-    cy.url().should("include", "login");
-    cy.get("app-login-form").should("be.visible");
-  });
-
-  it("Login não pode ser efetuado com campos vazios", () => {
-    cy.get("[data-cy='login-btn']").click();
-    cy.get("[data-error='cpf-missing']").should("be.visible");
-    cy.get("[data-error='password-missing']").should("be.visible");
+  it("Submissão de campos vazios gera mensagens de erro", () => {
+    cy.get("[data-btn='login']").click();
+    cy.get("[data-error='cpf-missing']").should("be.visible").and("be.visible");
+    cy.get("[data-error='password-missing']")
+      .should("be.visible")
+      .and("be.visible");
   });
 
   it("CPF não pode conter letras", () => {
     cy.get("input[name=cpf]").type("1111111111a");
-    cy.get("[data-error='cpf-letters']").should("be.visible");
+    cy.get("input[name=cpf]").should("have.value", "111.111.111-1");
   });
 
   it("CPF deve ter 11 dígitos", () => {
     cy.get("input[name=cpf]").type("1111111111");
-    cy.get("[data-cy='login-btn']").click();
+    cy.get("[data-btn='login']").click();
     cy.get("[data-error='cpf-length']").should("be.visible");
   });
 
-  it("Login com dados válidos leva à página inicial", () => {
+  it("Login com dados válidos não gera mensagens de erro", () => {
     cy.get("input[name=cpf]").type("11111111111");
-    cy.get("input[name=password]").type("senha1234");
-    cy.get("[data-cy='login-btn']").click();
-    cy.url().should("eq", Cypress.config().baseUrl + "/");
+    cy.get("input[name=password]").type("Senha1234");
+    cy.get("[data-btn='login']").click();
+    cy.get("[data-error]").should("not.exist");
+    cy.get("[data-error]").should("not.exist");
   });
 });
