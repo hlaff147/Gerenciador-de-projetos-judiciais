@@ -22,7 +22,7 @@ var allowCrossDomain = function (req: any, res: any, next: any) {
 app.use(allowCrossDomain);
 app.use(bodyParser.json());
 
-app.post("/api/usuarios", async (req: Request, res: Response) => {
+app.post("/api/cadastrar", async (req: Request, res: Response) => {
   var user = req.body;
   const userId = await createUser(user);
 
@@ -47,7 +47,7 @@ app.get("/api/usuarios", async (req: Request, res: Response) => {
   }
 });
 
-app.delete("/api/usuarios", async (req: Request, res: Response) => {
+app.delete("/api/apagar", async (req: Request, res: Response) => {
   const cpf: string = req.body.cpf;
   const success = await deleteUser(cpf);
 

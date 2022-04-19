@@ -45,7 +45,7 @@ export class UserService {
   }
 
   signupUser(user: User): Observable<User | null> {
-    const url: string = this.API_URL + '/usuarios';
+    const url: string = this.API_URL + '/cadastrar';
 
     return this.http.post(url, user, { headers: this.headers }).pipe(
       retry(2),
