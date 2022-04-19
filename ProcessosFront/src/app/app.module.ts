@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -35,7 +36,6 @@ import { NewDocumentComponent } from '../components/new-document/new-document.co
 import { ProfileComponent } from 'src/components/profile/profile.component';
 import { ConfirmModalComponent } from '../components/confirm-modal/confirm-modal.component';
 import { NavbarComponent } from 'src/components/navbar/navbar.component';
-import { AuthService } from 'src/services/login/auth.service';
 
 @NgModule({
   declarations: [
@@ -56,6 +56,7 @@ import { AuthService } from 'src/services/login/auth.service';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
     MatDialogModule,
     MatFormFieldModule,
@@ -77,7 +78,6 @@ import { AuthService } from 'src/services/login/auth.service';
     MatDividerModule,
   ],
   providers: [
-    AuthService,
     { provide: MAT_DIALOG_DATA, useValue: {} },
     { provide: MatDialogRef, useValue: {} },
   ],
