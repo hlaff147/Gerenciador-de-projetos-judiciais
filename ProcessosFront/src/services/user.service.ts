@@ -29,7 +29,7 @@ export class UserService {
         // TODO: Lidar com login inválido
         if (!res?.['success']) return null;
 
-        this.currUser = res?.['success'][0];
+        this.currUser = res?.['success'];
         this.userAuthEvent.emit(this.currUser);
         this.router.navigate(['/']);
 
