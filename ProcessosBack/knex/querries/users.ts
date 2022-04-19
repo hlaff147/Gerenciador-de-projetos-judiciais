@@ -30,3 +30,15 @@ export const deleteUser = async (cpf: string) => {
 
   return null;
 };
+
+export const getUser = async (cpf: string, password: string) => {
+  try {
+    const query = await db("users")
+      .where({ cpf: cpf, password: password })
+      .select();
+    return query.length ? query : null;
+  } catch (err: any) {
+    console.log(err.message);
+  }
+  return null;
+};

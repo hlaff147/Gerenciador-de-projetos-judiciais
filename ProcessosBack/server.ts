@@ -1,6 +1,12 @@
 import { Request, Response } from "express";
-import { createUser, getAllUsers, deleteUser } from "./knex/querries/users";
+import {
+  createUser,
+  getAllUsers,
+  deleteUser,
+  getUser,
+} from "./knex/querries/users";
 import { db } from "./knex/config/database";
+import { User } from "../common/user";
 
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -42,7 +48,6 @@ app.get("/api/usuarios", async (req: Request, res: Response) => {
 });
 
 app.delete("/api/usuarios", async (req: Request, res: Response) => {
-  console.log(req.body.cpf);
   const cpf: string = req.body.cpf;
   const success = await deleteUser(cpf);
 
@@ -51,6 +56,20 @@ app.delete("/api/usuarios", async (req: Request, res: Response) => {
     res.send({ success: `Usuário cpf ${cpf} deletado com sucesso` });
   } else {
     res.send({ failure: `Não pode deletar usuário cpf: ${cpf}` });
+  }
+});
+
+app.get("/api/auth", async (req: Request, res: Response) => {
+  const cpf = req.query.cpf as string;
+  const password = req.query.password as string;
+
+  const user = await getUser(cpf, password);
+
+  if (user) {
+    console.log(`[SERVIDOR] Buscando usuário cpf ${cpf}`);
+    res.send({ success: user });
+  } else {
+    res.send({ failure: "Não pode encontrar usuário com essas credenciais" });
   }
 });
 
