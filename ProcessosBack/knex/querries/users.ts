@@ -3,7 +3,7 @@ import { db } from "../config/database";
 export const createUser = async (user: any) => {
   try {
     const query = await db("users").insert(user);
-    return query;
+    return query[0];
   } catch (err: any) {
     console.log(err.message);
   }
@@ -37,6 +37,16 @@ export const getUser = async (cpf: string, password: string) => {
       .where({ cpf: cpf, password: password })
       .select();
     return query.length ? query : null;
+  } catch (err: any) {
+    console.log(err.message);
+  }
+  return null;
+};
+
+export const getUserById = async (id: number) => {
+  try {
+    const query = await db("users").where({ id: id }).select();
+    return query.length ? query[0] : null;
   } catch (err: any) {
     console.log(err.message);
   }

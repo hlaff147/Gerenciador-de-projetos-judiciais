@@ -49,7 +49,15 @@ export class UserService {
 
     return this.http.post(url, user, { headers: this.headers }).pipe(
       retry(2),
-      map((res) => (res?.['success'] ? user : null))
+      map((res) => {
+        if (!res?.['success']) return null;
+
+        this.currUser = res?.['success'];
+        this.userAuthEvent.emit(this.currUser);
+        this.router.navigate(['/']);
+
+        return this.currUser;
+      })
     );
   }
 

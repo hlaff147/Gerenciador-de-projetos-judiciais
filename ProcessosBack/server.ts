@@ -4,6 +4,7 @@ import {
   getAllUsers,
   deleteUser,
   getUser,
+  getUserById,
 } from "./knex/querries/users";
 import { db } from "./knex/config/database";
 import { User } from "../common/user";
@@ -27,10 +28,11 @@ app.post("/api/cadastrar", async (req: Request, res: Response) => {
   const userId = await createUser(user);
 
   if (userId) {
+    user = await getUserById(userId);
     console.log(
       `[SERVIDOR] Usuário cpf ${user.cpf} foi registrado com id ${userId}`
     );
-    res.send({ success: "Usuário cadastrado com sucesso" });
+    res.send({ success: user });
   } else {
     res.send({ failure: "Usuário não pode ser cadastrado" });
   }
