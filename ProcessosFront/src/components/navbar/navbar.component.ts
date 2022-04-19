@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/services/login/auth.service';
+import { UserService } from 'src/services/user.service';
 import { User } from 'src/types/user';
 
 @Component({
@@ -10,13 +10,13 @@ import { User } from 'src/types/user';
 export class NavbarComponent implements OnInit {
   user: User | null = null;
 
-  constructor(private authService: AuthService) {}
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    this.authService.userAuthEvent.subscribe((user) => (this.user = user));
+    this.userService.userAuthEvent.subscribe((user) => (this.user = user));
   }
 
   logout(): void {
-    if (this.user) this.authService.logoutUser(null);
+    if (this.user) this.userService.logoutUser(null);
   }
 }

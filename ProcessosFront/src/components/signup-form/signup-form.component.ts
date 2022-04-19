@@ -12,7 +12,7 @@ import { inputNumberValdiator } from 'src/validators/input-numer';
 import { passwordValidator } from 'src/validators/password';
 import { confPasswordValidator } from 'src/validators/confirm-password';
 import { User } from '../../../../common/user';
-import { SignupService } from 'src/services/signup.service';
+import { UserService } from 'src/services/user.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
@@ -48,7 +48,7 @@ export class SignupFormComponent implements OnInit {
   functions = ['advogado', 'juiz', 'cliente', 'réu'];
   matcher = new MyErrorStateMatcher();
 
-  constructor(private router: Router, private signupService: SignupService) {}
+  constructor(private router: Router, private userService: UserService) {}
 
   ngOnInit(): void {}
 
@@ -63,7 +63,7 @@ export class SignupFormComponent implements OnInit {
 
     const user = this.getUser();
 
-    this.signupService.signupUser(user).subscribe((data) => {
+    this.userService.signupUser(user).subscribe((data) => {
       // TODO: Lidar com cadastro inválido
       if (!data) return;
       this.router.navigate(['/processos']);

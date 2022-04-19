@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { inputNumberValdiator } from 'src/validators/input-numer';
-import { AuthService } from 'src/services/login/auth.service';
+import { UserService } from 'src/services/user.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
@@ -36,7 +36,7 @@ export class LoginFormComponent implements OnInit {
 
   matcher = new MyErrorStateMatcher();
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private router: Router, private userService: UserService) {}
 
   ngOnInit(): void {}
 
@@ -47,6 +47,6 @@ export class LoginFormComponent implements OnInit {
     const cpf = this.cpf.value;
     const password = this.password.value;
 
-    this.authService.loginUser(cpf, password).subscribe();
+    this.userService.loginUser(cpf, password).subscribe();
   }
 }
