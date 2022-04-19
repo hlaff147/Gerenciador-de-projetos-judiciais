@@ -29,9 +29,7 @@ export class UserService {
         // TODO: Lidar com login inválido
         if (!res?.['success']) return null;
 
-        this.currUser = res?.['success'];
-        this.userAuthEvent.emit(this.currUser);
-        this.router.navigate(['/']);
+        this.login(res?.['success']);
 
         return this.currUser;
       })
@@ -52,9 +50,7 @@ export class UserService {
       map((res) => {
         if (!res?.['success']) return null;
 
-        this.currUser = res?.['success'];
-        this.userAuthEvent.emit(this.currUser);
-        this.router.navigate(['/']);
+        this.login(res?.['success']);
 
         return this.currUser;
       })
@@ -63,5 +59,11 @@ export class UserService {
 
   userIsAuthenticated(): boolean {
     return this.currUser != null;
+  }
+
+  private login(user: User) {
+    this.currUser = user;
+    this.userAuthEvent.emit(this.currUser);
+    this.router.navigate(['/']);
   }
 }
