@@ -57,14 +57,29 @@ export class ProccessManagementComponent implements OnInit {
               judge: '',
               status: '',
             }
-          : element,
+          : {
+            id: element.id,
+            name: element.name,
+            startDate: element.startDate,
+            judge: element.judge,
+            status: element.status,
+          },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result !== undefined) {
+        const index = this.proccesses.findIndex(p => p.id == result.id);
+        if (index != -1) {
+          this.proccesses[index] = result;
+          console.log(this.proccesses[index]);
+          console.log(result);
+      }else{
         this.proccessService.addProccess(result).subscribe();
-        this.getProcesses();
-      }
+        this.getProcesses();}
+    }
     });
+  }
+  editProccess(element: Proccess): void {
+    this.openModal(element);
   }
 }

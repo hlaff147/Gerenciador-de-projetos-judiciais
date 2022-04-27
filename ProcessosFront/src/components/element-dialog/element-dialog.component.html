@@ -1,44 +1,48 @@
-<h1 mat-dialog-title>Crie um processo</h1>
+<h1 *ngIf="isChange" mat-dialog-title>Criar Processo</h1>
+<h1 *ngIf="!isChange" mat-dialog-title>Editar Processo</h1>
 <div mat-dialog-content style="display: flex; flex-direction: column">
+
   <mat-form-field appearance="fill">
     <mat-label>Nome do processo</mat-label>
     <input matInput [(ngModel)]="data.name" />
   </mat-form-field>
+
   <mat-form-field appearance="fill">
     <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepicker]="picker" />
+    <input matInput [matDatepicker]="picker" [(ngModel)]="data.startDate"/>
     <mat-hint>MM/DD/YYYY</mat-hint>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
+
   <mat-form-field appearance="fill">
     <mat-label>Juiz</mat-label>
     <input matInput [(ngModel)]="data.judge" />
   </mat-form-field>
+
   <mat-form-field appearance="fill">
     <mat-label>Status</mat-label>
-    <mat-select>
-      <mat-option value="one">concluído</mat-option>
-      <mat-option value="two">atrasado</mat-option>
-      <mat-option value="two">em andamento</mat-option>
+    <mat-select [(ngModel)]="data.status">
+      <mat-option value="concluído">concluído</mat-option>
+      <mat-option value="atrasado">atrasado</mat-option>
+      <mat-option value="andamento">em andamento</mat-option>
     </mat-select>
   </mat-form-field>
+
 </div>
 <div mat-dialog-actions>
-  <button
-    class="custom-button-cancel border-0 ml-2 btn-icon btn-icon-only btn-pill btn btn-outline-focus btn-sm"
-    mat-button
-    (click)="onCancel()"
-  >
+  <button class="custom-button-cancel border-0 ml-2 btn-icon btn-icon-only btn-pill btn btn-outline-focus btn-sm"
+    mat-button (click)="onCancel()">
     Cancelar
   </button>
-  <button
-    mat-button
-    [mat-dialog-close]="data"
-    cdkFocusInitial
-    class="custom-button-create border-0 ml-2 btn-icon btn-icon-only btn-pill btn btn-outline-focus btn-sm"
-  >
+  <button *ngIf="isChange" mat-button [mat-dialog-close]="data" cdkFocusInitial
+    class="custom-button-create border-0 ml-2 btn-icon btn-icon-only btn-pill btn btn-outline-focus btn-sm">
     <i class="bi bi-file-plus" style="margin-right: 5px"></i>
     Criar
+  </button>
+  <button *ngIf="!isChange" mat-button [mat-dialog-close]="data" cdkFocusInitial
+    class="custom-button-create border-0 ml-2 btn-icon btn-icon-only btn-pill btn btn-outline-focus btn-sm">
+    <i class="bi bi-file-plus" style="margin-right: 5px"></i>
+    Editar
   </button>
 </div>

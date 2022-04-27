@@ -13,8 +13,17 @@ import {
 })
 export class ElementDialog implements OnInit {
   element!: Proccess;
+  isChange!: boolean;
 
-  ngOnInit(): void {}
+
+  ngOnInit(): void {
+    if (this.element.id != null) {
+      this.isChange = true;
+    }
+    else {
+      this.isChange = false;
+    }
+  }
 
   constructor(
     public dialogRef: MatDialogRef<ElementDialog>,
