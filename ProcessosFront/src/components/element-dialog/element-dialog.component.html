@@ -1,5 +1,5 @@
-<h1 *ngIf="isChange" mat-dialog-title>Criar Processo</h1>
-<h1 *ngIf="!isChange" mat-dialog-title>Editar Processo</h1>
+<h1 *ngIf="!isChange" mat-dialog-title>Criar Processo</h1>
+<h1 *ngIf="isChange" mat-dialog-title>Editar Processo</h1>
 <div mat-dialog-content style="display: flex; flex-direction: column">
 
   <mat-form-field appearance="fill">
@@ -35,12 +35,12 @@
     mat-button (click)="onCancel()">
     Cancelar
   </button>
-  <button *ngIf="isChange" mat-button [mat-dialog-close]="data" cdkFocusInitial
+  <button *ngIf="!isChange" mat-button [mat-dialog-close]="data" cdkFocusInitial
     class="custom-button-create border-0 ml-2 btn-icon btn-icon-only btn-pill btn btn-outline-focus btn-sm">
     <i class="bi bi-file-plus" style="margin-right: 5px"></i>
     Criar
   </button>
-  <button *ngIf="!isChange" mat-button [mat-dialog-close]="data" cdkFocusInitial
+  <button *ngIf="isChange" mat-button [mat-dialog-close]="data" cdkFocusInitial
     class="custom-button-create border-0 ml-2 btn-icon btn-icon-only btn-pill btn btn-outline-focus btn-sm">
     <i class="bi bi-file-plus" style="margin-right: 5px"></i>
     Editar

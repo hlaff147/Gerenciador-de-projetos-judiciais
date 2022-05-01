@@ -50,8 +50,8 @@ export class ProccessManagementComponent implements OnInit {
     const dialogRef = this.dialog.open(ElementDialog, {
       width: '30rem',
       data:
-        element === null
-          ? {
+        element === null ? {
+              id: null,
               name: '',
               startDate: new Date(),
               judge: '',
