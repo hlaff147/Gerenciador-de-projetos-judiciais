@@ -5,7 +5,7 @@
     <input matInput [(ngModel)]="data.name" />
   </mat-form-field>
   <mat-form-field appearance="fill">
-    <mat-label>Choose a date</mat-label>
+    <mat-label>Escolha uma data</mat-label>
     <input matInput [matDatepicker]="picker" />
     <mat-hint>MM/DD/YYYY</mat-hint>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -20,13 +20,13 @@
     <mat-select>
       <mat-option value="one">concluído</mat-option>
       <mat-option value="two">atrasado</mat-option>
-      <mat-option value="two">em andamento</mat-option>
+      <mat-option value="three">em andamento</mat-option>
     </mat-select>
   </mat-form-field>
 </div>
-<div mat-dialog-actions>
+<div mat-dialog-actions class="btns-criar-progresso">
   <button
-    class="custom-button-cancel border-0 ml-2 btn-icon btn-icon-only btn-pill btn btn-outline-focus btn-sm"
+    class="custom-button-cancel border-0 ml-2 btn-icon btn-icon-only btn-pill btn btn-outline-focus btn-sm btn-cancelar-progresso"
     mat-button
     (click)="onCancel()"
   >
@@ -36,9 +36,9 @@
     mat-button
     [mat-dialog-close]="data"
     cdkFocusInitial
-    class="custom-button-create border-0 ml-2 btn-icon btn-icon-only btn-pill btn btn-outline-focus btn-sm"
+    class="custom-button-create border-0 ml-2 btn-icon btn-icon-only btn-pill btn btn-outline-focus btn-sm btn-criar-progresso"
   >
-    <i class="bi bi-file-plus" style="margin-right: 5px"></i>
+    <i class="bi bi-file-plus"></i>
     Criar
   </button>
 </div>
