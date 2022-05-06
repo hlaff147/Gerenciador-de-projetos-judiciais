@@ -1,27 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Inject } from '@angular/core';
-import {
-  FormControl,
-  Validators,
-  FormGroupDirective,
-  NgForm,
-} from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
+import { FormControl, Validators } from '@angular/forms';
 import { Document } from '../../types/document';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(
-    control: FormControl | null,
-    form: FormGroupDirective | NgForm | null
-  ): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(
-      control &&
-      control.invalid &&
-      (control.dirty || control.touched || isSubmitted)
-    );
-  }
-}
+import { MyErrorStateMatcher } from 'src/validators/error-state-matcher';
 
 @Component({
   selector: 'app-new-document',
