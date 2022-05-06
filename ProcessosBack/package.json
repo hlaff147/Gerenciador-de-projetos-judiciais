@@ -6,7 +6,8 @@
     "start": "npx nodemon --exec ts-node --files server.ts",
     "list-migrations": "knex --migrations-directory knex/migrations --knexfile knexfile.ts migrate:list",
     "rollback": "knex --migrations-directory knex/migrations --knexfile knexfile.ts migrate:rollback",
-    "migrate": "knex --migrations-directory knex/migrations --knexfile knexfile.ts migrate:latest"
+    "migrate": "knex --migrations-directory knex/migrations --knexfile knexfile.ts migrate:latest",
+    "make-migration": "knex --migrations-directory knex/migrations --knexfile knexfile.ts migrate:make -x ts"
   },
   "license": "ISC",
   "dependencies": {
