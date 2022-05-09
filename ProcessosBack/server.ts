@@ -7,7 +7,6 @@ import {
   getUserById,
 } from "./knex/querries/users";
 import { db } from "./knex/config/database";
-import { User } from "../common/user";
 import {
   createProcess,
   deleteProcess,
@@ -58,6 +57,19 @@ app.get("/api/usuarios", async (req: Request, res: Response) => {
   }
 });
 
+app.get("/api/usuario", async (req: Request, res: Response) => {
+  const id = req.query.id as string;
+
+  const user = await getUserById(parseInt(id));
+
+  if (user) {
+    console.log(`[SERVIDOR] Buscando usuário id ${id}`);
+    res.send({ success: user });
+  } else {
+    res.send({ failure: `Não pode encontrar usuário id ${id}` });
+  }
+});
+
 app.delete("/api/apagar-usuario", async (req: Request, res: Response) => {
   const cpf: string = req.body.cpf;
   const success = await deleteUser(cpf);
@@ -100,8 +112,8 @@ app.post("/api/abrir-processo", async (req: Request, res: Response) => {
 });
 
 app.delete("/api/apagar-processo", async (req: Request, res: Response) => {
-  const id: number = req.body.id;
-  const success = await deleteProcess(id);
+  const id = req.query.id as string;
+  const success = await deleteProcess(parseInt(id));
 
   if (success) {
     console.log(`[SERVIDOR] Processo id ${id} foi deletado da base de dados`);
@@ -115,19 +127,20 @@ app.get("/api/processos", async (req: Request, res: Response) => {
   const lawyerId = req.query.lawyerId as string;
   const judgeId = req.query.judgeId as string;
 
+  const lawyerIsValid = lawyerId != undefined;
+  const judgeIsValid = judgeId != undefined;
+
   let processes: Process[] | null = null;
 
-  console.log(lawyerId, judgeId);
-
-  if (!lawyerId && !judgeId) {
+  if (!lawyerIsValid && !judgeIsValid) {
     processes = await getAllProcesses();
     console.log(`[SERVIDOR] Buscando ${processes?.length} processos`);
-  } else if (lawyerId !== "") {
+  } else if (lawyerIsValid) {
     processes = await getProcessesByLaywerId(parseInt(lawyerId));
     console.log(
       `[SERVIDOR] Buscando ${processes?.length} processos de advogado id ${lawyerId}`
     );
-  } else if (judgeId !== "") {
+  } else if (judgeIsValid) {
     processes = await getProcessesByJudgeId(parseInt(judgeId));
     console.log(
       `[SERVIDOR] Buscando ${processes?.length} processos de juiz id ${judgeId}`
