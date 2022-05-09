@@ -28,7 +28,7 @@ import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 import { LoginFormComponent } from '../components/login-form/login-form.component';
 import { SignupFormComponent } from '../components/signup-form/signup-form.component';
 import { ProccessManagementComponent } from '../components/proccess-management/proccess-management.component';
-import { ElementDialog } from '../components/element-dialog/element-dialog.component';
+import { NewProcessComponent } from '../components/new-process/new-process.component';
 import { ProccessDetailComponent } from '../components/proccess-detail/proccess-detail.component';
 import { DocumentListComponent } from '../components/document-list/document-list.component';
 import { DocumentDetailComponent } from '../components/document-detail/document-detail.component';
@@ -36,6 +36,7 @@ import { NewDocumentComponent } from '../components/new-document/new-document.co
 import { ProfileComponent } from 'src/components/profile/profile.component';
 import { ConfirmModalComponent } from '../components/confirm-modal/confirm-modal.component';
 import { NavbarComponent } from 'src/components/navbar/navbar.component';
+import { ProccessInfoComponent } from 'src/components/process-info/proccess-info.component';
 
 @NgModule({
   declarations: [
@@ -44,13 +45,14 @@ import { NavbarComponent } from 'src/components/navbar/navbar.component';
     SignupFormComponent,
     ProccessManagementComponent,
     ProccessDetailComponent,
-    ElementDialog,
+    NewProcessComponent,
     DocumentListComponent,
     DocumentDetailComponent,
     NewDocumentComponent,
     ProfileComponent,
     ConfirmModalComponent,
     NavbarComponent,
+    ProccessInfoComponent,
   ],
   imports: [
     BrowserModule,

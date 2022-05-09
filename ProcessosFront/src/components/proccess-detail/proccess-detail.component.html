@@ -1,4 +1,4 @@
-<div *ngIf="proccess">
+<div *ngIf="process">
   <div class="container my-4 d-flex flex-column">
     <div class="mb-5">
       <a
@@ -10,38 +10,9 @@
       >
         <mat-icon>arrow_circle_left</mat-icon>
       </a>
-      <h5 class="fs-2">{{ proccess.name }}</h5>
-      <p>
-        Juiz: <span class="fst-italic text-muted">{{ proccess.judge }}</span>
-      </p>
-      <p>
-        Data de início:
-        <span class="fst-italic text-muted"
-          >{{ proccess.startDate.getDate() }}/{{
-            proccess.startDate.getMonth()
-          }}/{{ proccess.startDate.getFullYear() }}</span
-        >
-      </p>
-      <div *ngIf="proccess.status === 'concluído'">
-        <p>
-          Status:
-          <span class="fst-italic text-success">{{ proccess.status }}</span>
-        </p>
-      </div>
-      <div *ngIf="proccess.status === 'atrasado'">
-        <p>
-          Status:
-          <span class="fst-italic text-danger">{{ proccess.status }}</span>
-        </p>
-      </div>
-      <div *ngIf="proccess.status === 'em andamento'">
-        <p>
-          Status:
-          <span class="fst-italic text-primary">{{ proccess.status }}</span>
-        </p>
-      </div>
+      <app-proccess-info [process]="process"></app-proccess-info>
     </div>
 
-    <app-document-list [proccess-id]="proccess.id"></app-document-list>
+    <app-document-list [proccess-id]="process.id"></app-document-list>
   </div>
 </div>

@@ -24,9 +24,9 @@ export class SignupFormComponent implements OnInit {
     Validators.required,
     confPasswordValidator(this.password),
   ]);
-  function = new FormControl('');
+  role = new FormControl('');
 
-  functions = ['advogado', 'juiz', 'cliente', 'réu'];
+  roles = ['advogado', 'juiz', 'cliente', 'réu'];
   matcher = new MyErrorStateMatcher();
 
   constructor(private router: Router, private userService: UserService) {}
@@ -40,7 +40,7 @@ export class SignupFormComponent implements OnInit {
     if (!this.phone.valid) return;
     if (!this.password.valid) return;
     if (!this.confPassword.valid) return;
-    if (!this.function.valid) return;
+    if (!this.role.valid) return;
 
     const user = this.getUser();
 
@@ -57,7 +57,7 @@ export class SignupFormComponent implements OnInit {
       cpf: this.cpf.value,
       email: this.email.value,
       phone: this.phone.value,
-      function: this.function.value,
+      role: this.role.value,
       password: this.password.value,
     };
   }

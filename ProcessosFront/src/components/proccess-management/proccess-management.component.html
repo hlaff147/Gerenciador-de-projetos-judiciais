@@ -1,5 +1,12 @@
 <div class="container d-flex flex-column my-4">
-  <button mat-stroked-button type="button" color="primary" class="p-2" (click)="openModal(null)">
+  <button
+    *ngIf="user?.role == 'advogado'"
+    mat-stroked-button
+    type="button"
+    color="primary"
+    class="p-2"
+    (click)="openModal(null)"
+  >
     <mat-icon>add_circle</mat-icon>
     Começar novo processo
   </button>
@@ -7,43 +14,50 @@
   <ul class="list-group list-group-flush mt-5 w-100" data-cy="proccess-list">
     <p class="fs-3" mat-subheader>Processos</p>
 
-    <li class="ps-3 mb-1 list-group-item w-100 d-flex flex-column flex-md-row justify-content-between" role="listitem"
-      *ngFor="let proccess of proccesses">
+    <li
+      class="ps-3 mb-1 list-group-item w-100 d-flex flex-column flex-md-row justify-content-between"
+      role="listitem"
+      *ngFor="let process of processes"
+    >
       <div class="text-start">
-        <p class="fs-5">{{ proccess.name }}</p>
+        <p class="fs-5">{{ process.name }}</p>
 
-        <p class="text-muted ms-3">
-          Início: {{ proccess.startDate.getDate() }}/{{
-          proccess.startDate.getMonth()
-          }}/{{ proccess.startDate.getFullYear() }}
-        </p>
-
-        <p class="fst-italic ms-3">Juiz: {{ proccess.judge }}</p>
+        <p class="text-muted ms-3">Início: {{ process.startDate }}</p>
       </div>
 
       <div class="d-flex flex-column align-items-start align-items-md-end">
         <div class="d-flex align-items-center">
-          <p *ngIf="proccess.status == 'concluído'" class="m-0">
-            Status: <span class="text-success">{{ proccess.status }}</span>
+          <p *ngIf="process.status == 'concluído'" class="m-0">
+            Status: <span class="text-success">{{ process.status }}</span>
           </p>
-          <p *ngIf="proccess.status == 'atrasado'" class="m-0">
-            Status: <span class="text-danger">{{ proccess.status }}</span>
+          <p *ngIf="process.status == 'atrasado'" class="m-0">
+            Status: <span class="text-danger">{{ process.status }}</span>
           </p>
-          <p *ngIf="proccess.status == 'em andamento'" class="m-0">
-            Status: <span class="text-primary">{{ proccess.status }}</span>
+          <p *ngIf="process.status == 'em andamento'" class="m-0">
+            Status: <span class="text-primary">{{ process.status }}</span>
           </p>
 
-          <button (click)="editProccess(proccess)"
-            class="border-0 ml-2 btn-icon btn-icon-only btn-pill btn btn-outline-focus btn-sm">
+          <button
+            (click)="editProccess(proccess)"
+            class="border-0 ml-2 btn-icon btn-icon-only btn-pill btn btn-outline-focus btn-sm"
+          >
             <i class="bi bi-pencil-square"></i>
           </button>
-          <button (click)="deleteProccess(proccess.id)"
-            class="border-0 ml-2 btn-icon btn-icon-only btn-pill btn btn-outline-focus btn-sm">
+          <button
+            *ngIf="user?.role == 'juiz'"
+            (click)="deleteProccess(process.id)"
+            class="border-0 ml-2 btn-icon btn-icon-only btn-pill btn btn-outline-focus btn-sm"
+          >
             <i class="bi bi-trash3-fill"></i>
           </button>
         </div>
 
-        <a mat-flat-button role="button" routerLink="/processos/{{ proccess.id }}" color="primary">
+        <a
+          mat-flat-button
+          role="button"
+          routerLink="/processos/{{ process.id }}"
+          color="primary"
+        >
           Detalhes do processo
         </a>
       </div>
