@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Proccess } from '../../types/proccess';
 import { ProccessService } from '../../services/proccess.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ElementDialog } from '../element-dialog/element-dialog.component';
+import { NewProcessComponent } from '../new-process/new-process.component';
 import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
 import { UserService } from 'src/services/user.service';
 import { User } from '../../../../common/user';
@@ -60,15 +60,13 @@ export class ProccessManagementComponent implements OnInit {
   }
 
   openModal(element: Proccess | null): void {
-    const dialogRef = this.dialog.open(ElementDialog, {
+    const dialogRef = this.dialog.open(NewProcessComponent, {
       width: '30rem',
       data:
         element === null
           ? {
               name: '',
-              startDate: new Date(),
-              judge: '',
-              status: '',
+              lawyerId: this.user.id,
             }
           : element,
     });
