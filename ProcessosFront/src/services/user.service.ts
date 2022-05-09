@@ -57,6 +57,19 @@ export class UserService {
     );
   }
 
+  getCurrUser(): Observable<User | null> {
+    const url: string = this.API_URL + '/usuario';
+    const params: HttpParams = new HttpParams().set('id', this.currUser.id);
+
+    return this.http.get(url, { headers: this.headers, params: params }).pipe(
+      retry(2),
+      map((res) => {
+        if (!res?.['success']) return null;
+        return res?.['success'];
+      })
+    );
+  }
+
   userIsAuthenticated(): boolean {
     return this.currUser != null;
   }
