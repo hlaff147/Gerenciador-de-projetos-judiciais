@@ -10,36 +10,7 @@
       >
         <mat-icon>arrow_circle_left</mat-icon>
       </a>
-      <h5 class="fs-2">{{ process.name }}</h5>
-      <p>
-        Juiz: <span class="fst-italic text-muted">{{ process.judgeId }}</span>
-      </p>
-      <p>
-        Data de início:
-        <span class="fst-italic text-muted"
-          >{{ process.startDate.getDate() }}/{{
-            process.startDate.getMonth()
-          }}/{{ process.startDate.getFullYear() }}</span
-        >
-      </p>
-      <div *ngIf="process.status === 'concluído'">
-        <p>
-          Status:
-          <span class="fst-italic text-success">{{ process.status }}</span>
-        </p>
-      </div>
-      <div *ngIf="process.status === 'atrasado'">
-        <p>
-          Status:
-          <span class="fst-italic text-danger">{{ process.status }}</span>
-        </p>
-      </div>
-      <div *ngIf="process.status === 'em andamento'">
-        <p>
-          Status:
-          <span class="fst-italic text-primary">{{ process.status }}</span>
-        </p>
-      </div>
+      <app-proccess-info [process]="process"></app-proccess-info>
     </div>
 
     <app-document-list [proccess-id]="process.id"></app-document-list>

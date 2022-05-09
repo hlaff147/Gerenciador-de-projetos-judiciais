@@ -36,6 +36,7 @@ import { NewDocumentComponent } from '../components/new-document/new-document.co
 import { ProfileComponent } from 'src/components/profile/profile.component';
 import { ConfirmModalComponent } from '../components/confirm-modal/confirm-modal.component';
 import { NavbarComponent } from 'src/components/navbar/navbar.component';
+import { ProccessInfoComponent } from 'src/components/process-info/proccess-info.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { NavbarComponent } from 'src/components/navbar/navbar.component';
     ProfileComponent,
     ConfirmModalComponent,
     NavbarComponent,
+    ProccessInfoComponent,
   ],
   imports: [
     BrowserModule,

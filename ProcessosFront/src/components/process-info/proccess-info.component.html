@@ -1,0 +1,31 @@
+<h5 class="fs-2">{{ process.name }}</h5>
+<p>
+  Juiz: <span class="fst-italic text-muted">{{ judge?.name }}</span>
+</p>
+<p>
+  Advogado: <span class="fst-italic text-muted">{{ lawyer?.name }}</span>
+</p>
+<p>
+  Data de início:
+  <span class="fst-italic text-muted">
+    {{ process.startDate }}
+  </span>
+</p>
+<div *ngIf="process.status === 'concluído'">
+  <p>
+    Status:
+    <span class="fst-italic text-success">{{ process.status }}</span>
+  </p>
+</div>
+<div *ngIf="process.status === 'atrasado'">
+  <p>
+    Status:
+    <span class="fst-italic text-danger">{{ process.status }}</span>
+  </p>
+</div>
+<div *ngIf="process.status === 'em andamento'">
+  <p>
+    Status:
+    <span class="fst-italic text-primary">{{ process.status }}</span>
+  </p>
+</div>
