@@ -15,12 +15,24 @@ import {
   getProcessesByJudgeId,
   getProcessesByLaywerId,
 } from "./knex/querries/processes";
+import {
+  attachDocument,
+  deleteDocument,
+  getDocumentById,
+  getDocumentsByProcessId,
+} from "./knex/querries/documents";
 import { Process } from "../common/process";
 
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 var app = express();
+
+var corsOptions = {
+  origin: "*",
+  optionsSuccessStatus: 200,
+};
 
 var allowCrossDomain = function (req: any, res: any, next: any) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -29,7 +41,8 @@ var allowCrossDomain = function (req: any, res: any, next: any) {
   next();
 };
 app.use(allowCrossDomain);
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(cors(corsOptions));
 
 app.post("/api/cadastrar", async (req: Request, res: Response) => {
   var user = req.body;
@@ -171,6 +184,60 @@ app.get("/api/processo", async (req: Request, res: Response) => {
     res.send({ success: process });
   } else {
     res.send({ failure: `Não pode encontrar processos com id ${id}` });
+  }
+});
+
+app.get("/api/documentos", async (req: Request, res: Response) => {
+  const processId = req.query.processId as string;
+  const documents = await getDocumentsByProcessId(parseInt(processId));
+
+  if (documents) {
+    console.log(
+      `[SERVIDOR] Buscando ${documents.length} documentos de processo id ${processId}`
+    );
+    res.send({ success: documents });
+  } else {
+    res.send({
+      failure: `Não pode encontrar documentos para processo id ${processId}`,
+    });
+  }
+});
+
+app.get("/api/documento", async (req: Request, res: Response) => {
+  const id = req.query.id as string;
+  const document = await getDocumentById(parseInt(id));
+
+  if (document) {
+    console.log(`[SERVIDOR] Buscando documento id ${id}`);
+    res.send({ success: document });
+  } else {
+    res.send({
+      failure: `Não pode encontrar documento id ${id}`,
+    });
+  }
+});
+
+app.post("/api/anexar-documento", async (req: Request, res: Response) => {
+  const document = req.body;
+  const id = await attachDocument(document);
+
+  if (id) {
+    console.log(`[SERVIDOR] Anexando documento id ${id}`);
+    res.send({ success: document });
+  } else {
+    res.send({ failure: "Não pode anexar documento" });
+  }
+});
+
+app.delete("/api/apagar-documento", async (req: Request, res: Response) => {
+  const id = req.query.id as string;
+  const success = await deleteDocument(parseInt(id));
+
+  if (success) {
+    console.log(`[SERVIDOR] Documento id ${id} foi deletedo da base de dados`);
+    res.send({ success: id });
+  } else {
+    res.send({ failure: `Não pode deletar documento id ${id}` });
   }
 });
 
