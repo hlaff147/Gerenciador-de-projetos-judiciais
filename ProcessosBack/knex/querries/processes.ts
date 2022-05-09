@@ -31,7 +31,7 @@ export const createProcess = async (process: any): Promise<number | null> => {
 
 export const getAllProcess = async (): Promise<Process[] | null> => {
   try {
-    const query = await db("processes");
+    const query = await db("processes").orderBy("startDate", "desc");
     return query;
   } catch (err: any) {
     console.log(err.message);
@@ -54,7 +54,10 @@ export const getProcessesByLaywerId = async (
   lawyerId: number
 ): Promise<Process[] | null> => {
   try {
-    const query = await db("processes").where({ lawyerId: lawyerId }).select();
+    const query = await db("processes")
+      .where({ lawyerId: lawyerId })
+      .select()
+      .orderBy("startDate", "desc");
     return query.length ? query : null;
   } catch (err: any) {
     console.log(err.message);
@@ -66,7 +69,10 @@ export const getProcessesByJudgeId = async (
   judgeId: number
 ): Promise<Process[] | null> => {
   try {
-    const query = await db("processes").where({ judgeId: judgeId }).select();
+    const query = await db("processes")
+      .where({ judgeId: judgeId })
+      .select()
+      .orderBy("startDate", "desc");
     return query.length ? query : null;
   } catch (err: any) {
     console.log(err.message);
@@ -76,7 +82,10 @@ export const getProcessesByJudgeId = async (
 
 export const getProcessById = async (id: number): Promise<Process | null> => {
   try {
-    const query = await db("processes").where({ id: id }).select();
+    const query = await db("processes")
+      .where({ id: id })
+      .select()
+      .orderBy("startDate", "desc");
     return query.length ? query[0] : null;
   } catch (err: any) {
     console.log(err.message);
