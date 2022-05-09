@@ -4,9 +4,11 @@ import { Proccess } from '../../types/proccess';
 import { ProccessService } from '../../services/proccess.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ElementDialog } from '../element-dialog/element-dialog.component';
-import { PROCCESSES } from '../../mocks/mock-proccesslist';
-import { Observable, of } from 'rxjs';
 import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
+import { UserService } from 'src/services/user.service';
+import { User } from '../../../../common/user';
+import { Process } from '../../../../common/process';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-proccess-management',
@@ -14,20 +16,30 @@ import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component'
   styleUrls: ['./proccess-management.component.css'],
 })
 export class ProccessManagementComponent implements OnInit {
-  proccesses: Proccess[] = [];
+  processes: Process[] = [];
+  user: User | null = null;
 
-  getProcesses(): Observable<Proccess[]> {
-    return of(PROCCESSES);
-  }
   constructor(
     private proccessService: ProccessService,
-    public dialog: MatDialog
+    private userService: UserService,
+    public dialog: MatDialog,
+    public route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.proccessService
-      .getProcesses()
-      .subscribe((proccesses) => (this.proccesses = proccesses));
+    this.userService.getCurrUser().subscribe((user) => {
+      this.user = user;
+
+      if (this.user.role === 'advogado') {
+        this.proccessService
+          .getProcessesByLawyer(this.user.id)
+          .subscribe((processes) => (this.processes = processes));
+      } else if (this.user.role === 'juiz') {
+        this.proccessService
+          .getProcessesByJudge(this.user.id)
+          .subscribe((processes) => (this.processes = processes));
+      }
+    });
   }
 
   deleteProccess(id: number): void {
@@ -40,9 +52,10 @@ export class ProccessManagementComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result)
-        this.proccessService
-          .deleteProccess(id)
-          .subscribe((proccesses) => (this.proccesses = proccesses));
+        this.proccessService.deleteProccess(id).subscribe((processId) => {
+          const index = this.processes.findIndex((p) => p.id == processId);
+          this.processes.splice(index, 1);
+        });
     });
   }
 
@@ -62,8 +75,9 @@ export class ProccessManagementComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result !== undefined) {
-        this.proccessService.addProccess(result).subscribe();
-        this.getProcesses();
+        this.proccessService.addProcess(result).subscribe((process) => {
+          this.processes = [process, ...this.processes];
+        });
       }
     });
   }

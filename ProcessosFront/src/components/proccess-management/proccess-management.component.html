@@ -16,30 +16,26 @@
     <li
       class="ps-3 mb-1 list-group-item w-100 d-flex flex-column flex-md-row justify-content-between"
       role="listitem"
-      *ngFor="let proccess of proccesses"
+      *ngFor="let process of processes"
     >
       <div class="text-start">
-        <p class="fs-5">{{ proccess.name }}</p>
+        <p class="fs-5">{{ process.name }}</p>
 
-        <p class="text-muted ms-3">
-          Início: {{ proccess.startDate.getDate() }}/{{
-            proccess.startDate.getMonth()
-          }}/{{ proccess.startDate.getFullYear() }}
-        </p>
+        <p class="text-muted ms-3">Início: {{ process.startDate }}</p>
 
-        <p class="fst-italic ms-3">Juiz: {{ proccess.judge }}</p>
+        <p class="fst-italic ms-3">Juiz: {{ process.judgeId }}</p>
       </div>
 
       <div class="d-flex flex-column align-items-start align-items-md-end">
         <div class="d-flex align-items-center">
-          <p *ngIf="proccess.status == 'concluído'" class="m-0">
-            Status: <span class="text-success">{{ proccess.status }}</span>
+          <p *ngIf="process.status == 'concluído'" class="m-0">
+            Status: <span class="text-success">{{ process.status }}</span>
           </p>
-          <p *ngIf="proccess.status == 'atrasado'" class="m-0">
-            Status: <span class="text-danger">{{ proccess.status }}</span>
+          <p *ngIf="process.status == 'atrasado'" class="m-0">
+            Status: <span class="text-danger">{{ process.status }}</span>
           </p>
-          <p *ngIf="proccess.status == 'em andamento'" class="m-0">
-            Status: <span class="text-primary">{{ proccess.status }}</span>
+          <p *ngIf="process.status == 'em andamento'" class="m-0">
+            Status: <span class="text-primary">{{ process.status }}</span>
           </p>
 
           <button
@@ -48,7 +44,7 @@
             <i class="bi bi-pencil-square"></i>
           </button>
           <button
-            (click)="deleteProccess(proccess.id)"
+            (click)="deleteProccess(process.id)"
             class="border-0 ml-2 btn-icon btn-icon-only btn-pill btn btn-outline-focus btn-sm"
           >
             <i class="bi bi-trash3-fill"></i>
@@ -58,7 +54,7 @@
         <a
           mat-flat-button
           role="button"
-          routerLink="/processos/{{ proccess.id }}"
+          routerLink="/processos/{{ process.id }}"
           color="primary"
         >
           Detalhes do processo
