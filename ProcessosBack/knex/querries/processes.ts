@@ -74,6 +74,21 @@ export const getProcessesByJudgeId = async (
   return null;
 };
 
+export const updateProcessesById = async (
+  id: number,
+  name: string,
+  status: string,
+): Promise<Process[] | null> => {
+  try {
+    const query = await db("processes").where({ id: id })
+    await db("processes").where({ id: id }).update({name: name, status: status});
+    return query;
+  } catch (err: any) {
+    console.log(err.message);
+  }
+  return null;
+};
+
 export const getProcessById = async (id: number): Promise<Process | null> => {
   try {
     const query = await db("processes").where({ id: id }).select();

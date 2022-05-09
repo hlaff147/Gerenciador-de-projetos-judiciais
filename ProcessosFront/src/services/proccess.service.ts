@@ -78,4 +78,16 @@ export class ProccessService {
       })
     );
   }
+
+  editProcess(process: Process): Observable<Process | null> {
+    const url = this.API_URL + '/editar-processo';
+
+    return this.http.post(url, process, { headers: this.headers }).pipe(
+      retry(2),
+      map((res) => {
+        if (!res?.['success']) return null;
+        return res?.['success'];
+      })
+    );
+  }
 }

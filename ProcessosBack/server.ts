@@ -14,6 +14,7 @@ import {
   getProcessById,
   getProcessesByJudgeId,
   getProcessesByLaywerId,
+  updateProcessesById,
 } from "./knex/querries/processes";
 import { Process } from "../common/process";
 
@@ -171,6 +172,21 @@ app.get("/api/processo", async (req: Request, res: Response) => {
     res.send({ success: process });
   } else {
     res.send({ failure: `Não pode encontrar processos com id ${id}` });
+  }
+});
+
+app.post("/api/editar-processo", async (req: Request, res: Response) => {
+  const process = req.body
+  const id = process.id as string;
+  const name = process.name as string;
+  const status = process.status as string;
+  const success = await updateProcessesById(parseInt(id), name , status);
+
+  if (success) {
+    console.log(`[SERVIDOR] Processo ${id} foi atualizado na base de dados`);
+    res.send({ success: `Processo id ${id} atualizado com sucesso` });
+  } else {
+    res.send({ failure: `Não pode atualizar processo id: ${id}` });
   }
 });
 
