@@ -65,10 +65,17 @@ export class ProccessManagementComponent implements OnInit {
       data:
         element === null
           ? {
+              id: null,
               name: '',
               lawyerId: this.user.id,
             }
-          : element,
+          : {
+              id: element.id,
+              name: element.name,
+              startDate: element.startDate,
+              judge: element.judge,
+              status: element.status,
+            },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -78,5 +85,8 @@ export class ProccessManagementComponent implements OnInit {
         });
       }
     });
+  }
+  editProccess(element: Proccess): void {
+    this.openModal(element);
   }
 }
