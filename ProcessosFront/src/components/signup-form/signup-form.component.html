@@ -82,20 +82,20 @@
 
     <mat-form-field class="full-width">
       <mat-select
-        placeholder="Função"
-        name="function"
-        [formControl]="function"
+        placeholder="Cargo"
+        name="role"
+        [formControl]="role"
         [errorStateMatcher]="matcher"
         required
       >
         <mat-option></mat-option>
-        <mat-option *ngFor="let function of functions" [value]="function">
-          {{ function | titlecase }}
+        <mat-option *ngFor="let role of roles" [value]="role">
+          {{ role | titlecase }}
         </mat-option>
       </mat-select>
       <mat-hint></mat-hint>
-      <mat-error *ngIf="function.value == ''" data-error="function-missing">
-        Escolha uma função.
+      <mat-error *ngIf="role.value == ''" data-error="role-missing">
+        Escolha um cargo.
       </mat-error>
     </mat-form-field>
 

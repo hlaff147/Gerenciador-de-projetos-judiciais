@@ -4,6 +4,6 @@ export interface User {
   cpf: string;
   email: string;
   phone: string;
-  function: string;
+  role: string;
   password: string;
 }

@@ -8,7 +8,7 @@ export async function up(knex: Knex): Promise<void> {
       table.string("cpf").unique().notNullable();
       table.string("email").notNullable();
       table.string("phone").notNullable();
-      table.string("function").notNullable();
+      table.string("role").notNullable();
       table.string("password").notNullable();
     })
     .catch((err) => console.log(err.message));
