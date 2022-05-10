@@ -5,6 +5,26 @@
 <p>
   Advogado: <span class="fst-italic text-muted">{{ lawyer?.name }}</span>
 </p>
+<div>
+  <p>Contato:</p>
+  <span
+    >Telefone:<a
+      href="https://wa.me/send?phone=55{{
+        lawyer?.phone
+      }}&text=Olá, Advogado(a)!"
+      class="fst-italic text-muted"
+      >{{ lawyer?.phone }}</a
+    >
+    <i class="bi bi-whatsapp" style="margin-left: 5px"></i
+  ></span>
+  <br />
+  <span
+    >Email:<a href="mailto:{{ lawyer?.email }}" class="fst-italic text-muted">{{
+      lawyer?.email
+    }}</a>
+    <i class="bi bi-envelope" style="margin-left: 5px"></i>
+  </span>
+</div>
 <p>
   Data de início:
   <span class="fst-italic text-muted">
