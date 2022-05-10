@@ -29,6 +29,18 @@ export const createProcess = async (process: any): Promise<number | null> => {
   return null;
 };
 
+export const updateProcess = async (process: any): Promise<number | null> => {
+  try {
+    const query = await db("processes")
+      .where({ id: process.id })
+      .update(process);
+    return query;
+  } catch (err: any) {
+    console.log(err.message);
+  }
+  return null;
+};
+
 export const getAllProcess = async (): Promise<Process[] | null> => {
   try {
     const query = await db("processes").orderBy("startDate", "desc");

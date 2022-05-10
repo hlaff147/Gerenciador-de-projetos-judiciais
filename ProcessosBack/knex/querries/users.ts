@@ -56,3 +56,13 @@ export const getUserById = async (id: number): Promise<User | null> => {
   }
   return null;
 };
+
+export const getUserByCpf = async (cpf: string): Promise<User | null> => {
+  try {
+    const query = await db("users").where({ cpf: cpf }).select();
+    return query.length ? query[0] : null;
+  } catch (err: any) {
+    console.log(err.message);
+  }
+  return null;
+};
