@@ -37,8 +37,7 @@ export class UserService {
   }
 
   logoutUser(user?: User): void {
-    this.userAuthEvent.emit(null);
-    this.currUser = null;
+    this.login(null);
     this.router.navigate(['/login']);
   }
 
@@ -51,6 +50,7 @@ export class UserService {
         if (!res?.['success']) return null;
 
         this.login(res?.['success']);
+        this.router.navigate(['/']);
 
         return this.currUser;
       })
@@ -80,7 +80,6 @@ export class UserService {
 
   private login(user: User) {
     this.currUser = user;
-    this.userAuthEvent.emit(this.currUser);
-    this.router.navigate(['/']);
+    this.userAuthEvent.emit(user);
   }
 }
