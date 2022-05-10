@@ -27,6 +27,7 @@ export class SignupFormComponent implements OnInit {
   role = new FormControl('');
 
   roles = ['advogado', 'juiz', 'cliente', 'réu'];
+  signupFailed: boolean = false;
   matcher = new MyErrorStateMatcher();
 
   constructor(private router: Router, private userService: UserService) {}
@@ -45,9 +46,8 @@ export class SignupFormComponent implements OnInit {
     const user = this.getUser();
 
     this.userService.signupUser(user).subscribe((data) => {
-      // TODO: Lidar com cadastro inválido
-      if (!data) return;
-      this.router.navigate(['/processos']);
+      if (data) this.router.navigate(['/processos']);
+      else this.signupFailed = true;
     });
   }
 
