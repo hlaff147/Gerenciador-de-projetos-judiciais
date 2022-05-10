@@ -1,0 +1,64 @@
+<h1 mat-dialog-title>Crie um processo</h1>
+<div mat-dialog-content style="display: flex; flex-direction: column">
+  <mat-form-field appearance="fill">
+    <mat-label>Nome do processo</mat-label>
+    <input
+      matInput
+      name="name"
+      [formControl]="name"
+      [errorStateMatcher]="matcher"
+      type="text"
+    />
+    <mat-hint></mat-hint>
+    <mat-error *ngIf="name.errors?.['required']" data-error="name-missing">
+      Nome é obrigatório.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Status</mat-label>
+    <mat-select
+      name="status"
+      [formControl]="status"
+      [errorStateMatcher]="matcher"
+      required
+    >
+      <mat-option value="concluído">concluído</mat-option>
+      <mat-option value="atrasado">atrasado</mat-option>
+      <mat-option value="em andamento">em andamento</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>CPF do juiz</mat-label>
+    <input
+      matInput
+      name="JudgeCpf"
+      [formControl]="judgeCpf"
+      [errorStateMatcher]="matcher"
+      type="text"
+      mask="000.000.000-00"
+    />
+    <mat-hint></mat-hint>
+    <mat-error *ngIf="judgeCpf.errors?.['required']" data-error="cpf-missing">
+      CPF é obrigatório.
+    </mat-error>
+    <mat-error *ngIf="judgeCpf.errors?.['length']" data-error="cpf-length">
+      CPF deve conter 11 dígitos.
+    </mat-error>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions class="d-flex justify-content-around w-100">
+  <button mat-flat-button type="button" color="warn" (click)="onCancel()">
+    Cancelar
+  </button>
+  <button
+    mat-flat-button
+    type="button"
+    color="primary"
+    (click)="onSubmit()"
+    cdkFocusInitial
+  >
+    Criar
+  </button>
+</div>
