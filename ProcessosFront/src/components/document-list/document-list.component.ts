@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Document } from '../../types/document';
 import { DocumentService } from '../../services/document.service';
 import { NewDocumentComponent } from '../new-document/new-document.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DocumentDetailComponent } from '../document-detail/document-detail.component';
+import { Document } from '../../../../common/document';
 
 @Component({
   selector: 'app-document-list',

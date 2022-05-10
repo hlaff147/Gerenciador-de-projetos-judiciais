@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Proccess } from '../../types/proccess';
 import { ProccessService } from '../../services/proccess.service';
 import { MatDialog } from '@angular/material/dialog';
 import { NewProcessComponent } from '../new-process/new-process.component';
@@ -59,7 +58,7 @@ export class ProccessManagementComponent implements OnInit {
     });
   }
 
-  openModal(element: Proccess | null): void {
+  openModal(element: Process | null): void {
     const dialogRef = this.dialog.open(NewProcessComponent, {
       width: '30rem',
       data:
@@ -73,7 +72,7 @@ export class ProccessManagementComponent implements OnInit {
               id: element.id,
               name: element.name,
               startDate: element.startDate,
-              judge: element.judge,
+              judgeId: element.judgeId,
               status: element.status,
             },
     });
@@ -86,7 +85,7 @@ export class ProccessManagementComponent implements OnInit {
       }
     });
   }
-  editProccess(element: Proccess): void {
+  editProccess(element: Process): void {
     this.openModal(element);
   }
 }
