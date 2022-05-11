@@ -46,6 +46,9 @@
     <mat-error *ngIf="judgeCpf.errors?.['length']" data-error="cpf-length">
       CPF deve conter 11 dígitos.
     </mat-error>
+    <mat-error *ngIf="judgeCpf.errors?.['fakeJudge']" data-error="cpf-length">
+      CPF deve ser de um juiz.
+    </mat-error>
   </mat-form-field>
 </div>
 <div mat-dialog-actions class="d-flex justify-content-around w-100">
