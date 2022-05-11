@@ -86,6 +86,11 @@ export class UserService {
     );
   }
 
+
+  getCurrUser(): User | null {
+    return this.currUser;
+  }
+
   getUserByCpf(cpf: string): Observable<User | null> {
     const url: string = this.API_URL + '/usuario';
     const params: HttpParams = new HttpParams().set('cpf', cpf);
@@ -99,9 +104,6 @@ export class UserService {
     );
   }
 
-  getCurrUser(): Observable<User | null> {
-    return this.getUserById(this.currUser.id);
-  }
 
   userIsAuthenticated(): boolean {
     return this.currUser != null;

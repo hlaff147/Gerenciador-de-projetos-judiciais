@@ -27,10 +27,8 @@ export class ProccessManagementComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userService.getCurrUser().subscribe((user) => {
-      this.user = user;
-      this.getProcesses();
-    });
+    this.user = this.userService.getCurrUser();
+    this.getProcesses();
   }
 
   deleteProccess(id: number): void {
