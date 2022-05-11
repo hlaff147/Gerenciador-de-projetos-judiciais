@@ -57,6 +57,22 @@ export class UserService {
     );
   }
 
+  deleteUser(user: User): Observable<unknown> {
+    const url: string = this.API_URL + '/apagar-usuario';
+    const params: HttpParams = new HttpParams().set('cpf', user.cpf);
+
+    return this.http
+      .delete(url, { headers: this.headers, params: params })
+      .pipe(
+        retry(2),
+        map((res) => {
+          if (!res?.['success']) return null;
+          this.login(null);
+          return res?.['success'];
+        })
+      );
+  }
+
   getUserById(id: number): Observable<User | null> {
     const url: string = this.API_URL + '/usuario';
     const params: HttpParams = new HttpParams().set('id', id);

@@ -96,7 +96,7 @@ app.get("/api/usuario", async (req: Request, res: Response) => {
 });
 
 app.delete("/api/apagar-usuario", async (req: Request, res: Response) => {
-  const cpf: string = req.body.cpf;
+  const cpf = req.query.cpf as string;
   const success = await deleteUser(cpf);
 
   if (success) {
