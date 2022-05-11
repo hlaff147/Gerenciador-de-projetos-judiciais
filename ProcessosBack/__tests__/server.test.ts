@@ -62,7 +62,7 @@ describe("Testes dos pontos de api relativos a usuários", () => {
     expect(res.body.success.cpf).toBe(userCpf);
   });
 
-  it("Apaga usuário por pdf", async () => {
+  it("Apagar usuário por pdf", async () => {
     var res = await request(server).get("/api/usuarios");
 
     expect(res.body).toHaveProperty("success");
@@ -123,5 +123,22 @@ describe("Testes dos pontos de api relativos a usuários", () => {
     expect(res.body).toHaveProperty("success");
     expect(res.body.success).toHaveLength(1);
     expect(res.body.success[0].id).toBe(processId);
+  });
+
+  it("Apagar processo por id", async () => {
+    var res;
+
+    res = await request(server).get("/api/processos");
+    expect(res.body).toHaveProperty("success");
+    const processCount = res.body.success.length;
+
+    res = await request(server)
+      .delete("/api/apagar-processo")
+      .query({ id: processId });
+    expect(res.body).toHaveProperty("success");
+
+    res = await request(server).get("/api/processos");
+    expect(res.body).toHaveProperty("success");
+    expect(res.body.success).toHaveLength(processCount - 1);
   });
 });
