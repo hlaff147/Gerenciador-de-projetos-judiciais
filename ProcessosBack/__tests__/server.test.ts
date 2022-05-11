@@ -66,7 +66,7 @@ describe("Testes dos pontos de api relativos a usuários", () => {
     var res = await request(server).get("/api/usuarios");
 
     expect(res.body).toHaveProperty("success");
-    expect(res.body.success).toHaveLength(1);
+    const userLength = res.body.success.length;
 
     res = await request(server)
       .delete("/api/apagar-usuario")
@@ -77,7 +77,7 @@ describe("Testes dos pontos de api relativos a usuários", () => {
     res = await request(server).get("/api/usuarios");
 
     expect(res.body).toHaveProperty("success");
-    expect(res.body.success).toHaveLength(0);
+    expect(res.body.success).toHaveLength(userLength - 1);
   });
 
   it("Abertura de processos", async () => {
