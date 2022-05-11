@@ -29,16 +29,7 @@ export class ProccessManagementComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getCurrUser().subscribe((user) => {
       this.user = user;
-
-      if (this.user.role === 'advogado') {
-        this.proccessService
-          .getProcessesByLawyer(this.user.id)
-          .subscribe((processes) => (this.processes = processes));
-      } else if (this.user.role === 'juiz') {
-        this.proccessService
-          .getProcessesByJudge(this.user.id)
-          .subscribe((processes) => (this.processes = processes));
-      }
+      this.getProcesses();
     });
   }
 
@@ -71,11 +62,33 @@ export class ProccessManagementComponent implements OnInit {
         });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result !== undefined)
+      if (!result) return;
+
+      if (element) {
         this.proccessService.editProcess(result).subscribe();
+        this.getProcesses();
+      } else {
+        this.proccessService
+          .addProcess(result)
+          .subscribe(
+            (process) => (this.processes = [process, ...this.processes])
+          );
+      }
     });
   }
   editProccess(element: Process): void {
     this.openModal(element);
+  }
+
+  getProcesses(): void {
+    if (this.user.role === 'advogado') {
+      this.proccessService
+        .getProcessesByLawyer(this.user.id)
+        .subscribe((processes) => (this.processes = processes));
+    } else if (this.user.role === 'juiz') {
+      this.proccessService
+        .getProcessesByJudge(this.user.id)
+        .subscribe((processes) => (this.processes = processes));
+    }
   }
 }

@@ -47,6 +47,11 @@ export class EditProcessComponent implements OnInit {
     if (!this.status.valid) return;
 
     this.userService.getUserByCpf(this.judgeCpf.value).subscribe((user) => {
+      if (user.role !== 'juiz') {
+        this.judgeCpf.setErrors({ fakeJudge: true });
+        return;
+      }
+
       this.process.name = this.name.value;
       this.process.judgeId = user.id;
       this.process.status = this.status.value;
