@@ -104,4 +104,14 @@ describe("Testes dos pontos de api relativos a usuários", () => {
     expect(res.body.success).toHaveProperty("id");
     expect(res.body.success.id).toBe(processId);
   });
+
+  it("Resgatar lista de processos por id de advogado", async () => {
+    const res = await request(server)
+      .get("/api/processos")
+      .query({ lawyerId: lawyerId });
+
+    expect(res.body).toHaveProperty("success");
+    expect(res.body.success).toHaveLength(1);
+    expect(res.body.success[0].id).toBe(processId);
+  });
 });
