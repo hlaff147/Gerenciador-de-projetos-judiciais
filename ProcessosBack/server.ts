@@ -5,6 +5,7 @@ import {
   deleteUser,
   getUser,
   getUserById,
+  getUserByCpf,
 } from "./knex/querries/users";
 import { db } from "./knex/config/database";
 import {
@@ -13,7 +14,9 @@ import {
   getAllProcess as getAllProcesses,
   getProcessById,
   getProcessesByJudgeId,
-  getProcessesByLaywerId,
+  getProcessesByLawyerId,
+  updateDefendants,
+  updateProcess,
 } from "./knex/querries/processes";
 import {
   attachDocument,
@@ -22,6 +25,7 @@ import {
   getDocumentsByProcessId,
 } from "./knex/querries/documents";
 import { Process } from "../common/process";
+import { User } from "../common/user";
 
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -57,7 +61,8 @@ app.post("/api/cadastrar", async (req: Request, res: Response) => {
   const userId = await createUser(user);
 
   if (userId) {
-    user = await getUserById(userId);
+    user.id = userId;
+    updateDefendants(user);
     console.log(
       `[SERVIDOR] Usuário cpf ${user.cpf} foi registrado com id ${userId}`
     );
@@ -80,8 +85,15 @@ app.get("/api/usuarios", async (req: Request, res: Response) => {
 
 app.get("/api/usuario", async (req: Request, res: Response) => {
   const id = req.query.id as string;
+  const cpf = req.query.cpf as string;
 
-  const user = await getUserById(parseInt(id));
+  const idIsValid = id != undefined;
+  const cpfIsValid = cpf != undefined;
+
+  let user: User | null = null;
+
+  if (idIsValid) user = await getUserById(parseInt(id));
+  else if (cpfIsValid) user = await getUserByCpf(cpf);
 
   if (user) {
     console.log(`[SERVIDOR] Buscando usuário id ${id}`);
@@ -92,7 +104,7 @@ app.get("/api/usuario", async (req: Request, res: Response) => {
 });
 
 app.delete("/api/apagar-usuario", async (req: Request, res: Response) => {
-  const cpf: string = req.body.cpf;
+  const cpf = req.query.cpf as string;
   const success = await deleteUser(cpf);
 
   if (success) {
@@ -132,6 +144,18 @@ app.post("/api/abrir-processo", async (req: Request, res: Response) => {
   }
 });
 
+app.put("/api/editar-processo", async (req: Request, res: Response) => {
+  var process = req.body;
+  const processId = await updateProcess(process);
+
+  if (processId) {
+    console.log(`[SERVIDOR] Processo ${process.name} foi editado com sucesso`);
+    res.send({ success: process });
+  } else {
+    res.send({ failure: "Processo não pode ser aberto" });
+  }
+});
+
 app.delete("/api/apagar-processo", async (req: Request, res: Response) => {
   const id = req.query.id as string;
   const success = await deleteProcess(parseInt(id));
@@ -157,7 +181,7 @@ app.get("/api/processos", async (req: Request, res: Response) => {
     processes = await getAllProcesses();
     console.log(`[SERVIDOR] Buscando ${processes?.length} processos`);
   } else if (lawyerIsValid) {
-    processes = await getProcessesByLaywerId(parseInt(lawyerId));
+    processes = await getProcessesByLawyerId(parseInt(lawyerId));
     console.log(
       `[SERVIDOR] Buscando ${processes?.length} processos de advogado id ${lawyerId}`
     );

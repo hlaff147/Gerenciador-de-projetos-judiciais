@@ -37,8 +37,7 @@ export class UserService {
   }
 
   logoutUser(user?: User): void {
-    this.userAuthEvent.emit(null);
-    this.currUser = null;
+    this.login(null);
     this.router.navigate(['/login']);
   }
 
@@ -51,10 +50,27 @@ export class UserService {
         if (!res?.['success']) return null;
 
         this.login(res?.['success']);
+        this.router.navigate(['/']);
 
         return this.currUser;
       })
     );
+  }
+
+  deleteUser(user: User): Observable<unknown> {
+    const url: string = this.API_URL + '/apagar-usuario';
+    const params: HttpParams = new HttpParams().set('cpf', user.cpf);
+
+    return this.http
+      .delete(url, { headers: this.headers, params: params })
+      .pipe(
+        retry(2),
+        map((res) => {
+          if (!res?.['success']) return null;
+          this.login(null);
+          return res?.['success'];
+        })
+      );
   }
 
   getUserById(id: number): Observable<User | null> {
@@ -70,9 +86,24 @@ export class UserService {
     );
   }
 
+
   getCurrUser(): User | null {
     return this.currUser;
   }
+
+  getUserByCpf(cpf: string): Observable<User | null> {
+    const url: string = this.API_URL + '/usuario';
+    const params: HttpParams = new HttpParams().set('cpf', cpf);
+
+    return this.http.get(url, { headers: this.headers, params: params }).pipe(
+      retry(2),
+      map((res) => {
+        if (!res?.['success']) return null;
+        return res?.['success'];
+      })
+    );
+  }
+
 
   userIsAuthenticated(): boolean {
     return this.currUser != null;
@@ -80,7 +111,6 @@ export class UserService {
 
   private login(user: User) {
     this.currUser = user;
-    this.userAuthEvent.emit(this.currUser);
-    this.router.navigate(['/']);
+    this.userAuthEvent.emit(user);
   }
 }

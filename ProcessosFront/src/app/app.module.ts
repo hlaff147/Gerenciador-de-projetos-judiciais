@@ -37,6 +37,7 @@ import { ProfileComponent } from 'src/components/profile/profile.component';
 import { ConfirmModalComponent } from '../components/confirm-modal/confirm-modal.component';
 import { NavbarComponent } from 'src/components/navbar/navbar.component';
 import { ProccessInfoComponent } from 'src/components/process-info/proccess-info.component';
+import { EditProcessComponent } from '../components/edit-process/edit-process.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { ProccessInfoComponent } from 'src/components/process-info/proccess-info
     ConfirmModalComponent,
     NavbarComponent,
     ProccessInfoComponent,
+    EditProcessComponent,
   ],
   imports: [
     BrowserModule,

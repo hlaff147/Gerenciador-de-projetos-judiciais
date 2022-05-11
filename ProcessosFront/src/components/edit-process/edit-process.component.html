@@ -5,7 +5,6 @@
     <input
       matInput
       name="name"
-      placeholder="Nome"
       [formControl]="name"
       [errorStateMatcher]="matcher"
       type="text"
@@ -16,31 +15,39 @@
     </mat-error>
   </mat-form-field>
 
-  <mat-form-field class="full-width">
+  <mat-form-field appearance="fill">
+    <mat-label>Status</mat-label>
+    <mat-select
+      name="status"
+      [formControl]="status"
+      [errorStateMatcher]="matcher"
+      required
+    >
+      <mat-option value="concluído">concluído</mat-option>
+      <mat-option value="atrasado">atrasado</mat-option>
+      <mat-option value="em andamento">em andamento</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>CPF do juiz</mat-label>
     <input
       matInput
-      name="defendantCpf"
-      placeholder="CPF do Réu"
-      [formControl]="defendantCpf"
+      name="JudgeCpf"
+      [formControl]="judgeCpf"
       [errorStateMatcher]="matcher"
       type="text"
       mask="000.000.000-00"
     />
     <mat-hint></mat-hint>
-    <mat-error
-      *ngIf="defendantCpf.errors?.['required']"
-      data-error="cpf-missing"
-    >
+    <mat-error *ngIf="judgeCpf.errors?.['required']" data-error="cpf-missing">
       CPF é obrigatório.
     </mat-error>
-    <mat-error *ngIf="defendantCpf.errors?.['length']" data-error="cpf-length">
+    <mat-error *ngIf="judgeCpf.errors?.['length']" data-error="cpf-length">
       CPF deve conter 11 dígitos.
     </mat-error>
-    <mat-error
-      *ngIf="defendantCpf.errors?.['duplicate']"
-      data-error="cpf-length"
-    >
-      CPF deve conter 11 dígitos.
+    <mat-error *ngIf="judgeCpf.errors?.['fakeJudge']" data-error="cpf-length">
+      CPF deve ser de um juiz.
     </mat-error>
   </mat-form-field>
 </div>

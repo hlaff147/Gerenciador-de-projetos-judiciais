@@ -8,6 +8,7 @@ import { UserService } from 'src/services/user.service';
 import { User } from '../../../../common/user';
 import { Process } from '../../../../common/process';
 import { ActivatedRoute } from '@angular/router';
+import { EditProcessComponent } from '../edit-process/edit-process.component';
 
 @Component({
   selector: 'app-proccess-management',
@@ -27,16 +28,7 @@ export class ProccessManagementComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.userService.getCurrUser();
-  
-    if (this.user.role === 'advogado') {
-      this.proccessService
-        .getProcessesByLawyer(this.user.id)
-        .subscribe((processes) => (this.processes = processes));
-    } else if (this.user.role === 'juiz') {
-      this.proccessService
-        .getProcessesByJudge(this.user.id)
-        .subscribe((processes) => (this.processes = processes));
-    }
+    this.getProcesses();
   }
 
   deleteProccess(id: number): void {
@@ -57,33 +49,49 @@ export class ProccessManagementComponent implements OnInit {
   }
 
   openModal(element: Process | null): void {
-    const dialogRef = this.dialog.open(NewProcessComponent, {
-      width: '30rem',
-      data:
-        element === null
-          ? {
-              id: null,
-              name: '',
-              lawyerId: this.user.id,
-            }
-          : {
-              id: element.id,
-              name: element.name,
-              startDate: element.startDate,
-              judgeId: element.judgeId,
-              status: element.status,
-            },
-    });
+    const dialogRef = element
+      ? this.dialog.open(EditProcessComponent, {
+          width: '30rem',
+          data: element,
+        })
+      : this.dialog.open(NewProcessComponent, {
+          width: '30rem',
+          data: {
+            id: null,
+            name: '',
+            defendantCpf: '',
+            authorId: this.user.id,
+          },
+        });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result !== undefined) {
-        this.proccessService.addProcess(result).subscribe((process) => {
-          this.processes = [process, ...this.processes];
-        });
+      if (!result) return;
+
+      if (element) {
+        this.proccessService.editProcess(result).subscribe();
+        this.getProcesses();
+      } else {
+        this.proccessService
+          .addProcess(result)
+          .subscribe(
+            (process) => (this.processes = [process, ...this.processes])
+          );
       }
     });
   }
   editProccess(element: Process): void {
     this.openModal(element);
+  }
+
+  getProcesses(): void {
+    if (this.user.role === 'advogado') {
+      this.proccessService
+        .getProcessesByLawyer(this.user.id)
+        .subscribe((processes) => (this.processes = processes));
+    } else if (this.user.role === 'juiz') {
+      this.proccessService
+        .getProcessesByJudge(this.user.id)
+        .subscribe((processes) => (this.processes = processes));
+    }
   }
 }

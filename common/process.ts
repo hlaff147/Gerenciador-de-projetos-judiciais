@@ -4,5 +4,7 @@ export interface Process {
   startDate?: Date;
   status?: string;
   judgeId?: number;
-  lawyerId: number;
+  authorId: number;
+  defendantId?: number;
+  defendantCpf: string;
 }

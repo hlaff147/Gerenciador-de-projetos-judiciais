@@ -17,6 +17,8 @@ export class LoginFormComponent implements OnInit {
 
   matcher = new MyErrorStateMatcher();
 
+  loginFailed: boolean = false;
+
   constructor(private router: Router, private userService: UserService) {}
 
   ngOnInit(): void {}
@@ -28,6 +30,17 @@ export class LoginFormComponent implements OnInit {
     const cpf = this.cpf.value;
     const password = this.password.value;
 
-    this.userService.loginUser(cpf, password).subscribe();
+    this.userService.loginUser(cpf, password).subscribe((user) => {
+      if (user) this.onLoginSuccess();
+      else this.onLoginFail();
+    });
+  }
+
+  private onLoginSuccess(): void {
+    this.router.navigate(['/']);
+  }
+
+  private onLoginFail(): void {
+    this.loginFailed = true;
   }
 }
