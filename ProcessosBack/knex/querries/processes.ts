@@ -62,12 +62,13 @@ export const deleteProcess = async (id: number): Promise<number | null> => {
   return null;
 };
 
-export const getProcessesByLaywerId = async (
+export const getProcessesByLawyerId = async (
   lawyerId: number
 ): Promise<Process[] | null> => {
   try {
     const query = await db("processes")
-      .where({ lawyerId: lawyerId })
+      .where({ authorId: lawyerId })
+      .orWhere({ defendantId: lawyerId })
       .select()
       .orderBy("startDate", "desc");
     return query.length ? query : null;

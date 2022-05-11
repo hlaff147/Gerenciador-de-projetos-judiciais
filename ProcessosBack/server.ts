@@ -14,7 +14,7 @@ import {
   getAllProcess as getAllProcesses,
   getProcessById,
   getProcessesByJudgeId,
-  getProcessesByLaywerId,
+  getProcessesByLawyerId,
   updateProcess,
 } from "./knex/querries/processes";
 import {
@@ -172,7 +172,7 @@ app.get("/api/processos", async (req: Request, res: Response) => {
     processes = await getAllProcesses();
     console.log(`[SERVIDOR] Buscando ${processes?.length} processos`);
   } else if (lawyerIsValid) {
-    processes = await getProcessesByLaywerId(parseInt(lawyerId));
+    processes = await getProcessesByLawyerId(parseInt(lawyerId));
     console.log(
       `[SERVIDOR] Buscando ${processes?.length} processos de advogado id ${lawyerId}`
     );

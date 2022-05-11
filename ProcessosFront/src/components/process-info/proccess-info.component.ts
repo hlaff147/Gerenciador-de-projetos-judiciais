@@ -23,7 +23,7 @@ export class ProccessInfoComponent implements OnInit {
 
   getLawyer(): void {
     this.userService
-      .getUserById(this.process.lawyerId)
+      .getUserById(this.process.authorId)
       .subscribe((lawyer) => (this.lawyer = lawyer));
   }
 

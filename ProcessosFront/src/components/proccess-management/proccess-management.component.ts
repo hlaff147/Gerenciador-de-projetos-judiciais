@@ -58,7 +58,7 @@ export class ProccessManagementComponent implements OnInit {
         })
       : this.dialog.open(NewProcessComponent, {
           width: '30rem',
-          data: { id: null, name: '', lawyerId: this.user.id },
+          data: { id: null, name: '', authorId: this.user.id },
         });
 
     dialogRef.afterClosed().subscribe((result) => {
