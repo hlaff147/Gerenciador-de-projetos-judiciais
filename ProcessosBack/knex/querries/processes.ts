@@ -1,4 +1,5 @@
 import { Process } from "../../../common/process";
+import { User } from "../../../common/user";
 import { db } from "../config/database";
 
 const getRandomJudgeId = async (): Promise<number | null> => {
@@ -104,4 +105,14 @@ export const getProcessById = async (id: number): Promise<Process | null> => {
     console.log(err.message);
   }
   return null;
+};
+
+export const updateDefendants = async (defendant: User): Promise<void> => {
+  try {
+    await db("processes")
+      .where({ defendantCpf: defendant.cpf })
+      .update({ defendantId: defendant.id });
+  } catch (err: any) {
+    console.log(err.message);
+  }
 };

@@ -15,6 +15,7 @@ import {
   getProcessById,
   getProcessesByJudgeId,
   getProcessesByLawyerId,
+  updateDefendants,
   updateProcess,
 } from "./knex/querries/processes";
 import {
@@ -52,7 +53,8 @@ app.post("/api/cadastrar", async (req: Request, res: Response) => {
   const userId = await createUser(user);
 
   if (userId) {
-    user = await getUserById(userId);
+    user.id = userId;
+    updateDefendants(user);
     console.log(
       `[SERVIDOR] Usuário cpf ${user.cpf} foi registrado com id ${userId}`
     );
