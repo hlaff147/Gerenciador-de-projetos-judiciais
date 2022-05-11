@@ -1,4 +1,6 @@
+import { i18nMetaToJSDoc } from '@angular/compiler/src/render3/view/i18n/meta';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from 'src/services/user.service';
 import { User } from '../../../../common/user';
 
@@ -10,7 +12,7 @@ import { User } from '../../../../common/user';
 export class ProfileComponent implements OnInit {
   user: User | undefined;
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
     this.userService.getCurrUser().subscribe((user) => (this.user = user));
@@ -29,5 +31,11 @@ export class ProfileComponent implements OnInit {
     const tmp2 = this.user.phone.substring(2, 7);
     const tmp3 = this.user.phone.substring(7, 11);
     return `(${tmp1}) ${tmp2}-${tmp3}`;
+  }
+
+  deleteAccount(): void {
+    this.userService
+      .deleteUser(this.user)
+      .subscribe(() => this.router.navigate(['/cadastro']));
   }
 }
