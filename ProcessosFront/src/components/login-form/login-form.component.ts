@@ -1,29 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-  FormControl,
-  Validators,
-  FormGroupDirective,
-  NgForm,
-} from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
+import { FormControl, Validators } from '@angular/forms';
 import { inputNumberValdiator } from 'src/validators/input-numer';
-import { AuthService } from 'src/services/login/auth.service';
-import { User } from 'src/types/user';
-
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(
-    control: FormControl | null,
-    form: FormGroupDirective | NgForm | null
-  ): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(
-      control &&
-      control.invalid &&
-      (control.dirty || control.touched || isSubmitted)
-    );
-  }
-}
+import { UserService } from 'src/services/user.service';
+import { MyErrorStateMatcher } from 'src/validators/error-state-matcher';
 
 @Component({
   selector: 'app-login-form',
@@ -37,9 +17,9 @@ export class LoginFormComponent implements OnInit {
 
   matcher = new MyErrorStateMatcher();
 
-  user: User = { cpf: '', password: '' };
+  loginFailed: boolean = false;
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private router: Router, private userService: UserService) {}
 
   ngOnInit(): void {}
 
@@ -47,12 +27,20 @@ export class LoginFormComponent implements OnInit {
     if (!this.cpf.valid) return;
     if (!this.password.valid) return;
 
-    this.updateUser();
-    this.authService.loginUser(this.user);
+    const cpf = this.cpf.value;
+    const password = this.password.value;
+
+    this.userService.loginUser(cpf, password).subscribe((user) => {
+      if (user) this.onLoginSuccess();
+      else this.onLoginFail();
+    });
   }
 
-  updateUser(): void {
-    this.user.cpf = this.cpf.value;
-    this.user.password = this.password.value;
+  private onLoginSuccess(): void {
+    this.router.navigate(['/']);
+  }
+
+  private onLoginFail(): void {
+    this.loginFailed = true;
   }
 }

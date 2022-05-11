@@ -1,30 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-  FormControl,
-  FormGroupDirective,
-  NgForm,
-  Validators,
-} from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
+import { FormControl, Validators } from '@angular/forms';
 import { nameValidator } from 'src/validators/name';
 import { inputNumberValdiator } from 'src/validators/input-numer';
 import { passwordValidator } from 'src/validators/password';
 import { confPasswordValidator } from 'src/validators/confirm-password';
-
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(
-    control: FormControl | null,
-    form: FormGroupDirective | NgForm | null
-  ): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(
-      control &&
-      control.invalid &&
-      (control.dirty || control.touched || isSubmitted)
-    );
-  }
-}
+import { User } from '../../../../common/user';
+import { UserService } from 'src/services/user.service';
+import { MyErrorStateMatcher } from 'src/validators/error-state-matcher';
 
 @Component({
   selector: 'app-signup-form',
@@ -41,12 +24,13 @@ export class SignupFormComponent implements OnInit {
     Validators.required,
     confPasswordValidator(this.password),
   ]);
-  function = new FormControl('');
+  role = new FormControl('');
 
-  functions = ['advogado', 'juiz', 'cliente', 'réu'];
+  roles = ['advogado', 'juiz'];
+  signupFailed: boolean = false;
   matcher = new MyErrorStateMatcher();
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private userService: UserService) {}
 
   ngOnInit(): void {}
 
@@ -57,8 +41,24 @@ export class SignupFormComponent implements OnInit {
     if (!this.phone.valid) return;
     if (!this.password.valid) return;
     if (!this.confPassword.valid) return;
-    if (!this.function.valid) return;
+    if (!this.role.valid) return;
 
-    this.router.navigate(['/processos']);
+    const user = this.getUser();
+
+    this.userService.signupUser(user).subscribe((data) => {
+      if (data) this.router.navigate(['/processos']);
+      else this.signupFailed = true;
+    });
+  }
+
+  getUser(): User {
+    return {
+      name: this.name.value,
+      cpf: this.cpf.value,
+      email: this.email.value,
+      phone: this.phone.value,
+      role: this.role.value,
+      password: this.password.value,
+    };
   }
 }

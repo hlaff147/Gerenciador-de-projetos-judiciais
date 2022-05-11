@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,7 +28,7 @@ import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 import { LoginFormComponent } from '../components/login-form/login-form.component';
 import { SignupFormComponent } from '../components/signup-form/signup-form.component';
 import { ProccessManagementComponent } from '../components/proccess-management/proccess-management.component';
-import { ElementDialog } from '../components/element-dialog/element-dialog.component';
+import { NewProcessComponent } from '../components/new-process/new-process.component';
 import { ProccessDetailComponent } from '../components/proccess-detail/proccess-detail.component';
 import { DocumentListComponent } from '../components/document-list/document-list.component';
 import { DocumentDetailComponent } from '../components/document-detail/document-detail.component';
@@ -35,7 +36,8 @@ import { NewDocumentComponent } from '../components/new-document/new-document.co
 import { ProfileComponent } from 'src/components/profile/profile.component';
 import { ConfirmModalComponent } from '../components/confirm-modal/confirm-modal.component';
 import { NavbarComponent } from 'src/components/navbar/navbar.component';
-import { AuthService } from 'src/services/login/auth.service';
+import { ProccessInfoComponent } from 'src/components/process-info/proccess-info.component';
+import { EditProcessComponent } from '../components/edit-process/edit-process.component';
 
 @NgModule({
   declarations: [
@@ -44,18 +46,21 @@ import { AuthService } from 'src/services/login/auth.service';
     SignupFormComponent,
     ProccessManagementComponent,
     ProccessDetailComponent,
-    ElementDialog,
+    NewProcessComponent,
     DocumentListComponent,
     DocumentDetailComponent,
     NewDocumentComponent,
     ProfileComponent,
     ConfirmModalComponent,
     NavbarComponent,
+    ProccessInfoComponent,
+    EditProcessComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
     MatDialogModule,
     MatFormFieldModule,
@@ -77,7 +82,6 @@ import { AuthService } from 'src/services/login/auth.service';
     MatDividerModule,
   ],
   providers: [
-    AuthService,
     { provide: MAT_DIALOG_DATA, useValue: {} },
     { provide: MatDialogRef, useValue: {} },
   ],

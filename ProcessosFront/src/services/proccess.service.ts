@@ -1,35 +1,93 @@
 import { Injectable } from '@angular/core';
 
-import { Observable, of } from 'rxjs';
-import { Proccess } from '../types/proccess';
-import { PROCCESSES } from '../mocks/mock-proccesslist';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { retry, map, Observable } from 'rxjs';
+import { Process } from '../../../common/process';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProccessService {
-  constructor() {}
+  private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  private API_URL = 'http://localhost:3000/api';
 
-  getProcesses(): Observable<Proccess[]> {
-    return of(PROCCESSES);
-  }
+  constructor(private http: HttpClient) {}
 
-  getProccess(id: number): Observable<Proccess | undefined> {
-    const proccess = PROCCESSES.find((p) => p.id === id);
-    return of(proccess);
-  }
+  getProcessesByLawyer(id: number): Observable<Process[]> {
+    const params: HttpParams = new HttpParams().set('lawyerId', id);
+    const url: string = this.API_URL + '/processos';
 
-  deleteProccess(id: number): Observable<Proccess[]> {
-    PROCCESSES.splice(
-      PROCCESSES.findIndex((p) => p.id === id),
-      1
+    return this.http.get(url, { headers: this.headers, params: params }).pipe(
+      retry(2),
+      map((res) => {
+        if (!res?.['success']) return [];
+        return res?.['success'];
+      })
     );
-    return of(PROCCESSES);
   }
 
-  addProccess(proccess: Proccess): Observable<unknown> {
-    proccess.id = PROCCESSES[PROCCESSES.length - 1].id + 1;
-    PROCCESSES.push(proccess);
-    return of(PROCCESSES);
+  getProcessesByJudge(id: number): Observable<Process[]> {
+    const params: HttpParams = new HttpParams().set('judgeId', id);
+    const url: string = this.API_URL + '/processos';
+
+    return this.http.get(url, { headers: this.headers, params: params }).pipe(
+      retry(2),
+      map((res) => {
+        if (!res?.['success']) return [];
+        return res?.['success'];
+      })
+    );
+  }
+
+  getProcessById(id: number): Observable<Process | null> {
+    const params: HttpParams = new HttpParams().set('id', id);
+    const url: string = this.API_URL + '/processo';
+
+    return this.http.get(url, { headers: this.headers, params: params }).pipe(
+      retry(2),
+      map((res) => {
+        if (!res?.['success']) return null;
+        return res?.['success'];
+      })
+    );
+  }
+
+  deleteProccess(id: number): Observable<number | null> {
+    const params: HttpParams = new HttpParams().set('id', id);
+    const url: string = this.API_URL + '/apagar-processo';
+
+    return this.http
+      .delete(url, { headers: this.headers, params: params })
+      .pipe(
+        retry(2),
+        map((res) => {
+          if (!res?.['success']) return null;
+          return res?.['success'];
+        })
+      );
+  }
+
+  addProcess(process: Process): Observable<Process | null> {
+    const url = this.API_URL + '/abrir-processo';
+
+    return this.http.post(url, process, { headers: this.headers }).pipe(
+      retry(2),
+      map((res) => {
+        if (!res?.['success']) return null;
+        return res?.['success'];
+      })
+    );
+  }
+
+  editProcess(process: Process): Observable<Process | null> {
+    const url = this.API_URL + '/editar-processo';
+
+    return this.http.put(url, process, { headers: this.headers }).pipe(
+      retry(2),
+      map((res) => {
+        if (!res?.['success']) return null;
+        return res?.['success'];
+      })
+    );
   }
 }

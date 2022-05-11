@@ -11,7 +11,7 @@ describe("Testes de cadastro", () => {
     cy.get("[data-error='cpf-missing']").should("exist").and("be.visible");
     cy.get("[data-error='email-missing']").should("exist").and("be.visible");
     cy.get("[data-error='phone-missing']").should("exist").and("be.visible");
-    cy.get("[data-error='function-missing']").should("exist").and("be.visible");
+    cy.get("[data-error='role-missing']").should("exist").and("be.visible");
     cy.get("[data-error='password-missing']").should("exist").and("be.visible");
     cy.get("[data-error='conf-password-missing']")
       .should("exist")
@@ -94,7 +94,7 @@ describe("Testes de cadastro", () => {
     cy.get("input[name=email]").type("jaozinhoreidelas12@gmail.com");
     cy.get("input[name=phone]").type("81911223344");
     cy.get("input[name=conf-password]").type("Senha1234");
-    cy.get("[name=function]").click();
+    cy.get("[name=role]").click();
     cy.contains("Advogado").click();
 
     cy.get("[data-btn='signup']").first().click();
