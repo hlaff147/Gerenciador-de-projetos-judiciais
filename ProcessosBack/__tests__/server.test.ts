@@ -1,4 +1,4 @@
-import { server } from "../server";
+import { closeServer, server } from "../server";
 import { db } from "../knex/config/database";
 import { User } from "../../common/user";
 import * as request from "supertest";
@@ -8,6 +8,10 @@ describe("Testes dos pontos de api relativos a usuários", () => {
 
   beforeAll(async () => {
     await db.migrate.latest();
+  });
+
+  afterAll(async () => {
+    closeServer();
   });
 
   it("Cadastro de usuário com informações válidas", async () => {
