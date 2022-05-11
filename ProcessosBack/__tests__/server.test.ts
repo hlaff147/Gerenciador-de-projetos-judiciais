@@ -25,4 +25,12 @@ describe("Testes dos pontos de api relativos a usuários", () => {
 
     expect(res.body).toHaveProperty("success");
   });
+
+  it("Autentificação com credenciais válidas", async () => {
+    const res = await request(server)
+      .get("/api/auth")
+      .query({ cpf: "11111111111", password: "Senha1234" });
+
+    expect(res.body).toHaveProperty("success");
+  });
 });
