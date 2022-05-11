@@ -5,6 +5,9 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { MyErrorStateMatcher } from 'src/validators/error-state-matcher';
+import { inputNumberValdiator } from 'src/validators/input-numer';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-new-process',
@@ -12,6 +15,11 @@ import {
   styleUrls: ['./new-process.component.css'],
 })
 export class NewProcessComponent implements OnInit {
+  name = new FormControl('', [Validators.required]);
+  defendantCpf = new FormControl('', [inputNumberValdiator(11)]);
+
+  matcher = new MyErrorStateMatcher();
+
   ngOnInit(): void {}
 
   constructor(
@@ -22,5 +30,14 @@ export class NewProcessComponent implements OnInit {
 
   onCancel(): void {
     this.dialogRef.close();
+  }
+
+  onSubmit(): void {
+    if (!this.name.valid) return;
+    if (!this.defendantCpf.valid) return;
+
+    this.data.name = this.name.value;
+    this.data.defendantCpf = this.defendantCpf.value;
+    this.dialogRef.close(this.data);
   }
 }
