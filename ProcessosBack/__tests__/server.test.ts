@@ -1,6 +1,7 @@
 import { closeServer, server } from "../server";
 import { db } from "../knex/config/database";
 import * as request from "supertest";
+import { Process } from "../../common/process";
 
 const signupUser = async (cpf: string, role: string) => {
   const res = await request(server).post("/api/cadastrar").send({
@@ -17,7 +18,8 @@ const signupUser = async (cpf: string, role: string) => {
 };
 
 describe("Testes dos pontos de api relativos a usuários", () => {
-  let userId: number;
+  let lawyerId: number;
+  let judgeId: number;
   const userCpf: string = "11111111111";
 
   beforeAll(async () => {
@@ -30,7 +32,7 @@ describe("Testes dos pontos de api relativos a usuários", () => {
 
   it("Cadastro de usuário com informações válidas", async () => {
     const res = await signupUser(userCpf, "advogado");
-    userId = res.body.success.id;
+    lawyerId = res.body.success.id;
   });
 
   it("Autentificação com credenciais válidas", async () => {
@@ -50,7 +52,9 @@ describe("Testes dos pontos de api relativos a usuários", () => {
   });
 
   it("Informações de usuário por id", async () => {
-    const res = await request(server).get("/api/usuario").query({ id: userId });
+    const res = await request(server)
+      .get("/api/usuario")
+      .query({ id: lawyerId });
 
     expect(res.body).toHaveProperty("success");
     expect(res.body.success).toHaveProperty("cpf");
@@ -73,5 +77,19 @@ describe("Testes dos pontos de api relativos a usuários", () => {
 
     expect(res.body).toHaveProperty("success");
     expect(res.body.success).toHaveLength(0);
+  });
+
+  it("Abertura de processos", async () => {
+    const process: Process = {
+      name: "Processo de Test",
+      lawyerId: lawyerId,
+    };
+    var res;
+
+    res = await signupUser("22222222222", "juiz");
+    judgeId = res.body.success.id;
+
+    res = await request(server).post("/api/abrir-processo").send(process);
+    expect(res.body).toHaveProperty("success");
   });
 });
