@@ -38,6 +38,7 @@
           </p>
 
           <button
+            *ngIf="user?.role == 'juiz'"
             (click)="editProccess(process)"
             class="border-0 ml-2 btn-icon btn-icon-only btn-pill btn btn-outline-focus btn-sm"
           >
