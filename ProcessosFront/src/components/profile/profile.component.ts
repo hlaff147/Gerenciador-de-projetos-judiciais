@@ -15,7 +15,7 @@ export class ProfileComponent implements OnInit {
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
-    this.userService.getCurrUser().subscribe((user) => (this.user = user));
+    this.user = this.userService.getCurrUser();
   }
 
   formattedCpf(): string {
