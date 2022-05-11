@@ -5,6 +5,7 @@ import * as request from "supertest";
 
 describe("Testes dos pontos de api relativos a usuários", () => {
   let userId: number;
+  const userCpf: string = "11111111111";
 
   beforeAll(async () => {
     await db.migrate.latest();
@@ -17,7 +18,7 @@ describe("Testes dos pontos de api relativos a usuários", () => {
   it("Cadastro de usuário com informações válidas", async () => {
     const user: User = {
       name: "Saul Goodman",
-      cpf: "11111111111",
+      cpf: userCpf,
       email: "bettercallsaul@fake.com",
       phone: "11111111111",
       role: "advogado",
@@ -33,7 +34,7 @@ describe("Testes dos pontos de api relativos a usuários", () => {
   it("Autentificação com credenciais válidas", async () => {
     const res = await request(server)
       .get("/api/auth")
-      .query({ cpf: "11111111111", password: "Senha1234" });
+      .query({ cpf: userCpf, password: "Senha1234" });
 
     expect(res.body).toHaveProperty("success");
   });
@@ -41,7 +42,7 @@ describe("Testes dos pontos de api relativos a usuários", () => {
   it("Autentificação com credenciais inválidas", async () => {
     const res = await request(server)
       .get("/api/auth")
-      .query({ cpf: "11111111111", password: "senha1234" });
+      .query({ cpf: userCpf, password: "senha1234" });
 
     expect(res.body).toHaveProperty("failure");
   });
@@ -52,5 +53,23 @@ describe("Testes dos pontos de api relativos a usuários", () => {
     expect(res.body).toHaveProperty("success");
     expect(res.body.success).toHaveProperty("name");
     expect(res.body.success.name).toBe("Saul Goodman");
+  });
+
+  it("Apaga usuário por pdf", async () => {
+    var res = await request(server).get("/api/usuarios");
+
+    expect(res.body).toHaveProperty("success");
+    expect(res.body.success).toHaveLength(1);
+
+    res = await request(server)
+      .delete("/api/apagar-usuario")
+      .send({ cpf: userCpf });
+
+    expect(res.body).toHaveProperty("success");
+
+    res = await request(server).get("/api/usuarios");
+
+    expect(res.body).toHaveProperty("success");
+    expect(res.body.success).toHaveLength(0);
   });
 });
