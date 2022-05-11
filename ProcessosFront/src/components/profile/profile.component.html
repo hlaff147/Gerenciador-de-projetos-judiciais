@@ -1,28 +1,41 @@
 <div class="container my-4">
-  <p class="fs-2 mb-3">Atualize seu perfil</p>
-
-  <form class="d-flex flex-column align-items-center container">
+  <p class="fs-2 mb-3">Perfil</p>
+  <form class="d-flex flex-column align-items-center container w-50">
     <mat-form-field class="w-100">
-      <input matInput placeholder="Nome" type="text" pattern="[a-zA-z ]*" />
-    </mat-form-field>
-
-    <mat-form-field class="w-100">
-      <input matInput placeholder="E-mail" type="text" email />
-    </mat-form-field>
-
-    <mat-form-field class="w-100">
+      <mat-label>Nome</mat-label>
       <input
         matInput
-        placeholder="Telefone"
+        [defaultValue]="user.name | titlecase"
         type="text"
-        pattern="\d+"
-        minlength="9"
-        maxlength="9"
+        pattern="[a-zA-z ]*"
+        readonly
       />
     </mat-form-field>
 
     <mat-form-field class="w-100">
-      <input matInput placeholder="Senha" type="text" />
+      <mat-label>Cargo</mat-label>
+      <input
+        matInput
+        [defaultValue]="user.role | titlecase"
+        type="text"
+        pattern="[a-zA-z ]*"
+        readonly
+      />
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>CPF</mat-label>
+      <input matInput [defaultValue]="formattedCpf()" type="text" readonly />
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>E-mail</mat-label>
+      <input matInput [defaultValue]="user.email" type="text" readonly />
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Telefone</mat-label>
+      <input matInput [defaultValue]="formattedPhone()" type="text" readonly />
     </mat-form-field>
 
     <button
@@ -30,10 +43,10 @@
       style="width: 60%"
       mat-flat-button
       type="submit"
-      data-cy="signup-btn"
-      color="primary"
+      data-btn="delete"
+      color="warn"
     >
-      Salvar mudanças
+      Aapgar conta
     </button>
   </form>
 </div>
