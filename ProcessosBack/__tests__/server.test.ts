@@ -27,9 +27,7 @@ describe("Testes dos pontos de api relativos a usuários", () => {
     await db.migrate.latest();
   });
 
-  afterAll(async () => {
-    closeServer();
-  });
+  afterAll(async () => {});
 
   it("Cadastro de usuário com informações válidas", async () => {
     const res = await signupUser(userCpf, "advogado");
@@ -62,7 +60,7 @@ describe("Testes dos pontos de api relativos a usuários", () => {
     expect(res.body.success.cpf).toBe(userCpf);
   });
 
-  it("Apagar usuário por pdf", async () => {
+  it("Apagar usuário por cpf", async () => {
     var res = await request(server).get("/api/usuarios");
 
     expect(res.body).toHaveProperty("success");
@@ -70,7 +68,7 @@ describe("Testes dos pontos de api relativos a usuários", () => {
 
     res = await request(server)
       .delete("/api/apagar-usuario")
-      .send({ cpf: userCpf });
+      .query({ cpf: userCpf });
 
     expect(res.body).toHaveProperty("success");
 
@@ -84,6 +82,7 @@ describe("Testes dos pontos de api relativos a usuários", () => {
     const process: Process = {
       name: "Processo de Test",
       authorId: authorId,
+      defendantCpf: "33333333333",
     };
     var res;
 
