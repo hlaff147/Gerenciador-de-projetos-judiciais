@@ -2,7 +2,46 @@
 <div mat-dialog-content style="display: flex; flex-direction: column">
   <mat-form-field appearance="fill">
     <mat-label>Nome do processo</mat-label>
-    <input matInput [(ngModel)]="data.name" />
+    <input
+      matInput
+      name="name"
+      placeholder="Nome"
+      [formControl]="name"
+      [errorStateMatcher]="matcher"
+      type="text"
+    />
+    <mat-hint></mat-hint>
+    <mat-error *ngIf="name.errors?.['required']" data-error="name-missing">
+      Nome é obrigatório.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <input
+      matInput
+      name="defendantCpf"
+      placeholder="CPF do Réu"
+      [formControl]="defendantCpf"
+      [errorStateMatcher]="matcher"
+      type="text"
+      mask="000.000.000-00"
+    />
+    <mat-hint></mat-hint>
+    <mat-error
+      *ngIf="defendantCpf.errors?.['required']"
+      data-error="cpf-missing"
+    >
+      CPF é obrigatório.
+    </mat-error>
+    <mat-error *ngIf="defendantCpf.errors?.['length']" data-error="cpf-length">
+      CPF deve conter 11 dígitos.
+    </mat-error>
+    <mat-error
+      *ngIf="defendantCpf.errors?.['duplicate']"
+      data-error="cpf-length"
+    >
+      CPF deve conter 11 dígitos.
+    </mat-error>
   </mat-form-field>
 </div>
 <div mat-dialog-actions class="d-flex justify-content-around w-100">
@@ -13,26 +52,9 @@
     mat-flat-button
     type="button"
     color="primary"
-    [mat-dialog-close]="data"
+    (click)="onSubmit()"
     cdkFocusInitial
   >
     Criar
   </button>
-  <!--
-  <button
-    class="custom-button-cancel border-0 ml-2 btn-icon btn-icon-only btn-pill btn btn-outline-focus btn-sm"
-    mat-button
-    (click)="onCancel()"
-  >
-    Cancelar
-  </button>
-  <button
-    mat-button
-    [mat-dialog-close]="data"
-    cdkFocusInitial
-    class="custom-button-create border-0 ml-2 btn-icon btn-icon-only btn-pill btn btn-outline-focus btn-sm"
-  >
-    <i class="bi bi-file-plus" style="margin-right: 5px"></i>
-    Criar
-  </button>
---></div>
+</div>

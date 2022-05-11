@@ -18,7 +18,7 @@ const signupUser = async (cpf: string, role: string) => {
 };
 
 describe("Testes dos pontos de api relativos a usuários", () => {
-  let lawyerId: number;
+  let authorId: number;
   let judgeId: number;
   let processId: number;
   const userCpf: string = "11111111111";
@@ -33,7 +33,7 @@ describe("Testes dos pontos de api relativos a usuários", () => {
 
   it("Cadastro de usuário com informações válidas", async () => {
     const res = await signupUser(userCpf, "advogado");
-    lawyerId = res.body.success.id;
+    authorId = res.body.success.id;
   });
 
   it("Autentificação com credenciais válidas", async () => {
@@ -55,7 +55,7 @@ describe("Testes dos pontos de api relativos a usuários", () => {
   it("Informações de usuário por id", async () => {
     const res = await request(server)
       .get("/api/usuario")
-      .query({ id: lawyerId });
+      .query({ id: authorId });
 
     expect(res.body).toHaveProperty("success");
     expect(res.body.success).toHaveProperty("cpf");
@@ -83,7 +83,7 @@ describe("Testes dos pontos de api relativos a usuários", () => {
   it("Abertura de processos", async () => {
     const process: Process = {
       name: "Processo de Test",
-      lawyerId: lawyerId,
+      authorId: authorId,
     };
     var res;
 
@@ -105,10 +105,10 @@ describe("Testes dos pontos de api relativos a usuários", () => {
     expect(res.body.success.id).toBe(processId);
   });
 
-  it("Resgatar lista de processos por id de advogado", async () => {
+  it("Resgatar lista de processos por id de autor", async () => {
     const res = await request(server)
       .get("/api/processos")
-      .query({ lawyerId: lawyerId });
+      .query({ authorId: authorId });
 
     expect(res.body).toHaveProperty("success");
     expect(res.body.success).toHaveLength(1);

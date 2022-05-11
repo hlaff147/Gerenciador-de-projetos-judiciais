@@ -14,7 +14,8 @@ import {
   getAllProcess as getAllProcesses,
   getProcessById,
   getProcessesByJudgeId,
-  getProcessesByLaywerId,
+  getProcessesByLawyerId,
+  updateDefendants,
   updateProcess,
 } from "./knex/querries/processes";
 import {
@@ -52,7 +53,8 @@ app.post("/api/cadastrar", async (req: Request, res: Response) => {
   const userId = await createUser(user);
 
   if (userId) {
-    user = await getUserById(userId);
+    user.id = userId;
+    updateDefendants(user);
     console.log(
       `[SERVIDOR] Usuário cpf ${user.cpf} foi registrado com id ${userId}`
     );
@@ -139,7 +141,6 @@ app.put("/api/editar-processo", async (req: Request, res: Response) => {
   const processId = await updateProcess(process);
 
   if (processId) {
-    process = await getProcessById(processId);
     console.log(`[SERVIDOR] Processo ${process.name} foi editado com sucesso`);
     res.send({ success: process });
   } else {
@@ -172,7 +173,7 @@ app.get("/api/processos", async (req: Request, res: Response) => {
     processes = await getAllProcesses();
     console.log(`[SERVIDOR] Buscando ${processes?.length} processos`);
   } else if (lawyerIsValid) {
-    processes = await getProcessesByLaywerId(parseInt(lawyerId));
+    processes = await getProcessesByLawyerId(parseInt(lawyerId));
     console.log(
       `[SERVIDOR] Buscando ${processes?.length} processos de advogado id ${lawyerId}`
     );
