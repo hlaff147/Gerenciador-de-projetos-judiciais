@@ -71,8 +71,15 @@ export class ProccessManagementComponent implements OnInit {
         });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result !== undefined)
-        this.proccessService.editProcess(result).subscribe();
+      if (!result) return;
+
+      if (element) this.proccessService.editProcess(result).subscribe();
+      else
+        this.proccessService
+          .addProcess(result)
+          .subscribe(
+            (process) => (this.processes = [process, ...this.processes])
+          );
     });
   }
   editProccess(element: Process): void {
