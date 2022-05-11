@@ -1,7 +1,20 @@
 import { closeServer, server } from "../server";
 import { db } from "../knex/config/database";
-import { User } from "../../common/user";
 import * as request from "supertest";
+
+const signupUser = async (cpf: string, role: string) => {
+  const res = await request(server).post("/api/cadastrar").send({
+    name: "Placeholder Name",
+    cpf: cpf,
+    email: "placeholder@email.com",
+    phone: "11111111111",
+    role: role,
+    password: "Senha1234",
+  });
+
+  expect(res.body).toHaveProperty("success");
+  return res;
+};
 
 describe("Testes dos pontos de api relativos a usuários", () => {
   let userId: number;
@@ -16,18 +29,7 @@ describe("Testes dos pontos de api relativos a usuários", () => {
   });
 
   it("Cadastro de usuário com informações válidas", async () => {
-    const user: User = {
-      name: "Saul Goodman",
-      cpf: userCpf,
-      email: "bettercallsaul@fake.com",
-      phone: "11111111111",
-      role: "advogado",
-      password: "Senha1234",
-    };
-
-    const res = await request(server).post("/api/cadastrar").send(user);
-
-    expect(res.body).toHaveProperty("success");
+    const res = await signupUser(userCpf, "advogado");
     userId = res.body.success.id;
   });
 
@@ -51,8 +53,8 @@ describe("Testes dos pontos de api relativos a usuários", () => {
     const res = await request(server).get("/api/usuario").query({ id: userId });
 
     expect(res.body).toHaveProperty("success");
-    expect(res.body.success).toHaveProperty("name");
-    expect(res.body.success.name).toBe("Saul Goodman");
+    expect(res.body.success).toHaveProperty("cpf");
+    expect(res.body.success.cpf).toBe(userCpf);
   });
 
   it("Apaga usuário por pdf", async () => {
