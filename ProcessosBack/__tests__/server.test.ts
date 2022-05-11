@@ -20,6 +20,7 @@ const signupUser = async (cpf: string, role: string) => {
 describe("Testes dos pontos de api relativos a usuários", () => {
   let lawyerId: number;
   let judgeId: number;
+  let processId: number;
   const userCpf: string = "11111111111";
 
   beforeAll(async () => {
@@ -91,5 +92,16 @@ describe("Testes dos pontos de api relativos a usuários", () => {
 
     res = await request(server).post("/api/abrir-processo").send(process);
     expect(res.body).toHaveProperty("success");
+    processId = res.body.success.id;
+  });
+
+  it("Informações de processo por id", async () => {
+    const res = await request(server)
+      .get("/api/processo")
+      .query({ id: processId });
+
+    expect(res.body).toHaveProperty("success");
+    expect(res.body.success).toHaveProperty("id");
+    expect(res.body.success.id).toBe(processId);
   });
 });
