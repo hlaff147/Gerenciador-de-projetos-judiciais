@@ -26,7 +26,7 @@ export class SignupFormComponent implements OnInit {
   ]);
   role = new FormControl('');
 
-  roles = ['advogado', 'juiz', 'cliente', 'réu'];
+  roles = ['advogado', 'juiz'];
   signupFailed: boolean = false;
   matcher = new MyErrorStateMatcher();
 
