@@ -5,6 +5,7 @@ import {
   deleteUser,
   getUser,
   getUserById,
+  getUserByCpf,
 } from "./knex/querries/users";
 import { db } from "./knex/config/database";
 import {
@@ -14,6 +15,7 @@ import {
   getProcessById,
   getProcessesByJudgeId,
   getProcessesByLaywerId,
+  updateProcess,
 } from "./knex/querries/processes";
 import {
   attachDocument,
@@ -22,6 +24,7 @@ import {
   getDocumentsByProcessId,
 } from "./knex/querries/documents";
 import { Process } from "../common/process";
+import { User } from "../common/user";
 
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -72,8 +75,15 @@ app.get("/api/usuarios", async (req: Request, res: Response) => {
 
 app.get("/api/usuario", async (req: Request, res: Response) => {
   const id = req.query.id as string;
+  const cpf = req.query.cpf as string;
 
-  const user = await getUserById(parseInt(id));
+  const idIsValid = id != undefined;
+  const cpfIsValid = cpf != undefined;
+
+  let user: User | null = null;
+
+  if (idIsValid) user = await getUserById(parseInt(id));
+  else if (cpfIsValid) user = await getUserByCpf(cpf);
 
   if (user) {
     console.log(`[SERVIDOR] Buscando usuário id ${id}`);
@@ -118,6 +128,19 @@ app.post("/api/abrir-processo", async (req: Request, res: Response) => {
     console.log(
       `[SERVIDOR] Processo ${process.name} foi registrado com id ${processId}`
     );
+    res.send({ success: process });
+  } else {
+    res.send({ failure: "Processo não pode ser aberto" });
+  }
+});
+
+app.put("/api/editar-processo", async (req: Request, res: Response) => {
+  var process = req.body;
+  const processId = await updateProcess(process);
+
+  if (processId) {
+    process = await getProcessById(processId);
+    console.log(`[SERVIDOR] Processo ${process.name} foi editado com sucesso`);
     res.send({ success: process });
   } else {
     res.send({ failure: "Processo não pode ser aberto" });

@@ -1,0 +1,38 @@
+.custom-button-create {
+  background-color: #5894ee;
+  margin: 15px;
+  border-radius: 1rem;
+  width: 75px;
+  color: white;
+}
+
+.custom-button-cancel {
+  background-color: #e26554;
+  border-radius: 1rem;
+  width: 75px;
+  color: white;
+}
+
+.custom-button-create:hover {
+  background-color: #2c7af0;
+}
+
+.custom-button-cancel:hover {
+  background-color: rgb(167, 62, 36);
+}
+
+.btn-criar-progresso {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.btn-cancelar-progresso {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.btns-criar-progresso {
+  justify-content: end;
+}
