@@ -5,6 +5,8 @@ import { NewDocumentComponent } from '../new-document/new-document.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DocumentDetailComponent } from '../document-detail/document-detail.component';
 import { Document } from '../../../../common/document';
+import { ProccessService } from 'src/services/proccess.service';
+import { Process } from '../../../../common/process';
 
 @Component({
   selector: 'app-document-list',
@@ -13,17 +15,22 @@ import { Document } from '../../../../common/document';
 })
 export class DocumentListComponent implements OnInit {
   @Input('proccess-id') proccessId: number | undefined = undefined;
+  process: Process | undefined;
 
   documents: Document[] = [];
 
   constructor(
     private documentService: DocumentService,
+    private processService: ProccessService,
     private route: ActivatedRoute,
     public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
     this.getDocuments();
+    this.processService
+      .getProcessById(this.proccessId)
+      .subscribe((process) => (this.process = process));
   }
 
   getDocuments(): void {
