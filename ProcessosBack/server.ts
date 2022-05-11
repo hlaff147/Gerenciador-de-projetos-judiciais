@@ -25,6 +25,7 @@ import { Process } from "../common/process";
 
 const express = require("express");
 const bodyParser = require("body-parser");
+const multipart = require("connect-multiparty");
 const cors = require("cors");
 
 var app = express();
@@ -43,6 +44,13 @@ var allowCrossDomain = function (req: any, res: any, next: any) {
 app.use(allowCrossDomain);
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cors(corsOptions));
+
+const multipartMiddleware = multipart({ uploadDir: './uploads' });
+app.post('/upload', multipartMiddleware, (req:any, res:any) => {
+  const files = req.files;
+  console.log(files);
+  res.json({ message: files });
+});
 
 app.post("/api/cadastrar", async (req: Request, res: Response) => {
   var user = req.body;

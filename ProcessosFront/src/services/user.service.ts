@@ -70,8 +70,8 @@ export class UserService {
     );
   }
 
-  getCurrUser(): Observable<User | null> {
-    return this.getUserById(this.currUser.id);
+  getCurrUser(): User | null {
+    return this.currUser;
   }
 
   userIsAuthenticated(): boolean {

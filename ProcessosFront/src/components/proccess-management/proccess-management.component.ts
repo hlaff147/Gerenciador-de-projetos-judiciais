@@ -26,19 +26,17 @@ export class ProccessManagementComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userService.getCurrUser().subscribe((user) => {
-      this.user = user;
-
-      if (this.user.role === 'advogado') {
-        this.proccessService
-          .getProcessesByLawyer(this.user.id)
-          .subscribe((processes) => (this.processes = processes));
-      } else if (this.user.role === 'juiz') {
-        this.proccessService
-          .getProcessesByJudge(this.user.id)
-          .subscribe((processes) => (this.processes = processes));
-      }
-    });
+    this.user = this.userService.getCurrUser();
+  
+    if (this.user.role === 'advogado') {
+      this.proccessService
+        .getProcessesByLawyer(this.user.id)
+        .subscribe((processes) => (this.processes = processes));
+    } else if (this.user.role === 'juiz') {
+      this.proccessService
+        .getProcessesByJudge(this.user.id)
+        .subscribe((processes) => (this.processes = processes));
+    }
   }
 
   deleteProccess(id: number): void {
