@@ -139,7 +139,6 @@ app.put("/api/editar-processo", async (req: Request, res: Response) => {
   const processId = await updateProcess(process);
 
   if (processId) {
-    process = await getProcessById(processId);
     console.log(`[SERVIDOR] Processo ${process.name} foi editado com sucesso`);
     res.send({ success: process });
   } else {
