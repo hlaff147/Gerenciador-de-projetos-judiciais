@@ -25,7 +25,9 @@ export class NewDocumentComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<NewDocumentComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private userService: UserService,private service: UploadFileService
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private userService: UserService,
+    private service: UploadFileService
   ) {}
 
   ngOnInit(): void {
@@ -37,20 +39,6 @@ export class NewDocumentComponent implements OnInit {
   onCancel(): void {
     this.dialogRef.close(null);
   }
-
-  // onSave(): void {
-  //   this.updateForms();
-
-  //   if (!this.name.valid) return;
-  //   if (!this.file.valid) return;
-  //   const document: Document = {
-  //     name: this.name.value,
-  //     processId: this.data.proccessId,
-  //     postedBy: this.userService.getCurrUser().id,
-  //     data: this.files
-  //   };
-  //   this.dialogRef.close(document);
-  // }
 
   updateForms(): void {
     this.name.markAsTouched();
@@ -69,7 +57,6 @@ export class NewDocumentComponent implements OnInit {
       this.files.add(selectedFiles[i]);
     }
     document.getElementById('customFileLabel').innerHTML = fileNames.join(', ');
-
   }
 
   onUpload() {
@@ -77,13 +64,14 @@ export class NewDocumentComponent implements OnInit {
       name: this.name.value,
       processId: this.data.proccessId,
       postedBy: this.userService.getCurrUser().id,
-      data: this.files
+      data: this.files,
     };
     this.updateForms();
     this.dialogRef.close(document);
     if (this.files && this.files.size > 0) {
-      this.service.upload(this.files, 'http://localhost:3000/upload')
-        .subscribe(response => console.log('Upload Concluído'));
+      this.service
+        .upload(this.files, 'http://localhost:3000/upload')
+        .subscribe((response) => console.log('Upload Concluído'));
     }
   }
 }
