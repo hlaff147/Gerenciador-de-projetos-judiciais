@@ -1,5 +1,6 @@
 <h5 class="fs-4 mb-3">Documentos do Processo</h5>
 <button
+  *ngIf="process.status !== 'concluído'"
   mat-button
   type="button"
   (click)="addDocument()"

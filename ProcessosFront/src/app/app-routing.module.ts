@@ -5,6 +5,7 @@ import { LoginFormComponent } from '../components/login-form/login-form.componen
 import { SignupFormComponent } from '../components/signup-form/signup-form.component';
 import { ProccessManagementComponent } from '../components/proccess-management/proccess-management.component';
 import { ProccessDetailComponent } from '../components/proccess-detail/proccess-detail.component';
+import { UploadFileComponent } from '../components/upload-file/upload-file/upload-file.component';
 import { ProfileComponent } from 'src/components/profile/profile.component';
 import { AuthGuard } from 'src/guards/auth.guard';
 
@@ -21,6 +22,11 @@ const routes: Routes = [
   {
     path: 'processos',
     component: ProccessManagementComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'upload',
+    component: UploadFileComponent,
     canActivate: [AuthGuard],
   },
   {

@@ -16,21 +16,23 @@
     >
   </mat-form-field>
 
-  <mat-form-field class="mb-3" appearance="fill">
-    <ngx-mat-file-input
-      name="file"
-      [formControl]="file"
-      [errorStateMatcher]="matcher"
-      accept=".pdf,.png,.jpg,.jpeg"
-      placeholder="Arquivo de anexo"
-    >
-      <mat-icon ngxMatFileInputIcon>folder</mat-icon>
-    </ngx-mat-file-input>
-    <mat-hint></mat-hint>
-    <mat-error *ngIf="file.errors?.['required']" data-error="file-missing"
-      >Documento é obrigatório.</mat-error
-    >
-  </mat-form-field>
+  <div style="margin-top: 10px">
+    <div class="custom-file">
+      <input
+        type="file"
+        class="custom-file-input"
+        id="customFile"
+        (change)="onChange($event)"
+        multiple
+      />
+      <label class="custom-file-label" for="customFile" id="customFileLabel"
+        >Selecionar Arquivo</label
+      >
+    </div>
+  </div>
+  <div style="margin-top: 10px">
+   
+  </div>
 
   <div class="w-100 mb-4">
     <mat-form-field class="w-50" appearance="fill">
@@ -67,10 +69,9 @@
       mat-flat-button
       type="button"
       color="primary"
-      (click)="onSave()"
+      (click)="onUpload()"
       data-btn="document-save"
     >
       Salvar
     </button>
   </div>
-</div>
